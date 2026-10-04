@@ -1,266 +1,421 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/png" href="/modelpixlab-icon-from-hero.png">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" type="image/png" href="/modelpixlab-icon-from-hero.png" />
 <title>Nano Banana 2 Generator — AI Photo Editor Online | ModelPixLab</title>
-<meta name="description" content="Generate and edit photos with Nano Banana 2 in your browser. Swap backgrounds, restyle portraits, keep faces consistent. Free daily generations.">
+<meta name="description" content="Generate and edit photos with Nano Banana 2 in your browser. Swap backgrounds, restyle photos, keep faces consistent. Free daily generations." />
+<link rel="canonical" href="https://modelpixlab.com/nano-banana-2-generator/" />
 <style>
-  :root{
-    --bg:#0c0e0c; --bg2:#111411; --card:#171a17; --card2:#1d211d;
-    --line:#262b26; --line2:#323832; --txt:#f2f4ef; --mut:#aebaa9; --dim:#7d8a7a;
-    --acc:#b8ff2e; --acc2:#d2ff7a; --good:#34d399; --warn:#ffd166;
-    --r:18px;
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(900px 480px at 50% -120px,rgba(184,255,46,.05),transparent 65%),radial-gradient(700px 520px at 88% 108%,rgba(184,255,46,.03),transparent 60%)}
-  body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.4;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(85% 62% at 50% 0%,#000 25%,transparent 100%);mask-image:radial-gradient(85% 62% at 50% 0%,#000 25%,transparent 100%)}
-  a{color:inherit;text-decoration:none}
-  .wrap{max-width:1140px;margin:0 auto;padding:0 22px;position:relative;z-index:1}
-  .ribbon{background:#0d0d0e;color:#bdbdc4;text-align:center;font-size:13px;padding:9px 14px;border-bottom:1px solid var(--line);position:relative;z-index:2}
-  .ribbon b{color:var(--acc)}
-  header{position:sticky;top:0;z-index:50;background:rgba(10,10,11,.72);backdrop-filter:blur(14px) saturate(1.4);-webkit-backdrop-filter:blur(14px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.06)}
-  .nav{display:flex;align-items:center;gap:26px;height:64px}
-  .logo{display:flex;align-items:center;gap:11px;font-weight:800;font-size:19px;letter-spacing:.2px}
-  .logo .mark{width:33px;height:33px;flex:none;filter:drop-shadow(0 2px 8px rgba(0,0,0,.4))}
-  .logo span em{font-style:normal;color:var(--acc)}
-  .nav nav{display:flex;gap:6px;margin-left:10px}
-  .nav nav a{color:var(--mut);font-size:14.5px;padding:8px 13px;border-radius:999px;transition:.18s}
-  .nav nav a:hover{color:#fff;background:rgba(255,255,255,.06)}
-  .nav nav a.on{color:#0a0f05;background:var(--acc);font-weight:700}
-  .nav .sp{flex:1}
-  .btn{display:inline-block;border:0;cursor:pointer;font-weight:700;border-radius:13px;padding:12px 22px;font-size:15px;color:#0c1005;background:var(--acc);box-shadow:0 1px 0 rgba(184,255,46,.25);transition:transform .15s,box-shadow .2s,filter .15s}
-  .btn:hover{filter:brightness(1.05);box-shadow:0 6px 18px rgba(0,0,0,.35);transform:translateY(-1px)}
-  .btn:active{transform:translateY(0) scale(.98)}
-  .btn:disabled{opacity:.65;cursor:wait;transform:none}
-  .btn.ghost{background:rgba(255,255,255,.04);border:1px solid var(--line2);color:var(--txt);box-shadow:none}
-  .btn.ghost:hover{background:rgba(255,255,255,.09);box-shadow:none}
-  .btn.small{padding:9px 16px;font-size:14px;border-radius:11px}
-  .hero{padding:64px 0 38px;text-align:center}
-  .badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line2);background:rgba(255,255,255,.04);color:var(--mut);border-radius:999px;padding:6px 15px;font-size:13px;margin-bottom:20px;backdrop-filter:blur(6px)}
-  .badge b{color:var(--acc)}
-  .badge::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--acc);box-shadow:0 0 10px var(--acc);animation:pulse 2s infinite}
-  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-  h1{font-size:clamp(34px,5.6vw,58px);line-height:1.12;font-weight:900;letter-spacing:-1px}
-  h1 .grad{background:linear-gradient(92deg,#f2f4ef 0%,#d9e8c8 55%,#b8ff2e 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .sub{color:var(--mut);max-width:660px;margin:18px auto 0;font-size:17.5px}
-  .gen{background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.09);border-radius:22px;padding:22px;margin:34px auto 0;max-width:840px;text-align:left;box-shadow:0 30px 80px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.07);backdrop-filter:blur(10px)}
-  .gen label{font-size:12.5px;color:var(--mut);display:block;margin-bottom:8px;font-weight:700;letter-spacing:.6px}
-  textarea{width:100%;background:rgba(0,0,0,.35);border:1px solid var(--line2);border-radius:13px;color:var(--txt);padding:14px;font-size:15.5px;min-height:76px;resize:vertical;font-family:inherit;transition:border-color .15s,box-shadow .15s}
-  textarea:focus,select:focus{outline:none;border-color:rgba(184,255,46,.6);box-shadow:0 0 0 3px rgba(184,255,46,.15)}
-  .row{display:flex;gap:12px;flex-wrap:wrap;margin-top:15px}
-  .field{flex:1;min-width:150px}
-  select{width:100%;background:rgba(0,0,0,.35);border:1px solid var(--line2);border-radius:12px;color:var(--txt);padding:11px 12px;font-size:14.5px}
-  .pills{display:flex;gap:8px;flex-wrap:wrap}
-  .pill{border:1px solid var(--line2);background:rgba(255,255,255,.03);color:var(--mut);border-radius:999px;padding:8px 14px;font-size:13.5px;cursor:pointer;transition:.15s;user-select:none}
-  .pill:hover{color:#fff;border-color:#3d3d44;transform:translateY(-1px)}
-  .pill.on{background:var(--acc);border-color:var(--acc);color:#06150a;font-weight:700;box-shadow:0 4px 16px rgba(184,255,46,.35)}
-  .genfoot{display:flex;align-items:center;gap:14px;margin-top:18px;flex-wrap:wrap}
-  .credits{color:var(--dim);font-size:13px}
-  .result{margin-top:18px;display:none}
-  .result.show{display:block;animation:pop .45s cubic-bezier(.2,.9,.3,1.2)}
-  @keyframes pop{from{opacity:0;transform:scale(.97) translateY(8px)}to{opacity:1;transform:none}}
-  .canvasbox{position:relative;border-radius:15px;overflow:hidden;border:1px solid var(--line2);background:#070708}
-  canvas{display:block;width:100%;height:auto}
-  .demo-tag{position:absolute;left:10px;top:10px;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:12px;padding:4px 10px;border-radius:999px;backdrop-filter:blur(4px)}
-  .dl{position:absolute;right:10px;bottom:10px}
-  .shimmer{height:300px;border-radius:15px;border:1px solid var(--line);background:linear-gradient(100deg,#131315 40%,#1d1d21 50%,#131315 60%);background-size:200% 100%;animation:sh 1.1s infinite linear;display:none;place-items:center;color:var(--mut);font-size:14.5px}
-  .shimmer.show{display:grid}
-  @keyframes sh{to{background-position:-200% 0}}
-  .examples{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
-  .ex{font-size:13px;color:var(--mut);border:1px dashed #34343a;padding:6px 12px;border-radius:999px;cursor:pointer;transition:.15s}
-  .ex:hover{color:#fff;border-color:var(--acc);background:rgba(184,255,46,.06)}
-  section{padding:56px 0}
-  h2{font-size:clamp(24px,3.6vw,34px);font-weight:850;letter-spacing:-.4px;text-align:center}
-  .lead{color:var(--mut);text-align:center;max-width:640px;margin:12px auto 0;font-size:16px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(245px,1fr));gap:18px;margin-top:32px}
-  .mcard{background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015));border:1px solid rgba(255,255,255,.07);border-radius:var(--r);padding:18px;cursor:pointer;transition:transform .22s,border-color .22s,box-shadow .22s}
-  .mcard:hover{transform:translateY(-5px);border-color:rgba(184,255,46,.55);box-shadow:0 18px 44px rgba(0,0,0,.5),0 0 0 1px rgba(184,255,46,.18)}
-  .mcard .thumb{height:112px;border-radius:12px;margin-bottom:15px;position:relative;overflow:hidden}
-  .mcard .thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.22) 48%,transparent 62%);transform:translateX(-120%);transition:transform .6s}
-  .mcard:hover .thumb::after{transform:translateX(120%)}
-  .mcard h3{font-size:17px}
-  .mcard p{color:var(--mut);font-size:13.5px;margin-top:4px;min-height:40px}
-  .tag{display:inline-block;font-size:11.5px;padding:3px 9px;border-radius:999px;background:#1f1f22;color:#c9c9ce;margin-right:6px;font-weight:600}
-  .tag.hot{background:#2a2107;color:#ffd166}
-  .tag.new{background:#1a2a0c;color:#cdea8e}
-  .feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:18px;margin-top:32px}
-  .fcard{background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015));border:1px solid rgba(255,255,255,.07);border-radius:var(--r);padding:22px;transition:transform .22s,border-color .22s}
-  .fcard:hover{transform:translateY(-4px);border-color:rgba(184,255,46,.4)}
-  .fcard .ic{font-size:22px;width:46px;height:46px;display:grid;place-items:center;border-radius:13px;background:rgba(184,255,46,.09);border:1px solid rgba(184,255,46,.22)}
-  .fcard h3{font-size:16.5px;margin:12px 0 5px}
-  .fcard p{color:var(--mut);font-size:14px}
-  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(225px,1fr));gap:18px;margin-top:32px;counter-reset:st}
-  .step{background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015));border:1px solid rgba(255,255,255,.07);border-radius:var(--r);padding:22px}
-  .step::before{counter-increment:st;content:counter(st);display:inline-grid;place-items:center;width:31px;height:31px;border-radius:50%;background:var(--acc);color:#06150a;font-weight:800;margin-bottom:12px;box-shadow:0 4px 14px rgba(184,255,46,.35)}
-  .step h3{font-size:16px;margin-bottom:4px}
-  .step p{color:var(--mut);font-size:14px}
-  .prose{max-width:760px;margin:0 auto}
-  .prose h2{text-align:left;margin-top:36px}
-  .prose p{color:#c9c9ce;margin-top:10px}
-  .prose ul{margin:10px 0 0 20px;color:#c9c9ce}
-  .prose li{margin:5px 0}
-  .faq{max-width:760px;margin:28px auto 0}
-  details{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:13px;padding:16px 19px;margin-bottom:10px;transition:border-color .2s}
-  details:hover{border-color:rgba(184,255,46,.35)}
-  summary{cursor:pointer;font-weight:700;font-size:15.5px}
-  details p{color:var(--mut);font-size:14.5px;margin-top:8px}
-  .plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:20px;margin-top:36px;align-items:stretch}
-  .plan{background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015));border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:28px;display:flex;flex-direction:column;transition:transform .22s}
-  .plan:hover{transform:translateY(-4px)}
-  .plan.pop{border-color:rgba(184,255,46,.6);background:linear-gradient(180deg,rgba(184,255,46,.07),rgba(255,255,255,.015));box-shadow:0 22px 50px rgba(0,0,0,.5),0 0 34px rgba(184,255,46,.10)}
-  .plan h3{font-size:17px}
-  .price{font-size:37px;font-weight:900;margin:10px 0 2px;letter-spacing:-.5px}
-  .price small{font-size:14px;color:var(--mut);font-weight:500}
-  .plan ul{list-style:none;margin:16px 0 22px;color:#c9c9ce;font-size:14.5px}
-  .plan li{margin:8px 0}
-  .plan .btn{margin-top:auto;text-align:center}
-  .view{display:none}
-  .view.on{display:block;animation:vin .4s ease}
-  @keyframes vin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-  .rv{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
-  .rv.in{opacity:1;transform:none}
-  footer{border-top:1px solid var(--line);padding:36px 0 48px;color:var(--dim);font-size:13.5px;margin-top:34px;position:relative;z-index:1}
-  .foot{display:flex;gap:24px;flex-wrap:wrap}
-  .foot b{color:var(--mut)}
-  @media(max-width:640px){.nav nav{display:none}.genfoot .btn{width:100%}.nav{gap:10px;height:58px}.logo{font-size:16px;gap:8px}.logo .mark{width:28px;height:28px}.btn.small{padding:8px 12px;font-size:13px;border-radius:10px;white-space:nowrap}.hero{padding:44px 0 30px}.badge{font-size:12px;padding:5px 12px}}
+      :root{
+        --bg:#0c0e0c;
+        --bg2:#111411;
+        --surface:#171a17;
+        --surface2:#1d211d;
+        --line:#262b26;
+        --line2:#323832;
+        --ink:#f2f4ef;
+        --muted:#aebaa9;
+        --faint:#7d8a7a;
+        --accent:#b8ff2e;
+        --accent-ink:#0c1005;
+        --accent-dim:rgba(184,255,46,.12);
+        --radius:18px;
+        --font:"Avenir Next","Segoe UI",system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+        --mono:ui-monospace,"SF Mono","Cascadia Mono",Consolas,monospace;
+      }
+
+        :root{
+          --bg:#f2f3ee;
+          --bg2:#eceee6;
+          --surface:#ffffff;
+          --surface2:#f7f8f3;
+          --line:#dde2d6;
+          --line2:#cbd3c0;
+          --ink:#141714;
+          --muted:#4a5648;
+          --faint:#7a8776;
+          --accent:#65a800;
+          --accent-ink:#ffffff;
+          --accent-dim:rgba(101,168,0,.09);
+        }
+
+      .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+      .bar{display:flex;align-items:center;gap:16px;height:62px}
+
+      .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.02em;font-size:17px;white-space:nowrap;text-decoration:none}
+
+      .brand-mark{width:34px;height:30px;flex:none;background:var(--ink);color:var(--bg);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:11px;border-radius:8px;letter-spacing:-.02em;white-space:nowrap;overflow:hidden}
+
+      .brand-mark i{color:var(--accent);font-style:normal}
+
+      .brand span em{color:var(--accent);font-style:normal}
+
+      nav.main{display:flex;gap:6px;margin-left:18px}
+
+      nav.main a{font-size:13.5px;color:var(--muted);text-decoration:none;padding:7px 11px;border-radius:999px}
+
+      nav.main a:hover{background:var(--surface);color:var(--ink)}
+
+      .hcta{margin-left:auto;background:var(--ink);color:var(--bg);text-decoration:none;font-weight:700;font-size:13.5px;padding:9px 16px;border-radius:999px;white-space:nowrap;display:inline-flex;align-items:center;gap:7px}
+
+      .hcta b{width:7px;height:7px;background:var(--accent);border-radius:50%;display:inline-block;box-shadow:0 0 0 3px var(--accent-dim)}
+
+      .ghost-btn{margin-left:auto;background:transparent;color:var(--muted);border:1px solid var(--line);font:inherit;font-size:13.5px;font-weight:600;padding:8px 15px;border-radius:999px;cursor:pointer;white-space:nowrap}
+
+      .ghost-btn:hover{color:var(--ink);border-color:var(--line2)}
+
+      .ghost-btn + .hcta{margin-left:0}
+
+      .bar .hcta{margin-left:0}
+.brand>span:not(.brand-mark){display:none}
+nav.main{display:none}
+.hcta{margin-left:auto}
+.ghost-btn + .hcta{margin-left:0}
+
+        .ghost-btn{display:none}
+
+        .brand{font-size:15px;gap:8px}
+
+        .brand-mark{width:30px;height:27px}
+
+        .hcta{font-size:12.5px;padding:8px 12px}
+
+        .bar{gap:10px}
+
+      .hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:28px;flex-wrap:wrap}
+
+      .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);background:var(--surface);padding:6px 10px;border-radius:999px}
+
+      .eyebrow i{width:6px;height:6px;background:var(--accent);border-radius:50%;display:block}
+
+      .hero h1{font-size:clamp(38px,6vw,64px);line-height:.95;letter-spacing:-.04em;margin:16px 0 10px;font-weight:900;max-width:720px}
+
+      .hero h1 .thin{font-weight:300;color:var(--muted)}
+
+      .hero h1 .hl{color:var(--accent);position:relative}
+
+      .hero .cn-title{font-size:15px;color:var(--muted);font-weight:600;margin:0}
+
+      .hero-side{max-width:360px;padding-top:42px}
+
+      .hero-side p{margin:0;color:var(--muted);font-size:15px;line-height:1.65}
+
+      .hero-side p.cn{margin-top:8px;font-size:13.5px;color:var(--faint)}
+
+      .stats{display:flex;gap:0;margin-top:18px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface)}
+
+      .stat{flex:1;padding:12px 14px;border-right:1px solid var(--line)}
+
+      .stat:last-child{border-right:0}
+
+      .stat b{display:block;font-size:18px;letter-spacing:-.03em;line-height:1}
+
+      .stat span{font-size:11px;color:var(--faint);font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em}
+.hero-side{padding-top:0;max-width:100%}
+.hero-top{flex-direction:column}
+.workspace{grid-template-columns:1fr}
+
+      .panel{padding:22px;border-right:1px solid var(--line);display:flex;flex-direction:column;background:var(--surface)}
+.panel{border-right:0;border-bottom:1px solid var(--line)}
+
+      .panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+
+      .panel-head strong{font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+
+      .panel-head span{font-family:var(--mono);font-size:11px;color:var(--faint);border:1px solid var(--line);padding:4px 8px;border-radius:999px}
+
+      label.lbl{display:block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin:16px 0 8px}
+
+      label.lbl:first-of-type{margin-top:0}
+
+      textarea#prompt{width:100%;min-height:110px;resize:vertical;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:14px;font:inherit;font-size:14.5px;line-height:1.55}
+
+      textarea#prompt:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+
+      .chip{font-size:12.5px;padding:7px 11px;border-radius:999px;cursor:pointer;border:1px solid var(--line);background:var(--bg);color:var(--muted)}
+
+      .chip:hover{border-color:var(--accent);color:var(--ink)}
+
+      .seg{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--bg)}
+
+      .seg button{appearance:none;border:0;background:transparent;color:var(--muted);font:inherit;padding:11px 10px;cursor:pointer;text-align:left}
+
+      .seg button + button{border-left:1px solid var(--line)}
+
+      .seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+
+      .seg button strong{display:block;font-size:14px;line-height:1.1}
+
+      .seg button small{display:block;font-size:11px;opacity:.75;margin-top:3px}
+
+      select#size{width:100%;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:11px 12px;font:inherit;font-size:13.5px}
+
+      .gen{margin-top:18px;width:100%;background:var(--accent);color:var(--accent-ink);border:0;font:inherit;font-size:15px;font-weight:800;padding:14px 18px;border-radius:13px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+
+      .gen:disabled{opacity:.55;cursor:wait}
+
+      .gen span:last-child{font-family:var(--mono);font-size:12px;font-weight:700;opacity:.7}
+
+      .bar2{width:200px;height:6px;border-radius:999px;background:var(--line);margin:14px auto 0;overflow:hidden}
+
+      .bar2 i{display:block;height:100%;width:38%;background:var(--accent);border-radius:999px;animation:slide .9s infinite alternate ease-in-out}
+.bar2 i{animation:none}
+
+      .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:22px}
+
+      .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 8px;font-weight:700}
+
+      .gallery{display:grid;grid-template-columns:1.15fr .85fr;gap:16px}
+.gallery{grid-template-columns:1fr}
+
+      .gallery-col{display:grid;gap:16px}
+
+      figure.shot{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+
+      figure.shot img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+
+      figure.shot.tall img{aspect-ratio:3/3.4}
+
+      figure.shot figcaption{padding:14px}
+
+      figure.shot .p{font-size:13.5px;line-height:1.55}
+
+      figure.shot .m{margin-top:10px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+
+      figure.shot .m span{font-family:var(--mono);font-size:11px;color:var(--faint)}
+
+      figure.shot button.use{font:inherit;font-size:12px;font-weight:700;cursor:pointer;background:var(--bg);color:var(--ink);border:1px solid var(--line);padding:7px 10px;border-radius:999px}
+
+      figure.shot button.use:hover{border-color:var(--accent)}
+
+
+      .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--surface)}
+.steps{grid-template-columns:1fr}
+
+      .step{padding:22px;border-right:1px solid var(--line)}
+
+      .step:last-child{border-right:0}
+.step{border-right:0;border-bottom:1px solid var(--line)}
+.step:last-child{border-bottom:0}
+
+      .step .n{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.1em}
+
+      .step h3{margin:10px 0 6px;font-size:17px;letter-spacing:-.02em}
+
+      .step h3 .cn{display:block;font-size:12.5px;color:var(--faint);font-weight:600;margin-top:2px}
+
+      .step p{margin:0;color:var(--muted);font-size:13.5px}
+
+      .step p.cn{color:var(--faint);font-size:12.5px;margin-top:6px}
+
+
+      .feats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.feats{grid-template-columns:1fr}
+
+      .feat{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px}
+
+      .feat .num{font-family:var(--mono);font-size:11px;color:var(--accent)}
+
+      .feat h3{margin:8px 0 6px;font-size:17px}
+
+      .feat h3 .cn{color:var(--faint);font-size:12.5px;font-weight:600}
+
+      .feat p{margin:0;color:var(--muted);font-size:13.5px}
+
+      .feat p.cn{color:var(--faint);font-size:12.5px;margin-top:5px}
+
+
+      .faq{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--surface)}
+
+      .faq details{border-bottom:1px solid var(--line)}
+
+      .faq details:last-child{border-bottom:0}
+
+      .faq summary{cursor:pointer;list-style:none;padding:17px 18px;font-weight:700;font-size:15px;display:flex;justify-content:space-between;gap:12px;align-items:center}
+
+      .faq summary::-webkit-details-marker{display:none}
+
+      .faq summary .cn{color:var(--faint);font-size:12.5px;font-weight:600}
+
+      .faq summary::after{content:"+";width:28px;height:28px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;color:var(--accent);flex:none;font-weight:800}
+
+      .faq details[open] summary::after{content:"–"}
+
+      .faq .a{padding:0 18px 18px;color:var(--muted);font-size:14px;max-width:760px}
+
+      .faq .a .cn{color:var(--faint);font-size:13px;margin-top:6px}
+
+      footer.site{padding:28px 0 42px;color:var(--faint)}
+
+      footer.site .cols{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center}
+
+      footer.site a{color:var(--muted);text-decoration:none;font-size:13px}
+
+      footer.site a:hover{color:var(--ink)}
+
+      footer.site .fine{font-size:12px;margin-top:14px;line-height:1.6}
+
+      footer.site button.flink{background:none;border:0;font:inherit;color:var(--muted);font-size:13px;cursor:pointer;padding:0}
+
+      footer.site button.flink:hover{color:var(--ink)}
+      .models{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+      @media(max-width:900px){.models{grid-template-columns:1fr 1fr}}
+      @media(max-width:560px){.models{grid-template-columns:1fr}}
+      .mcard{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:8px}
+      .mcard h3{margin:0;font-size:17px;letter-spacing:-.02em}
+      .mcard p{margin:0;color:var(--muted);font-size:13.5px;flex:1}
+      .mcard .tagrow{display:flex;gap:8px;align-items:center}
+      .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border-radius:999px;border:1px solid var(--line);color:var(--faint)}
+      .tag.live{color:var(--accent-ink);background:var(--accent);border-color:var(--accent);font-weight:700}
+      .mcard a.go{font-weight:700;font-size:14px;text-decoration:none;color:var(--ink)}
+      .mcard a.go:hover{color:var(--accent)}
+      .workspace{display:grid;grid-template-columns:400px 1fr;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--surface);margin-top:26px}
+      @media(max-width:900px){.workspace{grid-template-columns:1fr}}
+      .stage{position:relative;display:flex;flex-direction:column;background:var(--bg2);min-height:420px}
+      .stage-top{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line)}
+      .stage-top .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);display:inline-block;margin-right:8px}
+      .stage-body{flex:1;display:grid;place-items:center;padding:22px;text-align:center}
+      .stage-body img{max-width:100%;border-radius:12px;display:none}
+      .stage-empty{color:var(--faint);font-size:14px;max-width:340px}
+      .stage-empty b{display:block;color:var(--muted);font-size:16px;margin-bottom:6px}
+      .workbar{display:none;margin:0 auto}
+      .workbar .bar2{margin:12px auto 0}
+      .plans2{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+      @media(max-width:1000px){.plans2{grid-template-columns:1fr 1fr}}
+      @media(max-width:560px){.plans2{grid-template-columns:1fr}}
+      .plan2{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column}
+      .plan2.pop{border-color:var(--accent)}
+      .plan2 h3{margin:0;font-size:16px}
+      .plan2 .pr{font-size:32px;font-weight:900;letter-spacing:-.03em;margin:8px 0 2px}
+      .plan2 .pr small{font-size:13px;color:var(--muted);font-weight:600}
+      .plan2 ul{list-style:none;margin:14px 0 18px;padding:0;color:var(--muted);font-size:13.5px}
+      .plan2 li{margin:6px 0}
+      .plan2 .cta{margin-top:auto;text-align:center;text-decoration:none;font-weight:700;font-size:14px;padding:11px 14px;border-radius:12px;border:1px solid var(--line);color:var(--ink)}
+      .plan2 .cta.solid{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+      .ribbon{background:var(--bg2);border-bottom:1px solid var(--line);color:var(--muted);font-size:12.5px;text-align:center;padding:8px 14px}
+      .ribbon b{color:var(--accent)}
 </style>
-<link rel="canonical" href="https://modelpixlab.com/nano-banana-2-generator/">
 </head>
-<body data-view="view-nano">
-<div class="ribbon">🔍 <b>Preview build</b> — page design & structure demo. Live image generation API is not connected yet.</div>
-<header>
-  <div class="wrap nav">
-    <a class="logo" href="#/"><svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="15" fill="#101012" stroke="#2c2c30"/><path d="M17 47 V17 L32 37 L47 17 V47" fill="none" stroke="#ececea" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M24.5 24.5 L32 35 L39.5 24.5" fill="none" stroke="#b8ff2e" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Model<em>Pix</em>Lab</span></a>
-    <nav>
-      <a href="/" data-nav="home">Home</a>
-      <a href="/nano-banana-2-generator/" data-nav="nano" data-on="1">Nano Banana 2</a>
-      <a href="/gpt-image-2-5-generator/" data-nav="gpt">GPT Image 2.5</a>
-      <a href="/pricing/" data-nav="pricing">Pricing</a>
-    </nav>
-    <div class="sp"></div>
-    <a class="btn small ghost" href="/pricing/">Sign in</a>
-    <a class="btn small" href="/gpt-image-2-5-generator/">Try free</a>
-  </div>
-</header>
-<main class="view" id="view-nano">
-  <div class="hero wrap">
-    <div class="badge">● <b>Trending now</b> — the model everyone is searching for</div>
-    <h1>Nano Banana 2 Generator<br><span class="grad">Generate &amp; edit photos in seconds</span></h1>
-    <p class="sub">The Nano Banana 2 AI image generator and editor, right in your browser. Swap backgrounds, restyle photos, or create from a single sentence.</p>
-    <div class="gen" data-gen>
-      <label for="p-nano">DESCRIBE OR EDIT</label>
-      <textarea id="p-nano" placeholder="Turn this portrait into a watercolor painting…">Turn this portrait into a watercolor painting</textarea>
-      <div class="examples"><span class="ex">Remove the background, keep studio lighting</span><span class="ex">Make it golden hour</span><span class="ex">Add a neon sign that says OPEN</span></div>
-      <div class="row">
-        <div class="field"><label>MODE</label><div class="pills ratio"><span class="pill on">Generate</span><span class="pill">Edit photo</span><span class="pill">Upscale</span></div></div>
-        <div class="field"><label>ASPECT RATIO</label><div class="pills ratio"><span class="pill on">1:1</span><span class="pill">16:9</span><span class="pill">9:16</span></div></div>
-      </div>
-      <div class="genfoot"><button class="btn gen-btn">✦ Generate with Nano Banana 2</button><span class="credits">Free: 3/day · ~10s per image</span></div>
-      <div class="shimmer">Generating with Nano Banana 2…</div>
-      <div class="result"><div class="canvasbox"><canvas width="960" height="960"></canvas><span class="demo-tag">Demo preview</span><button class="btn small dl">Download</button></div></div>
+<body>
+<div class="ribbon">🔍 <b>Preview build</b> — live image generation API is not connected yet.</div>
+<header class="site"><div class="wrap"><div class="bar">
+<a class="brand" href="/"><span class="brand-mark">M<i>P</i></span><span>Model<em>Pix</em>Lab</span></a>
+<nav class="main"><a href="/gpt-image-2-5-generator/">GPT Image 2.5</a><a href="/nano-banana-2-generator/">Nano Banana 2</a><a href="/pricing/">Pricing</a></nav>
+<a class="ghost-btn" href="/gpt-image-2-5-generator/" style="text-decoration:none">Sign in</a>
+<a class="hcta" href="/gpt-image-2-5-generator/"><b></b>Start free</a>
+</div></div></header>
+<main>
+
+<div class="wrap">
+<section class="hero" style="padding:44px 0 8px" id="create">
+  <div class="hero-top">
+    <div>
+      <span class="eyebrow"><i></i>Trending now — the model everyone is searching for</span>
+      <h1>Nano Banana 2 <span class="thin">Generator.</span></h1>
+      <p class="cn-title">生成、编辑照片，只需几秒。</p>
     </div>
+    <div class="hero-side">
+      <p>The Nano Banana 2 AI image generator and editor, right in your browser. Swap backgrounds, restyle photos, or create from a single sentence.</p>
+      <p class="cn">浏览器里就能用的 Nano Banana 2 生成与编辑：换背景、改风格、一句话出图。</p>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="stat"><b>3 / day</b><span>Free generations</span></div>
+    <div class="stat"><b>~10s</b><span>Per image</span></div>
+    <div class="stat"><b>4K</b><span>Max output</span></div>
   </div>
 
-  <section class="wrap prose">
-    <h2>What is Nano Banana 2?</h2>
-    <p>Nano Banana 2 is Google's latest image generation and editing model (built on the Gemini image line). It became famous for one thing: editing real photos with plain-language instructions — change the background, relight the scene, swap an outfit — while keeping faces and details consistent.</p>
-    <h2>What it's best at</h2>
-    <ul>
-      <li><b>Photo editing by sentence</b> — "make it sunset", "remove the crowd", done.</li>
-      <li><b>Character consistency</b> — the same face across many generated scenes.</li>
-      <li><b>Fast drafts</b> — near-instant previews for product shots and social posts.</li>
-      <li><b>Text touch-ups</b> — fix or add short text inside images.</li>
-    </ul>
-    <h2>Prompt ideas to try</h2>
-    <ul>
-      <li>"Product photo of a glass perfume bottle on wet stone, morning mist"</li>
-      <li>"Turn this selfie into a 90s film photo, warm grain"</li>
-      <li>"A tiny banana astronaut floating in a kitchen, Pixar style"</li>
-    </ul>
-    <h2>Nano Banana 2 FAQ</h2>
-    <div class="faq" style="margin-top:14px">
-      <details><summary>Is the Nano Banana 2 generator free?</summary><p>You get free generations every day. Heavy use, HD output and no-watermark downloads are on paid plans.</p></details>
-      <details><summary>Can it edit my own photos?</summary><p>Yes — upload a photo and describe the change. Face-consistent editing is what this model is known for.</p></details>
-      <details><summary>How fast is it?</summary><p>Most images finish in about 10 seconds at standard resolution.</p></details>
+  <div class="workspace">
+    <div class="panel">
+      <div class="panel-head"><strong>Creator</strong><span>LAB 01</span></div>
+      <label class="lbl" for="prompt">Describe or edit</label>
+      <textarea id="prompt" placeholder="Turn this portrait into a watercolor painting…">A tiny banana astronaut floating in a kitchen, Pixar style</textarea>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+        <button class="chip" type="button" data-prompt="Product photo of a glass perfume bottle on wet stone, morning mist">Perfume product shot</button>
+        <button class="chip" type="button" data-prompt="Turn this selfie into a 90s film photo, warm grain">90s film photo</button>
+        <button class="chip" type="button" data-prompt="A tiny banana astronaut floating in a kitchen, Pixar style">Banana astronaut</button>
+      </div>
+      <label class="lbl">Mode</label>
+      <div class="seg" role="group" aria-label="Mode">
+        <button type="button" aria-pressed="true"><strong>Generate</strong><small>Text to image</small></button>
+        <button type="button" aria-pressed="false"><strong>Edit photo</strong><small>Restyle &amp; swap</small></button>
+      </div>
+      <label class="lbl" for="size">Size</label>
+      <select id="size"><option value="1024x1024">Square · 1024×1024</option><option value="1536x1024">Landscape · 1536×1024</option><option value="1024x1536">Portrait · 1024×1536</option></select>
+      <button class="gen" id="genBtn" type="button"><span>Generate with Nano Banana 2</span><span>↗</span></button>
+      <p style="font-size:11.5px;color:var(--faint);line-height:1.5;margin:14px 0 0">Preview build — sample results shown. The live version generates with Nano Banana 2 in real time.</p>
     </div>
-  </section>
-</main>
-<footer>
-  <div class="wrap foot">
-    <div><b>ModelPixLab</b><br>Every new AI image model, one lab.</div>
-    <div><b>Models</b><br>Nano Banana 2 · GPT Image 2.5<br>Seedream 5.0 Pro · Ideogram 4.0</div>
-    <div><b>Company</b><br>About · Blog · Contact</div>
-    <div><b>Legal</b><br>Terms · Privacy · Refunds</div>
+    <div class="stage">
+      <div class="stage-top"><span><span class="dot"></span>Canvas</span><a id="dlBtn" style="display:none;font-size:13px;font-weight:700;color:var(--ink);text-decoration:none" download="modelpixlab-image.png">Download ↓</a></div>
+      <div class="stage-body">
+        <div class="stage-empty" id="stageEmpty"><b>Your image will appear here</b>Press Generate — most images take seconds.</div>
+        <div class="workbar" id="stageWork"><div style="color:var(--muted);font-size:14px">Generating with Nano Banana 2…</div><div class="bar2"><i></i></div></div>
+        <img id="stageImg" alt="Generated image" />
+      </div>
+    </div>
   </div>
-  <div class="wrap" style="margin-top:22px">Preview build for design review. Model names belong to their respective owners; this lab is an independent tool interface.</div>
-</footer>
+</section>
+
+<section class="block" style="padding:40px 0 8px">
+  <div class="sec-head"><div><p class="kicker">What is Nano Banana 2?</p><h2 style="margin:0;font-size:30px;letter-spacing:-.03em">The photo editor that listens</h2></div></div>
+  <div class="feats">
+    <article class="feat"><div class="num">01</div><h3>Edit by sentence</h3><p>"Make it sunset", "remove the crowd", done — plain-language edits on real photos.</p></article>
+    <article class="feat"><div class="num">02</div><h3>Character consistency</h3><p>The same face across many generated scenes — what this model became famous for.</p></article>
+    <article class="feat"><div class="num">03</div><h3>Fast drafts</h3><p>Near-instant previews for product shots and social posts, then upscale the winner.</p></article>
+    <article class="feat"><div class="num">04</div><h3>Text touch-ups</h3><p>Fix or add short text inside images without redoing the whole picture.</p></article>
+  </div>
+</section>
+
+<section class="block" id="faq" style="padding:40px 0 30px">
+  <div class="sec-head"><div><p class="kicker">FAQ</p><h2 style="margin:0;font-size:30px;letter-spacing:-.03em">Nano Banana 2 FAQ</h2></div></div>
+  <div class="faq">
+    <details><summary>Is the Nano Banana 2 generator free?<span class="cn">免费吗？</span></summary><div class="a">You get free generations every day. Heavy use, HD output and no-watermark downloads are on paid plans.</div></details>
+    <details><summary>Can it edit my own photos?<span class="cn">能改我的照片吗？</span></summary><div class="a">Yes — upload a photo and describe the change. Face-consistent editing is what this model is known for.</div></details>
+    <details><summary>How fast is it?<span class="cn">多快？</span></summary><div class="a">Most images finish in about 10 seconds at standard resolution.</div></details>
+  </div>
+</section>
+</div>
 <script>
-document.querySelectorAll(".view").forEach(v => v.classList.remove("on"));
-document.getElementById(document.body.dataset.view).classList.add("on");
-document.querySelectorAll("[data-on]").forEach(a => a.classList.add("on"));
-document.querySelectorAll("[data-go]").forEach(c => c.addEventListener("click", () => location.href = c.dataset.go.replace(/^#/, "")));
-document.querySelectorAll(".pills").forEach(g => g.addEventListener("click", e => {
-  if (!e.target.classList.contains("pill")) return;
-  g.querySelectorAll(".pill").forEach(p => p.classList.remove("on"));
-  e.target.classList.add("on");
-}));
-document.querySelectorAll("[data-gen]").forEach(box => {
-  const ta = box.querySelector("textarea");
-  box.querySelectorAll(".ex").forEach(x => x.addEventListener("click", () => { ta.value = x.textContent.trim(); ta.focus(); }));
-});
-function hashCode(s){let h=0;for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))|0;return Math.abs(h)}
-function drawArt(cv, seedText){
-  const ctx=cv.getContext("2d"),W=cv.width,H=cv.height,seed=hashCode(seedText||"modelpixlab");
-  let s=seed; const rnd=()=>(s=(s*1103515245+12345)&0x7fffffff)/0x7fffffff;
-  const hue=seed%360,hue2=(hue+60+seed%80)%360;
-  const g=ctx.createLinearGradient(0,0,W,H);
-  g.addColorStop(0,`hsl(${hue},70%,26%)`); g.addColorStop(1,`hsl(${hue2},75%,14%)`);
-  ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
-  for(let i=0;i<7;i++){const x=rnd()*W,y=rnd()*H,r=90+rnd()*260;
-    const rg=ctx.createRadialGradient(x,y,0,x,y,r);
-    rg.addColorStop(0,`hsla(${(hue+i*37)%360},90%,65%,.55)`); rg.addColorStop(1,"hsla(0,0%,0%,0)");
-    ctx.fillStyle=rg; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill();}
-  ctx.fillStyle="rgba(255,255,255,.92)"; ctx.font="700 44px system-ui"; ctx.textAlign="center";
-  ctx.fillText((seedText||"Your image").split(/\s+/).slice(0,4).join(" "), W/2, H/2-6);
-  ctx.font="400 24px system-ui"; ctx.fillStyle="rgba(255,255,255,.65)";
-  ctx.fillText("demo render \u00b7 live API connects at launch", W/2, H/2+38);
-}
-document.querySelectorAll("[data-gen]").forEach(box => {
-  const btn=box.querySelector(".gen-btn"),shim=box.querySelector(".shimmer"),
-        res=box.querySelector(".result"),cv=box.querySelector("canvas"),
-        ta=box.querySelector("textarea"),dl=box.querySelector(".dl");
-  btn.addEventListener("click", async () => {
-    res.classList.remove("show"); shim.classList.add("show"); btn.disabled=true; btn.textContent="Generating\u2026";
-    try {
-      const modelSel = box.querySelector(".model-sel");
-      const resp = await fetch("/api/generate", {method:"POST", headers:{"Content-Type":"application/json"},
-        body: JSON.stringify({prompt: ta.value, model: modelSel ? modelSel.value : undefined})});
-      if (!resp.ok) throw new Error("api");
-      const data = await resp.json();
-      if (!data.image) throw new Error("noimg");
-      const img = new Image();
-      img.onload = () => { cv.width = img.naturalWidth; cv.height = img.naturalHeight;
-        cv.getContext("2d").drawImage(img,0,0); shim.classList.remove("show"); res.classList.add("show"); };
-      img.onerror = () => { throw new Error("load"); };
-      img.src = data.image;
-    } catch(e) {
-      await new Promise(r=>setTimeout(r,900));
-      cv.width=960; cv.height=960; drawArt(cv, ta.value);
-      shim.classList.remove("show"); res.classList.add("show");
-    }
-    btn.disabled=false; btn.textContent="\u2726 Generate again";
+(function(){
+  var samples = ['/assets/gpt25-sample-1.jpg','/assets/gpt25-sample-2.jpg','/assets/gpt25-sample-3.jpg','/assets/gpt25-sample-4.jpg'];
+  var promptEl = document.getElementById('prompt'), genBtn = document.getElementById('genBtn'),
+      sizeEl = document.getElementById('size'), stageEmpty = document.getElementById('stageEmpty'),
+      stageWork = document.getElementById('stageWork'), stageImg = document.getElementById('stageImg'),
+      dlBtn = document.getElementById('dlBtn'), lastIdx = -1;
+  document.querySelectorAll('[data-prompt]').forEach(function(c){ c.addEventListener('click', function(){ promptEl.value = c.getAttribute('data-prompt'); promptEl.focus(); }); });
+  document.querySelectorAll('.seg button').forEach(function(b){ b.addEventListener('click', function(){
+    document.querySelectorAll('.seg button').forEach(function(x){ x.setAttribute('aria-pressed','false'); });
+    b.setAttribute('aria-pressed','true'); }); });
+  function show(src){ stageWork.style.display='none'; stageImg.src=src; stageImg.style.display='block'; dlBtn.href=src; dlBtn.style.display='inline'; genBtn.disabled=false; genBtn.innerHTML='<span>Generate with Nano Banana 2</span><span>↗</span>'; }
+  genBtn.addEventListener('click', function(){
+    var text = promptEl.value.trim();
+    genBtn.disabled = true; genBtn.innerHTML = '<span>Generating…</span><span>···</span>';
+    stageImg.style.display='none'; dlBtn.style.display='none'; stageEmpty.style.display='none'; stageWork.style.display='block';
+    fetch('/api/generate', { method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ prompt: text || 'a creative AI image', model:'GPT Image 2.5', size: sizeEl.value }) })
+    .then(function(r){ return r.ok ? r.json() : Promise.reject(r.status); })
+    .then(function(d){ if(!d || !d.image) throw new Error('no_image'); show(d.image); })
+    .catch(function(){ var i; do { i = Math.floor(Math.random()*samples.length); } while(i===lastIdx); lastIdx=i;
+      var img = new Image(); img.onload = function(){ setTimeout(function(){ show(samples[i]); }, 900); };
+      img.onerror = function(){ stageWork.style.display='none'; stageEmpty.style.display='block'; genBtn.disabled=false; genBtn.innerHTML='<span>Generate with Nano Banana 2</span><span>↗</span>'; };
+      img.src = samples[i]; });
   });
-  if (dl) dl.addEventListener("click", () => {
-    const a=document.createElement("a"); a.download="modelpixlab-image.png";
-    a.href=cv.toDataURL("image/png"); a.click();
-  });
-});
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.1});
-document.querySelectorAll("section,.gen,.plan").forEach(el=>{el.classList.add("rv");io.observe(el)});
+})();
 </script>
+
+</main>
+<footer class="site"><div class="wrap">
+<div class="cols">
+<a class="brand" href="/" style="font-size:15px"><span class="brand-mark" style="width:30px;height:26px;font-size:10px">M<i>P</i></span><span>Model<em>Pix</em>Lab</span></a>
+<a href="/gpt-image-2-5-generator/">GPT Image 2.5 Generator</a>
+<a href="/nano-banana-2-generator/">Nano Banana 2 Generator</a>
+<a href="/pricing/">Pricing</a>
+</div>
+<p class="fine">Nano Banana 2 is a model by Google. This page is an independent tool interface. Nano Banana 2 是 Google 的模型，本页是独立的工具界面。</p>
+</div></footer>
 </body>
 </html>
