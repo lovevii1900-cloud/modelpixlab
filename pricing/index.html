@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="/modelpixlab-icon-from-hero.png">
+<title>GPT Image 2.5 Generator — Free AI Image Creator Online | ModelPixLab</title>
+<meta name="description" content="Create posters, covers and text-perfect images with GPT Image 2.5, OpenAI’s newest image model. Free daily generations, HD output, no install. Try it now.">
+<style>
+  :root{
+    --bg:#0a0a0b; --bg2:#101012; --card:#131315; --card2:#17181a;
+    --line:#232326; --line2:#303036; --txt:#f5f5f3; --mut:#a3a3ab; --dim:#6d6d75;
+    --acc:#46ff0a; --acc2:#8dff57; --good:#34d399; --warn:#ffd166;
+    --r:18px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(900px 480px at 50% -120px,rgba(70,255,10,.10),transparent 65%),radial-gradient(700px 520px at 88% 108%,rgba(70,255,10,.05),transparent 60%)}
+  body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.4;background-image:linear-gradient(rgba(255,255,255,.024) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.024) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(85% 62% at 50% 0%,#000 25%,transparent 100%);mask-image:radial-gradient(85% 62% at 50% 0%,#000 25%,transparent 100%)}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 22px;position:relative;z-index:1}
+  .ribbon{background:#0d0d0e;color:#bdbdc4;text-align:center;font-size:13px;padding:9px 14px;border-bottom:1px solid var(--line);position:relative;z-index:2}
+  .ribbon b{color:var(--acc)}
+  header{position:sticky;top:0;z-index:50;background:rgba(10,10,11,.72);backdrop-filter:blur(14px) saturate(1.4);-webkit-backdrop-filter:blur(14px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.06)}
+  .nav{display:flex;align-items:center;gap:26px;height:64px}
+  .logo{display:flex;align-items:center;gap:11px;font-weight:800;font-size:19px;letter-spacing:.2px}
+  .logo .mark{width:33px;height:33px;flex:none;filter:drop-shadow(0 2px 10px rgba(70,255,10,.25))}
+  .logo span em{font-style:normal;color:var(--acc)}
+  .nav nav{display:flex;gap:6px;margin-left:10px}
+  .nav nav a{color:var(--mut);font-size:14.5px;padding:8px 13px;border-radius:999px;transition:.18s}
+  .nav nav a:hover{color:#fff;background:rgba(255,255,255,.06)}
+  .nav nav a.on{color:#0a0f05;background:var(--acc);font-weight:700}
+  .nav .sp{flex:1}
+  .btn{display:inline-block;border:0;cursor:pointer;font-weight:700;border-radius:13px;padding:12px 22px;font-size:15px;color:#06150a;background:linear-gradient(180deg,#63ff2e,#2fe84f);box-shadow:0 0 0 1px rgba(70,255,10,.35),0 8px 24px rgba(70,255,10,.22);transition:transform .15s,box-shadow .2s,filter .15s}
+  .btn:hover{filter:brightness(1.07);box-shadow:0 0 0 1px rgba(70,255,10,.55),0 10px 32px rgba(70,255,10,.38);transform:translateY(-1px)}
+  .btn:active{transform:translateY(0) scale(.98)}
+  .btn:disabled{opacity:.65;cursor:wait;transform:none}
+  .btn.ghost{background:rgba(255,255,255,.04);border:1px solid var(--line2);color:var(--txt);box-shadow:none}
+  .btn.ghost:hover{background:rgba(255,255,255,.09);box-shadow:none}
+  .btn.small{padding:9px 16px;font-size:14px;border-radius:11px}
+  .hero{padding:64px 0 38px;text-align:center}
+  .badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line2);background:rgba(255,255,255,.04);color:var(--mut);border-radius:999px;padding:6px 15px;font-size:13px;margin-bottom:20px;backdrop-filter:blur(6px)}
+  .badge b{color:var(--acc)}
+  .badge::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--acc);box-shadow:0 0 10px var(--acc);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  h1{font-size:clamp(34px,5.6vw,58px);line-height:1.12;font-weight:900;letter-spacing:-1px}
+  h1 .grad{background:linear-gradient(92deg,#eaffd0 0%,#8dff57 45%,#46ff0a 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{color:var(--mut);max-width:660px;margin:18px auto 0;font-size:17.5px}
+  .gen{background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.09);border-radius:22px;padding:22px;margin:34px auto 0;max-width:840px;text-align:left;box-shadow:0 30px 80px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.07);backdrop-filter:blur(10px)}
+  .gen label{font-size:12.5px;color:var(--mut);display:block;margin-bottom:8px;font-weight:700;letter-spacing:.6px}
+  textarea{width:100%;background:rgba(0,0,0,.35);border:1px solid var(--line2);border-radius:13px;color:var(--txt);padding:14px;font-size:15.5px;min-height:76px;resize:vertical;font-family:inherit;transition:border-color .15s,box-shadow .15s}
+  textarea:focus,select:focus{outline:none;border-color:rgba(70,255,10,.6);box-shadow:0 0 0 3px rgba(70,255,10,.15)}
+  .row{display:flex;gap:12px;flex-wrap:wrap;margin-top:15px}
+  .field{flex:1;min-width:150px}
+  select{width:100%;background:rgba(0,0,0,.35);border:1px solid var(--line2);border-radius:12px;color:var(--txt);padding:11px 12px;font-size:14.5px}
+  .pills{display:flex;gap:8px;flex-wrap:wrap}
+  .pill{border:1px solid var(--line2);background:rgba(255,255,255,.03);color:var(--mut);border-radius:999px;padding:8px 14px;font-size:13.5px;cursor:pointer;transition:.15s;user-select:none}
+  .pill:hover{color:#fff;border-color:#3d3d44;transform:translateY(-1px)}
+  .pill.on{background:var(--acc);border-color:var(--acc);color:#06150a;font-weight:700;box-shadow:0 4px 16px rgba(70,255,10,.35)}
+  .genfoot{display:flex;align-items:center;gap:14px;margin-top:18px;flex-wrap:wrap}
+  .credits{color:var(--dim);font-size:13px}
+  .result{margin-top:18px;display:none}
+  .result.show{display:block;animation:pop .45s cubic-bezier(.2,.9,.3,1.2)}
+  @keyframes pop{from{opacity:0;transform:scale(.97) translateY(8px)}to{opacity:1;transform:none}}
+  .canvasbox{position:relative;border-radius:15px;overflow:hidden;border:1px solid var(--line2);background:#070708}
+  canvas{display:block;width:100%;height:auto}
+  .demo-tag{position:absolute;left:10px;top:10px;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:12px;padding:4px 10px;border-radius:999px;backdrop-filter:blur(4px)}
+  .dl{position:absolute;right:10px;bottom:10px}
+  .shimmer{height:300px;border-radius:15px;border:1px solid var(--line);background:linear-gradient(100deg,#131315 40%,#1d1d21 50%,#131315 60%);background-size:200% 100%;animation:sh 1.1s infinite linear;display:none;place-items:center;color:var(--mut);font-size:14.5px}
+  .shimmer.show{display:grid}
+  @keyframes sh{to{background-position:-200% 0}}
+  .examples{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+  .ex{font-size:13px;color:var(--mut);border:1px dashed #34343a;padding:6px 12px;border-radius:999px;cursor:pointer;transition:.15s}
+  .ex:hover{color:#fff;border-color:var(--acc);background:rgba(70,255,10,.06)}
+  section{padding:56px 0}
+  h2{font-size:clamp(24px,3.6vw,34px);font-weight:850;letter-spacing:-.4px;text-align:center}
+  .lead{color:var(--mut);text-align:center;max-width:640px;margin:12px auto 0;font-size:16px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(245px,1fr));gap:18px;margin-top:32px}
+  .mcard{background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015));border:1px solid rgba(255,255,255,.07);border-radius:var(--r);padding:18px;cursor:pointer;transition:transform .22s,border-color .22s,box-shadow .22s}
+  .mcard:hover{transform:translateY(-5px);border-color:rgba(70,255,10,.55);box-shadow:0 18px 44px rgba(0,0,0,.5),0 0 0 1px rgba(70,255,10,.18)}
+  .mcard .thumb{height:112px;border-radius:12px;margin-bottom:15px;position:relative;overflow:hidden}
+  .mcard .thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.22) 48%,transparent 62%);transform:translateX(-120%);transition:transform .6s}
+  .mcard:hover .thumb::after{transform:translateX(120%)}
+  .mcard h3{font-size:17px}
+  .mcard p{color:var(--mut);font-size:13.5px;margin-top:4px;min-height:40px}
+  .tag{display:inline-block;font-size:11.5px;padding:3px 9px;border-radius:999px;background:#1f1f22;color:#c9c9ce;margin-right:6px;font-weight:600}
+  .tag.hot{background:#2a2107;color:#ffd166}
+  .tag.new{background:#0f2a05;color:#9dff57}
+  .feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:18px;margin-top:32px}
+  .fcard{background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015));border:1px solid rgba(255,255,255,.07);border-radius:var(--r);padding:22px;transition:transform .22s,border-color .22s}
+  .fcard:hover{transform:translateY(-4px);border-color:rgba(70,255,10,.4)}
+  .fcard .ic{font-size:22px;width:46px;height:46px;display:grid;place-items:center;border-radius:13px;background:rgba(70,255,10,.09);border:1px solid rgba(70,255,10,.22)}
+  .fcard h3{font-size:16.5px;margin:12px 0 5px}
+  .fcard p{color:var(--mut);font-size:14px}
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(225px,1fr));gap:18px;margin-top:32px;counter-reset:st}
+  .step{background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015));border:1px solid rgba(255,255,255,.07);border-radius:var(--r);padding:22px}
+  .step::before{counter-increment:st;content:counter(st);display:inline-grid;place-items:center;width:31px;height:31px;border-radius:50%;background:var(--acc);color:#06150a;font-weight:800;margin-bottom:12px;box-shadow:0 4px 14px rgba(70,255,10,.35)}
+  .step h3{font-size:16px;margin-bottom:4px}
+  .step p{color:var(--mut);font-size:14px}
+  .prose{max-width:760px;margin:0 auto}
+  .prose h2{text-align:left;margin-top:36px}
+  .prose p{color:#c9c9ce;margin-top:10px}
+  .prose ul{margin:10px 0 0 20px;color:#c9c9ce}
+  .prose li{margin:5px 0}
+  .faq{max-width:760px;margin:28px auto 0}
+  details{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:13px;padding:16px 19px;margin-bottom:10px;transition:border-color .2s}
+  details:hover{border-color:rgba(70,255,10,.35)}
+  summary{cursor:pointer;font-weight:700;font-size:15.5px}
+  details p{color:var(--mut);font-size:14.5px;margin-top:8px}
+  .plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:20px;margin-top:36px;align-items:stretch}
+  .plan{background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015));border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:28px;display:flex;flex-direction:column;transition:transform .22s}
+  .plan:hover{transform:translateY(-4px)}
+  .plan.pop{border-color:rgba(70,255,10,.6);background:linear-gradient(180deg,rgba(70,255,10,.07),rgba(255,255,255,.015));box-shadow:0 22px 50px rgba(0,0,0,.5),0 0 34px rgba(70,255,10,.10)}
+  .plan h3{font-size:17px}
+  .price{font-size:37px;font-weight:900;margin:10px 0 2px;letter-spacing:-.5px}
+  .price small{font-size:14px;color:var(--mut);font-weight:500}
+  .plan ul{list-style:none;margin:16px 0 22px;color:#c9c9ce;font-size:14.5px}
+  .plan li{margin:8px 0}
+  .plan .btn{margin-top:auto;text-align:center}
+  .view{display:none}
+  .view.on{display:block;animation:vin .4s ease}
+  @keyframes vin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .rv{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+  .rv.in{opacity:1;transform:none}
+  footer{border-top:1px solid var(--line);padding:36px 0 48px;color:var(--dim);font-size:13.5px;margin-top:34px;position:relative;z-index:1}
+  .foot{display:flex;gap:24px;flex-wrap:wrap}
+  .foot b{color:var(--mut)}
+  @media(max-width:640px){.nav nav{display:none}.genfoot .btn{width:100%}}
+</style>
+<link rel="canonical" href="https://modelpixlab.com/gpt-image-2-5-generator/">
+</head>
+<body data-view="view-gpt">
+<div class="ribbon">🔍 <b>Preview build</b> — page design & structure demo. Live image generation API is not connected yet.</div>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#/"><svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="15" fill="#101012" stroke="#2c2c30"/><path d="M17 47 V17 L32 37 L47 17 V47" fill="none" stroke="#ececea" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M24.5 24.5 L32 35 L39.5 24.5" fill="none" stroke="#46ff0a" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Model<em>Pix</em>Lab</span></a>
+    <nav>
+      <a href="/" data-nav="home">Home</a>
+      <a href="/nano-banana-2-generator/" data-nav="nano">Nano Banana 2</a>
+      <a href="/gpt-image-2-5-generator/" data-nav="gpt" data-on="1">GPT Image 2.5</a>
+      <a href="/pricing/" data-nav="pricing">Pricing</a>
+    </nav>
+    <div class="sp"></div>
+    <a class="btn small ghost" href="/pricing/">Sign in</a>
+    <a class="btn small" href="/gpt-image-2-5-generator/">Try free</a>
+  </div>
+</header>
+<main class="view" id="view-gpt">
+  <div class="hero wrap">
+    <div class="badge">● <b>Just released</b> — OpenAI's newest image model</div>
+    <h1>GPT Image 2.5 Generator<br><span class="grad">Posters, covers &amp; text that reads right</span></h1>
+    <p class="sub">GPT Image 2.5 follows instructions like a designer and renders text like a typesetter. Try it free, right here.</p>
+    <div class="gen" data-gen>
+      <label for="p-gpt">DESCRIBE YOUR IMAGE</label>
+      <textarea id="p-gpt" placeholder="A movie poster titled 'MIDNIGHT CITY', neon-noir style…">A movie poster titled "MIDNIGHT CITY", neon-noir style</textarea>
+      <div class="examples"><span class="ex">Book cover: "The Last Lighthouse", minimal</span><span class="ex">Infographic about coffee brewing steps</span><span class="ex">Birthday card with the text "Happy 30th, Leo!"</span></div>
+      <div class="row">
+        <div class="field"><label>ASPECT RATIO</label><div class="pills ratio"><span class="pill on">1:1</span><span class="pill">16:9</span><span class="pill">9:16</span><span class="pill">4:5</span></div></div>
+        <div class="field"><label>QUALITY</label><div class="pills ratio"><span class="pill on">Standard</span><span class="pill">HD</span><span class="pill">Print 4K</span></div></div>
+      </div>
+      <div class="genfoot"><button class="btn gen-btn">✦ Generate with GPT Image 2.5</button><span class="credits">Free: 3/day · HD on Pro</span></div>
+      <div class="shimmer">Generating with GPT Image 2.5…</div>
+      <div class="result"><div class="canvasbox"><canvas width="960" height="960"></canvas><span class="demo-tag">Demo preview</span><button class="btn small dl">Download</button></div></div>
+    </div>
+  </div>
+
+  <section class="wrap prose">
+    <h2>What is GPT Image 2.5?</h2>
+    <p>GPT Image 2.5 is OpenAI's newest image model. Earlier models guessed at text; this one follows layout instructions — where the headline goes, what the label says, which product sits in front. It's built for posters, covers, ads and social graphics.</p>
+    <h2>Where it shines</h2>
+    <ul>
+      <li><b>Readable text</b> — titles, labels and signs spelled correctly.</li>
+      <li><b>Instruction following</b> — "logo top-left, product center, price bottom-right" just works.</li>
+      <li><b>Consistent branding</b> — feed it your colors and style, get on-brand variants.</li>
+    </ul>
+    <h2>GPT Image 2.5 FAQ</h2>
+    <div class="faq" style="margin-top:14px">
+      <details><summary>Is GPT Image 2.5 free to use here?</summary><p>Yes, with daily free generations. HD and 4K output are part of paid plans.</p></details>
+      <details><summary>GPT Image 2.5 vs Nano Banana 2 — which one?</summary><p>Pick GPT Image 2.5 for text-heavy designs and layouts; pick Nano Banana 2 for editing real photos.</p></details>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="wrap foot">
+    <div><b>ModelPixLab</b><br>Every new AI image model, one lab.</div>
+    <div><b>Models</b><br>Nano Banana 2 · GPT Image 2.5<br>Seedream 5.0 Pro · Ideogram 4.0</div>
+    <div><b>Company</b><br>About · Blog · Contact</div>
+    <div><b>Legal</b><br>Terms · Privacy · Refunds</div>
+  </div>
+  <div class="wrap" style="margin-top:22px">Preview build for design review. Model names belong to their respective owners; this lab is an independent tool interface.</div>
+</footer>
+<script>
+document.querySelectorAll(".view").forEach(v => v.classList.remove("on"));
+document.getElementById(document.body.dataset.view).classList.add("on");
+document.querySelectorAll("[data-on]").forEach(a => a.classList.add("on"));
+document.querySelectorAll("[data-go]").forEach(c => c.addEventListener("click", () => location.href = c.dataset.go.replace(/^#/, "")));
+document.querySelectorAll(".pills").forEach(g => g.addEventListener("click", e => {
+  if (!e.target.classList.contains("pill")) return;
+  g.querySelectorAll(".pill").forEach(p => p.classList.remove("on"));
+  e.target.classList.add("on");
+}));
+document.querySelectorAll("[data-gen]").forEach(box => {
+  const ta = box.querySelector("textarea");
+  box.querySelectorAll(".ex").forEach(x => x.addEventListener("click", () => { ta.value = x.textContent.trim(); ta.focus(); }));
+});
+function hashCode(s){let h=0;for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))|0;return Math.abs(h)}
+function drawArt(cv, seedText){
+  const ctx=cv.getContext("2d"),W=cv.width,H=cv.height,seed=hashCode(seedText||"modelpixlab");
+  let s=seed; const rnd=()=>(s=(s*1103515245+12345)&0x7fffffff)/0x7fffffff;
+  const hue=seed%360,hue2=(hue+60+seed%80)%360;
+  const g=ctx.createLinearGradient(0,0,W,H);
+  g.addColorStop(0,`hsl(${hue},70%,26%)`); g.addColorStop(1,`hsl(${hue2},75%,14%)`);
+  ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+  for(let i=0;i<7;i++){const x=rnd()*W,y=rnd()*H,r=90+rnd()*260;
+    const rg=ctx.createRadialGradient(x,y,0,x,y,r);
+    rg.addColorStop(0,`hsla(${(hue+i*37)%360},90%,65%,.55)`); rg.addColorStop(1,"hsla(0,0%,0%,0)");
+    ctx.fillStyle=rg; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill();}
+  ctx.fillStyle="rgba(255,255,255,.92)"; ctx.font="700 44px system-ui"; ctx.textAlign="center";
+  ctx.fillText((seedText||"Your image").split(/\s+/).slice(0,4).join(" "), W/2, H/2-6);
+  ctx.font="400 24px system-ui"; ctx.fillStyle="rgba(255,255,255,.65)";
+  ctx.fillText("demo render \u00b7 live API connects at launch", W/2, H/2+38);
+}
+document.querySelectorAll("[data-gen]").forEach(box => {
+  const btn=box.querySelector(".gen-btn"),shim=box.querySelector(".shimmer"),
+        res=box.querySelector(".result"),cv=box.querySelector("canvas"),
+        ta=box.querySelector("textarea"),dl=box.querySelector(".dl");
+  btn.addEventListener("click", async () => {
+    res.classList.remove("show"); shim.classList.add("show"); btn.disabled=true; btn.textContent="Generating\u2026";
+    try {
+      const modelSel = box.querySelector(".model-sel");
+      const resp = await fetch("/api/generate", {method:"POST", headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({prompt: ta.value, model: modelSel ? modelSel.value : undefined})});
+      if (!resp.ok) throw new Error("api");
+      const data = await resp.json();
+      if (!data.image) throw new Error("noimg");
+      const img = new Image();
+      img.onload = () => { cv.width = img.naturalWidth; cv.height = img.naturalHeight;
+        cv.getContext("2d").drawImage(img,0,0); shim.classList.remove("show"); res.classList.add("show"); };
+      img.onerror = () => { throw new Error("load"); };
+      img.src = data.image;
+    } catch(e) {
+      await new Promise(r=>setTimeout(r,900));
+      cv.width=960; cv.height=960; drawArt(cv, ta.value);
+      shim.classList.remove("show"); res.classList.add("show");
+    }
+    btn.disabled=false; btn.textContent="\u2726 Generate again";
+  });
+  if (dl) dl.addEventListener("click", () => {
+    const a=document.createElement("a"); a.download="modelpixlab-image.png";
+    a.href=cv.toDataURL("image/png"); a.click();
+  });
+});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.1});
+document.querySelectorAll("section,.gen,.plan").forEach(el=>{el.classList.add("rv");io.observe(el)});
+</script>
+</body>
+</html>
