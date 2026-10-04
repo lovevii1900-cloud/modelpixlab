@@ -298,6 +298,13 @@ nav.main{display:none}
       .plan2 .cta.solid{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
       .ribbon{background:var(--bg2);border-bottom:1px solid var(--line);color:var(--muted);font-size:12.5px;text-align:center;padding:8px 14px}
       .ribbon b{color:var(--accent)}
+
+      /* responsive repair: restore desktop header/layout rules that were flattened from media queries */
+      @media(max-width:720px){nav.main{display:none}}
+      @media(min-width:721px){nav.main{display:flex}.brand>span:not(.brand-mark){display:inline}}
+      @media(max-width:560px){.brand>span:not(.brand-mark){display:none}.ghost-btn{display:none}}
+      @media(min-width:561px){.brand{font-size:17px;gap:10px}.brand-mark{width:34px;height:30px}.hcta{font-size:13.5px;padding:9px 16px}.bar{gap:16px}.ghost-btn{display:inline-flex;align-items:center}}
+      @media(min-width:761px){.hero-top{flex-direction:row}.hero-side{padding-top:42px;max-width:360px}.panel{border-right:1px solid var(--line);border-bottom:0}.gallery{grid-template-columns:1.15fr .85fr}.steps{grid-template-columns:repeat(3,1fr)}.step{border-right:1px solid var(--line);border-bottom:0}.step:last-child{border-right:0}.feats{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
@@ -360,6 +367,63 @@ nav.main{display:none}
   </div>
 </section>
 
+<section class="block" id="examples" style="padding:40px 0 8px">
+  <div class="sec-head"><div><p class="kicker">Example outputs</p><h2 style="margin:0;font-size:30px;letter-spacing:-.03em">See the kinds of images you can create</h2></div>
+  <p class="lead" style="color:var(--muted);max-width:440px;margin:0">Preview gallery: product scenes, character portraits, city scenes and food photography. Tap a prompt to load it into the editor above. 点提示词就能填进上方编辑器试一版。</p></div>
+  <div class="gallery">
+    <figure class="shot tall">
+      <img src="/assets/gpt25-sample-3.jpg" alt="Stylized 3D animated character portrait of a young explorer" loading="lazy" />
+      <figcaption><div class="p">“Stylized 3D animated character portrait of a young explorer with a backpack, warm cinematic light”</div><div class="m"><span>Character portrait</span><button class="use" type="button" data-prompt="Stylized 3D animated character portrait of a young explorer with a backpack, warm cinematic light">Use this prompt</button></div></figcaption>
+    </figure>
+    <div class="gallery-col">
+      <figure class="shot">
+        <img src="/assets/gpt25-sample-2.jpg" alt="Frosted glass perfume bottle on a stone pedestal with sage green backdrop" loading="lazy" />
+        <figcaption><div class="p">“Minimalist product photo of a frosted glass perfume bottle on a stone pedestal, sage green studio backdrop”</div><div class="m"><span>Product scene</span><button class="use" type="button" data-prompt="Minimalist product photo of a frosted glass perfume bottle on a stone pedestal, sage green studio backdrop">Use this prompt</button></div></figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="/assets/gpt25-sample-1.jpg" alt="Rainy Tokyo street at dusk with neon signs reflecting on wet pavement" loading="lazy" />
+        <figcaption><div class="p">“A rainy Tokyo street at dusk, neon signs reflecting on wet pavement, people with transparent umbrellas”</div><div class="m"><span>City scene</span><button class="use" type="button" data-prompt="A rainy Tokyo street at dusk, neon signs reflecting on wet pavement, people with transparent umbrellas">Use this prompt</button></div></figcaption>
+      </figure>
+    </div>
+  </div>
+  <figure class="shot" style="margin-top:16px">
+    <img src="/assets/gpt25-sample-4.jpg" alt="Overhead flat lay of a rustic breakfast table with toast, eggs and coffee" style="aspect-ratio:21/9" loading="lazy" />
+    <figcaption><div class="p">“Overhead flat lay of a rustic breakfast table, sourdough toast, eggs and coffee, natural window light”</div><div class="m"><span>Food photography</span><button class="use" type="button" data-prompt="Overhead flat lay of a rustic breakfast table, sourdough toast, eggs and coffee, natural window light">Use this prompt</button></div></figcaption>
+  </figure>
+</section>
+
+<section class="block" id="how" style="padding:40px 0 8px">
+  <div class="sec-head"><div><p class="kicker">How it works</p><h2 style="margin:0;font-size:30px;letter-spacing:-.03em">Three steps to your image</h2></div>
+  <p class="lead" style="color:var(--muted);max-width:420px;margin:0">No Photoshop, no layers. Describe the change and the model does the editing. 不用图层，说清楚要改什么就行。</p></div>
+  <div class="steps">
+    <div class="step"><div class="n">STEP 01</div><h3>Describe — or upload</h3><p>Type what you want to create, or upload a photo and describe the change: background, light, outfit, style.</p></div>
+    <div class="step"><div class="n">STEP 02</div><h3>Generate or edit</h3><p>Generate builds from text; Edit works on your photo and keeps faces and key details consistent while it changes the rest.</p></div>
+    <div class="step"><div class="n">STEP 03</div><h3>Refine &amp; download</h3><p>Adjust one detail at a time — "warmer light", "cleaner background" — then download up to 4K, ready to post or ship.</p></div>
+  </div>
+
+  <div class="gallery" style="margin-top:16px">
+    <figure class="shot tall">
+      <img src="/assets/nanob-sample-5.jpg" alt="A golden puppy, an orange kitten, a white bunny and a duckling in a sunny meadow" loading="lazy" />
+      <figcaption><div class="p">“A golden puppy, an orange kitten, a white bunny and a duckling sitting in a sunny meadow”</div><div class="m"><span>Character portrait</span><button class="use" type="button" data-prompt="A golden puppy, an orange kitten, a white bunny and a duckling sitting in a sunny meadow">Use this prompt</button></div></figcaption>
+    </figure>
+    <div class="gallery-col">
+      <figure class="shot">
+        <img src="/assets/nanob-sample-6.jpg" alt="A sunny 3D hillside path lined with sunflowers and tulips" loading="lazy" />
+        <figcaption><div class="p">“A sunny 3D hillside path lined with sunflowers and tulips, balloons in a blue sky”</div><div class="m"><span>Product scene</span><button class="use" type="button" data-prompt="A sunny 3D hillside path lined with sunflowers and tulips, balloons in a blue sky">Use this prompt</button></div></figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="/assets/nanob-sample-7.jpg" alt="A satellite catching golden sunrise above Earth" loading="lazy" />
+        <figcaption><div class="p">“A satellite catching the golden sunrise above Earth, stars and warm light”</div><div class="m"><span>City scene</span><button class="use" type="button" data-prompt="A satellite catching the golden sunrise above Earth, stars and warm light">Use this prompt</button></div></figcaption>
+      </figure>
+    </div>
+  </div>
+  <figure class="shot" style="margin-top:16px">
+    <img src="/assets/nanob-sample-8.jpg" alt="Sunflowers and daisies with morning dew in warm sunlight" style="aspect-ratio:21/9" loading="lazy" />
+    <figcaption><div class="p">“Sunflowers and daisies with morning dew, warm sunlight through green leaves”</div><div class="m"><span>Food photography</span><button class="use" type="button" data-prompt="Sunflowers and daisies with morning dew, warm sunlight through green leaves">Use this prompt</button></div></figcaption>
+  </figure>
+</section>
+
+
 <section class="block" style="padding:40px 0 8px">
   <div class="sec-head"><div><p class="kicker">What is Nano Banana 2?</p><h2 style="margin:0;font-size:30px;letter-spacing:-.03em">The photo editor that listens</h2></div></div>
   <div class="feats">
@@ -367,6 +431,16 @@ nav.main{display:none}
     <article class="feat"><div class="num">02</div><h3>Character consistency</h3><p>The same face across many generated scenes — what this model became famous for.</p></article>
     <article class="feat"><div class="num">03</div><h3>Fast drafts</h3><p>Near-instant previews for product shots and social posts, then upscale the winner.</p></article>
     <article class="feat"><div class="num">04</div><h3>Text touch-ups</h3><p>Fix or add short text inside images without redoing the whole picture.</p></article>
+  </div>
+</section>
+
+<section class="block" id="bestfor" style="padding:40px 0 8px">
+  <div class="sec-head"><div><p class="kicker">Nano Banana 2 vs GPT Image 2.5</p><h2 style="margin:0;font-size:30px;letter-spacing:-.03em">Pick by the job</h2></div>
+  <p class="lead" style="color:var(--muted);max-width:420px;margin:0">Already have a photo? Start here. Starting from a blank page with text to render? The other bench is faster. 有照片用这边，从零出图、图里带字用另一边。</p></div>
+  <div class="models">
+    <article class="mcard"><div class="tagrow"><span class="tag live">This page</span><span class="tag">Google</span></div><h3>Nano Banana 2 — edit &amp; restyle</h3><p>Best when the starting point is a real photo: swap backgrounds, relight a scene, change outfits, keep the same face across shots.</p><span style="color:var(--faint);font-size:13px">You are in the right place ↓</span></article>
+    <article class="mcard"><div class="tagrow"><span class="tag live">Live</span><span class="tag">OpenAI</span></div><h3>GPT Image 2.5 — create &amp; typeset</h3><p>Best from a blank canvas: posters, covers and product shots, especially when the image needs accurate text in it.</p><a class="go" href="/gpt-image-2-5-generator/">Open GPT Image 2.5 →</a></article>
+    <article class="mcard"><div class="tagrow"><span class="tag">Shared</span></div><h3>Same lab, same credits</h3><p>Both benches share one account and one credit balance. Try each on the free daily generations and keep the one that fits your picture.</p><a class="go" href="/pricing/">See plans →</a></article>
   </div>
 </section>
 
