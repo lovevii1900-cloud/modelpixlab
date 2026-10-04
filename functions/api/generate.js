@@ -10,7 +10,7 @@ const MODEL_MAP = {
   'gpt-image-2.5': 'gpt-image-2.5',
 };
 
-const FREE_LIMIT = 1; // one-time welcome grant per new account (cookie stand-in until accounts launch)
+const FREE_LIMIT = 5; // one-time welcome grant per new account (cookie stand-in until accounts launch)
 
 export async function onRequestPost(context) {
   const { request, env } = context;
