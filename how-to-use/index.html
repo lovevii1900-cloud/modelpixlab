@@ -298,6 +298,22 @@ nav.main{display:none}
       .plan2 .cta.solid{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
       .ribbon{background:var(--bg2);border-bottom:1px solid var(--line);color:var(--muted);font-size:12.5px;text-align:center;padding:8px 14px}
       .ribbon b{color:var(--accent)}
+
+      /* responsive repair: restore desktop header/layout rules that were flattened from media queries */
+      @media(max-width:720px){nav.main{display:none}}
+      @media(min-width:721px){nav.main{display:flex}.brand>span:not(.brand-mark){display:inline}}
+      @media(max-width:560px){.brand>span:not(.brand-mark){display:none}.ghost-btn{display:none}}
+      @media(min-width:561px){.brand{font-size:17px;gap:10px}.brand-mark{width:34px;height:30px}.hcta{font-size:13.5px;padding:9px 16px}.bar{gap:16px}.ghost-btn{display:inline-flex;align-items:center}}
+      @media(min-width:761px){.hero-top{flex-direction:row}.hero-side{padding-top:42px;max-width:360px}.panel{border-right:1px solid var(--line);border-bottom:0}.gallery{grid-template-columns:1.15fr .85fr}.steps{grid-template-columns:repeat(3,1fr)}.step{border-right:1px solid var(--line);border-bottom:0}.step:last-child{border-right:0}.feats{grid-template-columns:repeat(2,1fr)}}
+
+      /* bigger logo + mobile fit */
+      .brand{font-size:21px;gap:12px}
+      .brand-mark{width:46px;height:40px;font-size:15px;border-radius:11px}
+      @media(max-width:560px){
+        .brand{font-size:19px;gap:10px}
+        .brand-mark{width:40px;height:35px;font-size:13px}
+        .brand>span:not(.brand-mark){display:inline}
+      }
 </style>
 </head>
 <body>
@@ -338,6 +354,27 @@ nav.main{display:none}
     <article class="feat"><div class="num">02</div><h3>Add a style word</h3><p>Finish with the look you want: photo, anime, illustration, 3D render, watercolor. One style word anchors the whole image.</p></article>
     <article class="feat"><div class="num">03</div><h3>Put text in quotes</h3><p>Words inside the image go in quotation marks: a neon sign that says "OPEN". Short text works best — a few words, spelled exactly.</p></article>
     <article class="feat"><div class="num">04</div><h3>Change one thing at a time</h3><p>Regenerating with the same prompt gives variations. To fix a result, change one detail per round instead of rewriting everything.</p></article>
+  </div>
+</section>
+
+<section class="block" style="padding:40px 0 8px">
+  <div class="sec-head"><div><p class="kicker">Prompt → result</p><h2 style="margin:0;font-size:30px;letter-spacing:-.03em">Read an image like a prompt</h2></div>
+  <p class="lead" style="color:var(--muted);max-width:480px;margin:0">Every strong result can be read backwards: subject + place + light + style. When your image misses, add the missing piece instead of starting over. 好结果都能反推：主体 + 场景 + 光线 + 风格。</p></div>
+  <div class="gallery">
+    <figure class="shot tall">
+      <img src="/assets/gpt25-sample-1.jpg" alt="Rainy Tokyo street at dusk with neon signs reflecting on wet pavement" loading="lazy" />
+      <figcaption><div class="p"><b>Subject:</b> Tokyo street · <b>Setting:</b> rainy dusk · <b>Details:</b> neon reflections, transparent umbrellas</div><div class="m"><span>Scene + mood + details</span><a href="/gpt-image-2-5-generator/" style="font-size:12px;font-weight:700;color:var(--ink);text-decoration:none">Try this style →</a></div></figcaption>
+    </figure>
+    <div class="gallery-col">
+      <figure class="shot">
+        <img src="/assets/gpt25-sample-2.jpg" alt="Frosted glass perfume bottle on a stone pedestal with sage green backdrop" loading="lazy" />
+        <figcaption><div class="p"><b>Subject:</b> frosted perfume bottle · <b>Setting:</b> stone pedestal, sage backdrop · <b>Style:</b> minimalist product photo</div><div class="m"><span>Product prompts need staging</span><a href="/gpt-image-2-5-generator/" style="font-size:12px;font-weight:700;color:var(--ink);text-decoration:none">Make a product shot →</a></div></figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="/assets/gpt25-sample-3.jpg" alt="Stylized 3D animated character portrait of a young explorer" loading="lazy" />
+        <figcaption><div class="p"><b>Subject:</b> young explorer · <b>Setting:</b> mountain sunset · <b>Style:</b> stylized 3D animated portrait</div><div class="m"><span>Style words steer the whole image</span><a href="/gpt-image-2-5-generator/" style="font-size:12px;font-weight:700;color:var(--ink);text-decoration:none">Make a character →</a></div></figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 
