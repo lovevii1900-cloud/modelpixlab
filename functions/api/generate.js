@@ -10,7 +10,7 @@ const MODEL_MAP = {
   'gpt-image-2.5': 'gpt-image-2.5',
 };
 
-const FREE_DAILY_LIMIT = 3; // per visitor per day (cookie-based soft cap; hard caps live in Cloudflare rules)
+const FREE_LIMIT = 1; // one-time welcome grant per new account (cookie stand-in until accounts launch)
 
 export async function onRequestPost(context) {
   const { request, env } = context;
@@ -29,7 +29,7 @@ export async function onRequestPost(context) {
   const m = cookie.match(/mpl_free=(\d+)/);
   const used = m ? parseInt(m[1], 10) : 0;
   if (used >= FREE_DAILY_LIMIT) {
-    return json({ error: 'daily_free_limit', limit: FREE_DAILY_LIMIT }, 429);
+    return json({ error: 'free_limit_reached', limit: FREE_LIMIT }, 429);
   }
 
   const upstream = await fetch('https://api.openai.com/v1/images/generations', {
