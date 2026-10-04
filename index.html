@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="/modelpixlab-icon-from-hero.png">
-<title>Pricing — ModelPixLab</title>
-<meta name="description" content="Start free with daily generations on every model. Upgrade for HD output, no watermark and commercial use.">
+<title>ModelPixLab — Every New AI Image Model, One Lab</title>
+<meta name="description" content="Generate and edit images with the newest AI models — GPT Image 2.5, Nano Banana 2 and more. Free to try, no Photoshop needed.">
 <style>
   :root{
     --bg:#0a0a0b; --bg2:#101012; --card:#131315; --card2:#17181a;
@@ -128,41 +128,99 @@
   .foot b{color:var(--mut)}
   @media(max-width:640px){.nav nav{display:none}.genfoot .btn{width:100%}}
 </style>
-<link rel="canonical" href="https://modelpixlab.com/pricing/">
+<link rel="canonical" href="https://modelpixlab.com/">
 </head>
-<body data-view="view-pricing">
+<body data-view="view-home">
 <div class="ribbon">🔍 <b>Preview build</b> — page design & structure demo. Live image generation API is not connected yet.</div>
 <header>
   <div class="wrap nav">
     <a class="logo" href="#/"><svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="15" fill="#101012" stroke="#2c2c30"/><path d="M17 47 V17 L32 37 L47 17 V47" fill="none" stroke="#ececea" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M24.5 24.5 L32 35 L39.5 24.5" fill="none" stroke="#46ff0a" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Model<em>Pix</em>Lab</span></a>
     <nav>
-      <a href="/" data-nav="home">Home</a>
+      <a href="/" data-nav="home" data-on="1">Home</a>
       <a href="/nano-banana-2-generator/" data-nav="nano">Nano Banana 2</a>
       <a href="/gpt-image-2-5-generator/" data-nav="gpt">GPT Image 2.5</a>
-      <a href="/pricing/" data-nav="pricing" data-on="1">Pricing</a>
+      <a href="/pricing/" data-nav="pricing">Pricing</a>
     </nav>
     <div class="sp"></div>
     <a class="btn small ghost" href="/pricing/">Sign in</a>
     <a class="btn small" href="/gpt-image-2-5-generator/">Try free</a>
   </div>
 </header>
-<main class="view" id="view-pricing">
+<main class="view" id="view-home">
   <div class="hero wrap">
-    <h1>Simple pricing</h1>
-    <p class="sub">Start free. Upgrade when the free credits run out — not before.</p>
-    <div class="plans" style="text-align:left">
-      <div class="plan"><h3>Free</h3><div class="price">$0</div><p style="color:var(--mut);font-size:14px">For trying things out</p>
-        <ul><li>✓ 3 generations / day</li><li>✓ All models included</li><li>✓ Standard resolution</li><li>✓ Personal use</li></ul>
-        <a class="btn ghost" href="#/">Start free</a></div>
-      <div class="plan pop"><h3>Pro</h3><div class="price">$9.9<small>/mo</small></div><p style="color:var(--mut);font-size:14px">For creators &amp; sellers</p>
-        <ul><li>✓ 300 generations / month</li><li>✓ HD + 4K output</li><li>✓ No watermark</li><li>✓ Commercial license</li><li>✓ Priority queue</li></ul>
-        <a class="btn" href="#/">Go Pro</a></div>
-      <div class="plan"><h3>Credits pack</h3><div class="price">$4.9</div><p style="color:var(--mut);font-size:14px">100 credits, never expire</p>
-        <ul><li>✓ 100 generations</li><li>✓ HD output</li><li>✓ No watermark</li><li>✓ Commercial license</li></ul>
-        <a class="btn ghost" href="#/">Buy credits</a></div>
+    <div class="badge">● <b>New:</b> Nano Banana 2 &amp; GPT Image 2.5 just landed</div>
+    <h1>Every new AI image model.<br><span class="grad">One lab.</span></h1>
+    <p class="sub">Describe it, pick a model, get your image. We plug in the newest generators the week they drop — no installs, no Photoshop, free to try.</p>
+
+    <div class="gen" data-gen>
+      <label for="p-home">DESCRIBE YOUR IMAGE</label>
+      <textarea id="p-home" placeholder="A cozy cabin in snowy mountains at dusk, warm light in the windows, cinematic…">A cozy cabin in snowy mountains at dusk, warm light in the windows, cinematic</textarea>
+      <div class="examples">
+        <span class="ex">Product photo of a sneaker on pastel background</span>
+        <span class="ex">Anime girl portrait, soft studio light</span>
+        <span class="ex">Logo for a coffee brand, minimalist</span>
+      </div>
+      <div class="row">
+        <div class="field"><label>MODEL</label>
+          <select class="model-sel">
+            <option>Nano Banana 2</option><option>GPT Image 2.5</option><option>Seedream 5.0 Pro</option>
+            <option>Ideogram 4.0</option><option>FLUX 2 Pro</option><option>FLUX 2 Klein</option>
+          </select></div>
+        <div class="field"><label>ASPECT RATIO</label>
+          <div class="pills ratio"><span class="pill on">1:1</span><span class="pill">16:9</span><span class="pill">9:16</span><span class="pill">4:3</span></div></div>
+        <div class="field"><label>STYLE</label>
+          <select><option>Auto</option><option>Photo</option><option>Anime</option><option>Illustration</option><option>3D render</option></select></div>
+      </div>
+      <div class="genfoot">
+        <button class="btn gen-btn">✦ Generate image</button>
+        <span class="credits">Free plan: 3 images/day · No card needed</span>
+      </div>
+      <div class="shimmer">Generating your image…</div>
+      <div class="result"><div class="canvasbox"><canvas width="960" height="960"></canvas><span class="demo-tag">Demo preview</span><button class="btn small dl">Download</button></div></div>
     </div>
-    <p style="color:var(--dim);font-size:13px;margin-top:22px">Draft pricing for the pilot — final numbers set after real API costs are measured.</p>
   </div>
+
+  <section class="wrap">
+    <h2>Pick your model</h2>
+    <p class="lead">New models land here first. Each one has its own page, its own strengths — one lab, zero tab-hopping.</p>
+    <div class="grid">
+      <div class="mcard" data-go="/nano-banana-2-generator/"><div class="thumb" style="background:linear-gradient(135deg,#f59e0b,#ef4444)"></div><span class="tag hot">TRENDING</span><span class="tag new">NEW</span><h3>Nano Banana 2</h3><p>Google's fast editor-generator. Best for photo edits, face swaps and quick product shots.</p></div>
+      <div class="mcard" data-go="/gpt-image-2-5-generator/"><div class="thumb" style="background:linear-gradient(135deg,#22d3ee,#6366f1)"></div><span class="tag new">NEW</span><h3>GPT Image 2.5</h3><p>OpenAI's latest. Sharp text rendering and instruction-following for posters and covers.</p></div>
+      <div class="mcard" data-go="/nano-banana-2-generator/"><div class="thumb" style="background:linear-gradient(135deg,#a78bfa,#ec4899)"></div><h3>Seedream 5.0 Pro</h3><p>ByteDance's flagship. Cinematic light, strong composition, great for ads.</p></div>
+      <div class="mcard" data-go="/gpt-image-2-5-generator/"><div class="thumb" style="background:linear-gradient(135deg,#34d399,#0ea5e9)"></div><h3>Ideogram 4.0</h3><p>The text-in-image specialist. Logos, memes and typography that actually spell right.</p></div>
+      <div class="mcard" data-go="/nano-banana-2-generator/"><div class="thumb" style="background:linear-gradient(135deg,#f472b6,#7c5cff)"></div><h3>FLUX 2 Pro</h3><p>Black Forest Labs' pro line. Photoreal skin, hands and product detail.</p></div>
+      <div class="mcard" data-go="/gpt-image-2-5-generator/"><div class="thumb" style="background:linear-gradient(135deg,#fbbf24,#22c55e)"></div><h3>FLUX 2 Klein</h3><p>The small fast one. Drafts in seconds when you just need to explore ideas.</p></div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <h2>Why creators use ModelPixLab</h2>
+    <div class="feat">
+      <div class="fcard"><div class="ic">⚡</div><h3>New models, first week</h3><p>When a model drops, we integrate and benchmark it immediately — you never wait months for access.</p></div>
+      <div class="fcard"><div class="ic">🎛️</div><h3>One interface, every model</h3><p>Same prompt box, same workflow. Switch models with one click and compare results side by side.</p></div>
+      <div class="fcard"><div class="ic">🆓</div><h3>Free to try, fair to scale</h3><p>Daily free generations on every model. Pay only when you need volume, HD and no watermark.</p></div>
+      <div class="fcard"><div class="ic">🖼️</div><h3>Generate + edit</h3><p>Text-to-image, image-to-image, background swap, upscale — the full toolbox in the browser.</p></div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><h3>Describe</h3><p>Type what you want, or upload a photo to edit. Plain words work — no prompt engineering degree needed.</p></div>
+      <div class="step"><h3>Pick a model</h3><p>Each model card tells you what it's best at. Not sure? Start with the trending one.</p></div>
+      <div class="step"><h3>Generate &amp; download</h3><p>Get your image in seconds. Download, upscale, or remix it into a new variation.</p></div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <h2>Questions</h2>
+    <div class="faq">
+      <details><summary>Is ModelPixLab free?</summary><p>Yes. Every model includes free daily generations. Paid plans add more credits, higher resolution, batch generation and watermark-free downloads.</p></details>
+      <details><summary>Which model should I start with?</summary><p>For photo editing and general use, start with Nano Banana 2. For posters with text, try GPT Image 2.5 or Ideogram 4.0.</p></details>
+      <details><summary>Can I use the images commercially?</summary><p>Images you generate on paid plans come with commercial usage rights, subject to each model's license terms shown on its page.</p></details>
+      <details><summary>Do I need to install anything?</summary><p>No. Everything runs in your browser, on phone or desktop.</p></details>
+    </div>
+  </section>
 </main>
 <footer>
   <div class="wrap foot">
