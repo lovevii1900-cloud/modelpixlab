@@ -298,6 +298,22 @@ nav.main{display:none}
       .plan2 .cta.solid{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
       .ribbon{background:var(--bg2);border-bottom:1px solid var(--line);color:var(--muted);font-size:12.5px;text-align:center;padding:8px 14px}
       .ribbon b{color:var(--accent)}
+
+      /* responsive repair: restore desktop header/layout rules that were flattened from media queries */
+      @media(max-width:720px){nav.main{display:none}}
+      @media(min-width:721px){nav.main{display:flex}.brand>span:not(.brand-mark){display:inline}}
+      @media(max-width:560px){.brand>span:not(.brand-mark){display:none}.ghost-btn{display:none}}
+      @media(min-width:561px){.brand{font-size:17px;gap:10px}.brand-mark{width:34px;height:30px}.hcta{font-size:13.5px;padding:9px 16px}.bar{gap:16px}.ghost-btn{display:inline-flex;align-items:center}}
+      @media(min-width:761px){.hero-top{flex-direction:row}.hero-side{padding-top:42px;max-width:360px}.panel{border-right:1px solid var(--line);border-bottom:0}.gallery{grid-template-columns:1.15fr .85fr}.steps{grid-template-columns:repeat(3,1fr)}.step{border-right:1px solid var(--line);border-bottom:0}.step:last-child{border-right:0}.feats{grid-template-columns:repeat(2,1fr)}}
+
+      /* bigger logo + mobile fit */
+      .brand{font-size:21px;gap:12px}
+      .brand-mark{width:46px;height:40px;font-size:15px;border-radius:11px}
+      @media(max-width:560px){
+        .brand{font-size:19px;gap:10px}
+        .brand-mark{width:40px;height:35px;font-size:13px}
+        .brand>span:not(.brand-mark){display:inline}
+      }
 </style>
 </head>
 <body>
