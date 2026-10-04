@@ -406,7 +406,16 @@
         .pay-aside{display:none}
         .pay-main{padding:26px 20px 24px}
       }
-    </style>
+    
+      /* bigger logo + mobile fit */
+      .brand{font-size:21px;gap:12px}
+      .brand-mark{width:46px;height:40px;font-size:15px;border-radius:11px}
+      @media(max-width:560px){
+        .brand{font-size:19px;gap:10px}
+        .brand-mark{width:40px;height:35px;font-size:13px}
+        .brand>span:not(.brand-mark){display:inline}
+      }
+</style>
   </head>
   <body>
     <header class="site">
