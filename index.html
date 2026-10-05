@@ -695,7 +695,7 @@
 
     <div class="auth-overlay" id="authOverlay" hidden>
       <div class="auth-shell" role="dialog" aria-modal="true" aria-labelledby="authTitle">
-        <button class="auth-close" id="authClose" type="button" aria-label="Close 关闭">✕</button>
+        <button class="auth-close" id="authClose" type="button" aria-label="Close">✕</button>
         <aside class="auth-aside">
           <span class="brand-mark">M<i>P</i></span>
           <h3>Your creations,<br /><span class="hl">kept &amp; synced.</span></h3>
@@ -757,7 +757,7 @@
 
     <div class="pay-overlay" id="payOverlay" hidden>
       <div class="pay-shell" role="dialog" aria-modal="true" aria-labelledby="payTitle">
-        <button class="auth-close" id="payClose" type="button" aria-label="Close 关闭">✕</button>
+        <button class="auth-close" id="payClose" type="button" aria-label="Close">✕</button>
         <aside class="pay-aside">
           <span class="brand-mark">M<i>P</i></span>
           <h3>Never hit<br /><span class="hl">the empty tank.</span></h3>
@@ -785,17 +785,17 @@
             </div>
 
             <div class="plan-list" id="planList">
-              <button class="plan-opt" type="button" aria-pressed="false" data-kind="plan" data-name="Basic plan" data-price="9.9" data-credits="250" data-cycle="/mo 每月">
+              <button class="plan-opt" type="button" aria-pressed="false" data-kind="plan" data-name="Basic plan" data-price="9.9" data-credits="250" data-cycle="/mo">
                 <span class="radio"></span>
                 <span class="pinfo"><strong>Creator</strong><small>For regular creators</small></span>
                 <span class="price"><b>$9.9</b><span>250 credits/mo</span></span>
               </button>
-              <button class="plan-opt" type="button" aria-pressed="true" data-kind="plan" data-name="Pro plan" data-price="19.9" data-credits="700" data-cycle="/mo 每月">
+              <button class="plan-opt" type="button" aria-pressed="true" data-kind="plan" data-name="Pro plan" data-price="19.9" data-credits="700" data-cycle="/mo">
                 <span class="radio"></span>
                 <span class="pinfo"><strong>Pro</strong><span class="badge">Most popular</span><small>Priority queue + batch generation</small></span>
                 <span class="price"><b>$19.9</b><span>700 credits/mo</span></span>
               </button>
-              <button class="plan-opt" type="button" aria-pressed="false" data-kind="plan" data-name="Studio plan 工作室版" data-price="39.9" data-credits="1600" data-cycle="/mo 每月">
+              <button class="plan-opt" type="button" aria-pressed="false" data-kind="plan" data-name="Studio plan" data-price="39.9" data-credits="1600" data-cycle="/mo">
                 <span class="radio"></span>
                 <span class="pinfo"><strong>Studio</strong><small>Teams &amp; heavy use</small></span>
                 <span class="price"><b>$39.9</b><span>1,600 credits/mo</span></span>
@@ -803,17 +803,17 @@
             </div>
 
             <div class="plan-list" id="packList" hidden>
-              <button class="plan-opt" type="button" aria-pressed="false" data-kind="pack" data-name="Starter pack 入门包" data-price="4.9" data-credits="100" data-cycle="one-time 一次性">
+              <button class="plan-opt" type="button" aria-pressed="false" data-kind="pack" data-name="Starter pack" data-price="4.9" data-credits="100" data-cycle="one-time">
                 <span class="radio"></span>
                 <span class="pinfo"><strong>Starter</strong><small>Top up for a single project</small></span>
                 <span class="price"><b>$4.9</b><span>100 credits</span></span>
               </button>
-              <button class="plan-opt" type="button" aria-pressed="true" data-kind="pack" data-name="Creator pack 创作者包" data-price="12.9" data-credits="300" data-cycle="one-time 一次性">
+              <button class="plan-opt" type="button" aria-pressed="true" data-kind="pack" data-name="Creator pack" data-price="12.9" data-credits="300" data-cycle="one-time">
                 <span class="radio"></span>
                 <span class="pinfo"><strong>Creator</strong><small>Best value per credit</small></span>
                 <span class="price"><b>$12.9</b><span>300 credits</span></span>
               </button>
-              <button class="plan-opt" type="button" aria-pressed="false" data-kind="pack" data-name="Studio pack 工作室包" data-price="29.9" data-credits="800" data-cycle="one-time 一次性">
+              <button class="plan-opt" type="button" aria-pressed="false" data-kind="pack" data-name="Studio pack" data-price="29.9" data-credits="800" data-cycle="one-time">
                 <span class="radio"></span>
                 <span class="pinfo"><strong>Studio</strong><small>Stock up and forget limits</small></span>
                 <span class="price"><b>$29.9</b><span>800 credits</span></span>
@@ -1106,8 +1106,8 @@
           }
         };
         var DYN = {
-          en: { generate:"<span>Generate</span><span>↗</span>", generating:"<span>Generating… 生成中…</span><span>•••</span>", working:"Generating with {m}… 正在用 {m} 生成…", sampleOut:"sample output 示例出图", sketchAttached:"Sketch attached — describe the style, then Generate. 草图已附上：描述想要的风格，再点生成。", payNow:"Pay", processing:"Processing… 处理中…", planWord:"Plan 套餐", packWord:"Pack 点数包", cycleMonthly:"Monthly自动续费", cycleOnce:"One-time 一次性",
-            aTitleCreate:"Create your free account<span class='cn'>免费注册</span>", aTitleSignin:"Welcome back<span class='cn'>欢迎回来</span>", aSubCreate:"Takes about 20 seconds. No credit card required.", aSubSignin:"Sign in to pick up your creations where you left off. 登录后继续看你的作品。", aBtnCreate:"<span>Create free account</span><span>↗</span>", aBtnSignin:"<span>Sign in</span><span>↗</span>", aAltCreate:"Already have an account? <button type='button' id='altSwitch'>Sign in</button>", aAltSignin:"New here? <button type='button' id='altSwitch'>Create an account 注册</button>" },
+          en: { generate:"<span>Generate</span><span>↗</span>", generating:"<span>Generating…</span><span>•••</span>", working:"Generating with {m}…", sampleOut:"sample output", sketchAttached:"Sketch attached — describe the style, then Generate.", payNow:"Pay", processing:"Processing…", planWord:"Plan", packWord:"Pack", cycleMonthly:"Monthly", cycleOnce:"One-time",
+            aTitleCreate:"Create your free account", aTitleSignin:"Welcome back", aSubCreate:"Takes about 20 seconds. No credit card required.", aSubSignin:"Sign in to pick up your creations where you left off.", aBtnCreate:"<span>Create free account</span><span>↗</span>", aBtnSignin:"<span>Sign in</span><span>↗</span>", aAltCreate:"Already have an account? <button type='button' id='altSwitch'>Sign in</button>", aAltSignin:"New here? <button type='button' id='altSwitch'>Create an account</button>" },
           es: { generate:"<span>Generar</span><span>↗</span>", generating:"<span>Generando…</span><span>•••</span>", working:"Generando con {m}…", sampleOut:"resultado de ejemplo", sketchAttached:"Boceto adjunto: describe el estilo y pulsa Generar.", payNow:"Pagar", processing:"Procesando…", planWord:"Plan", packWord:"Paquete", cycleMonthly:"Mensual", cycleOnce:"Pago único",
             aTitleCreate:"Crea tu cuenta gratis", aTitleSignin:"Bienvenido de nuevo", aSubCreate:"Tarda unos 20 segundos. No necesitas tarjeta.", aSubSignin:"Inicia sesión para seguir con tus creaciones.", aBtnCreate:"<span>Crear cuenta gratis</span><span>↗</span>", aBtnSignin:"<span>Iniciar sesión</span><span>↗</span>", aAltCreate:"¿Ya tienes cuenta? <button type='button' id='altSwitch'>Iniciar sesión</button>", aAltSignin:"¿Nuevo aquí? <button type='button' id='altSwitch'>Crear una cuenta</button>" },
           pt: { generate:"<span>Gerar</span><span>↗</span>", generating:"<span>Gerando…</span><span>•••</span>", working:"Gerando com {m}…", sampleOut:"resultado de exemplo", sketchAttached:"Rascunho anexado — descreva o estilo e toque em Gerar.", payNow:"Pagar", processing:"Processando…", planWord:"Plano", packWord:"Pacote", cycleMonthly:"Mensal", cycleOnce:"Pagamento único",
@@ -1397,7 +1397,7 @@
         pwToggle.addEventListener('click', function () {
           var show = pwInput.type === 'password';
           pwInput.type = show ? 'text' : 'password';
-          pwToggle.textContent = show ? 'Hide 隐藏' : 'Show';
+          pwToggle.textContent = show ? 'Hide' : 'Show';
         });
 
         pwInput.addEventListener('input', function () {
@@ -1413,9 +1413,9 @@
           pwBar.style.background = score <= 1 ? '#ff5d5d' : score <= 3 ? '#ffb02e' : 'var(--accent)';
           pwHint.textContent = v.length === 0
             ? '8+ characters with a mix of letters and numbers is a good start.'
-            : score <= 1 ? 'Weak — add length or numbers. 偏弱：加长一点，或加上数字。'
-            : score <= 3 ? 'Fair — a symbol or capital letter would help. 还行：再加个符号或大写字母更好。'
-            : 'Strong password. 强度不错。';
+            : score <= 1 ? 'Weak — add length or numbers.'
+            : score <= 3 ? 'Fair — a symbol or capital letter would help.'
+            : 'Strong password.';
         });
 
         function showError(msg) { errorBox.textContent = msg; errorBox.classList.add('show'); }
@@ -1426,19 +1426,19 @@
           var email = emailInput.value.trim();
           var pw = pwInput.value;
           if (mode === 'register' && nameInput.value.trim().length < 1) {
-            showError('Please enter a display name. 请填写昵称。'); nameInput.focus(); return;
+            showError('Please enter a display name.'); nameInput.focus(); return;
           }
           if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
-            showError('That email address looks incomplete. 邮箱格式不对，请检查一下。'); emailInput.focus(); return;
+            showError('That email address looks incomplete.'); emailInput.focus(); return;
           }
           if (pw.length < 8) {
-            showError('Password needs at least 8 characters. 密码至少 8 位。'); pwInput.focus(); return;
+            showError('Password needs at least 8 characters.'); pwInput.focus(); return;
           }
           hideError();
-          doneTitle.textContent = mode === 'register' ? 'Welcome aboard' : 'Signed in (preview) 已登录（预览）';
+          doneTitle.textContent = mode === 'register' ? 'Welcome aboard' : 'Signed in (preview)';
           doneText.textContent = mode === 'register'
-            ? 'Account created for ' + email + ' — in the live version a confirmation email would be on its way. 已为 ' + email + ' 创建账号——正式版会同时发一封确认邮件。'
-            : 'This is how the signed-in state will look once accounts are live. 这是账号系统上线后的登录成功样式。';
+            ? 'Account created for ' + email + ' — in the live version a confirmation email would be on its way.'
+            : 'This is how the signed-in state will look once accounts are live.';
           formWrap.style.display = 'none';
           doneView.hidden = false;
         });
@@ -1554,7 +1554,7 @@
           setTimeout(function () {
             balance += selected.credits;
             balanceNum.textContent = fmt(balance);
-            doneText.textContent = selected.name + ' · ' + method + ' — ' + fmt(selected.credits) + ' credits added, new balance ' + fmt(balance) + '. 已到账 ' + fmt(selected.credits) + ' 点，当前余额 ' + fmt(balance) + ' 点。（设计稿演示，不会真实扣款）';
+            doneText.textContent = selected.name + ' · ' + method + ' — ' + fmt(selected.credits) + ' credits added, new balance ' + fmt(balance) + '.';
             formWrap.style.display = 'none';
             doneView.hidden = false;
           }, 900);
