@@ -21,7 +21,7 @@ const MODEL_MAP = {
   'gpt-image-2.5': 'gpt-image-2.5',
 };
 
-const FREE_LIMIT = 5; // one-time welcome grant per new account (cookie stand-in until accounts launch)
+// (free quota is now per-account in D1, granted at signup)
 const POLL_INTERVAL_MS = 3000;
 const POLL_TIMEOUT_MS = 50000; // stay inside a single request; on timeout we surface task_id instead of silently failing
 const SUBMIT_TIMEOUT_MS = 25000; // submit must answer fast; APIMart normally responds in <10s
@@ -87,13 +87,23 @@ export async function onRequestPost(context) {
   const key = env.IMAGE_API_KEY || env.OPENAI_API_KEY_FREE || env.OPENAI_API_KEY;
   if (!key) return json({ error: 'api_not_configured' }, 503);
 
-  // Soft per-visitor cap via cookie counter (UX layer; real enforcement: CF rate-limit rules)
-  // One-time welcome grant stand-in until real accounts launch: long-lived cookie, not daily.
+  // ---- Account auth (required): Google sign-in, 3 free images for new accounts ----
+  if (!env.DB) return json({ error: 'db_not_configured' }, 503);
   const cookie = request.headers.get('Cookie') || '';
-  const m = cookie.match(/mpl_free=(\d+)/);
-  const used = m ? parseInt(m[1], 10) : 0;
-  if (used >= FREE_LIMIT) {
-    return json({ error: 'free_limit_reached', limit: FREE_LIMIT }, 429);
+  const sm = cookie.match(/mpl_session=([A-Za-z0-9\-_]+)/);
+  if (!sm) return json({ error: 'auth_required' }, 401);
+  const db = env.DB;
+  const nowSec = Math.floor(Date.now() / 1000);
+  let userId;
+  try {
+    const sess = await db.prepare('SELECT user_id, expires_at FROM sessions WHERE token = ?').bind(sm[1]).first();
+    if (!sess || sess.expires_at < nowSec) return json({ error: 'auth_required' }, 401);
+    userId = sess.user_id;
+    const cred = await db.prepare('SELECT balance FROM credits WHERE user_id = ?').bind(userId).first();
+    const balance = cred ? cred.balance : 0;
+    if (balance < 1) return json({ error: 'out_of_credits', balance }, 402);
+  } catch {
+    return json({ error: 'db_error' }, 500);
   }
 
   const base = (env.IMAGE_API_BASE || env.OPENAI_BASE_URL || 'https://api.openai.com/v1').replace(/\/$/, '');
@@ -175,9 +185,20 @@ export async function onRequestPost(context) {
     if (!image) return json({ error: 'no_image_returned' }, 502);
   }
 
+  // Deduct 1 credit + record the generation (only on success)
+  try {
+    await db.batch([
+      db.prepare('UPDATE credits SET balance = balance - 1 WHERE user_id = ? AND balance > 0').bind(userId),
+      db.prepare('INSERT INTO generations (id, user_id, prompt, image_url, cost_credits, created_at) VALUES (?, ?, ?, ?, 1, ?)')
+        .bind(
+          Array.from(crypto.getRandomValues(new Uint8Array(12))).map(b => b.toString(16).padStart(2, '0')).join(''),
+          userId, prompt.slice(0, 500), image, Math.floor(Date.now() / 1000)
+        ),
+    ]);
+  } catch { /* credit bookkeeping must not fail the response */ }
+
   const headers = {
     'Content-Type': 'application/json',
-    'Set-Cookie': `mpl_free=${used + 1}; Path=/; Max-Age=31536000; SameSite=Lax`,
     'Cache-Control': 'no-store',
   };
   return new Response(JSON.stringify({ image }), { status: 200, headers });
