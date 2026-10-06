@@ -1208,6 +1208,7 @@
         var stageMeta = document.getElementById('stageMeta');
         var stageMetaTop = document.getElementById('stageMetaTop');
         var dlBtn = document.getElementById('dlBtn');
+        var isGenerating = false; // guard against double-clicks
         var sketchFile = document.getElementById('sketchFile');
         var sketchPrev = document.getElementById('sketchPrev');
         var sketchHint = document.getElementById('sketchHint');
@@ -1285,8 +1286,11 @@
           } catch (e) { tsWidget = null; }
         }
         function showLoading() {
+          isGenerating = true;
           genBtn.disabled = true;
           genBtn.innerHTML = window.mplT('generating');
+          genBtn.style.opacity = '0.6';
+          genBtn.style.cursor = 'wait';
           stageImg.style.display = 'none';
           stageEmpty.style.display = 'none';
           dlBtn.style.display = 'none';
@@ -1309,7 +1313,10 @@
             syncMeta(window.mplT('sampleOut'));
             dlBtn.href = d.image;
             dlBtn.style.display = 'inline-block';
+            isGenerating = false;
             genBtn.disabled = false;
+            genBtn.style.opacity = '';
+            genBtn.style.cursor = '';
             genBtn.innerHTML = window.mplT('generate');
             // Refresh credits after successful generation
             if (window.mplUser) { window.mplUser.credits = Math.max(0, (window.mplUser.credits || 1) - 1); if (window.refreshAuthUI) window.refreshAuthUI(); }
@@ -1324,7 +1331,10 @@
             else if (err === 402) msg = 'Out of credits — top up to keep creating.';
             if (big) big.textContent = msg;
             stageEmpty.style.display = 'block';
+            isGenerating = false;
             genBtn.disabled = false;
+            genBtn.style.opacity = '';
+            genBtn.style.cursor = '';
             genBtn.innerHTML = window.mplT('generate');
           });
         }
@@ -1349,6 +1359,7 @@
         // Re-enable by restoring tsExecute() call below. Rate limiting +
         // cookie free-cap remain as abuse protection.
         genBtn.addEventListener('click', function () {
+          if (isGenerating) return; // ignore clicks while generating
           // Auth gate: must be signed in (Google) to generate
           if (!window.mplUser) {
             window.openAuth('register');

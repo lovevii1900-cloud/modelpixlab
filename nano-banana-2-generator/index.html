@@ -530,10 +530,13 @@ nav.main{display:none}
   document.querySelectorAll('.seg button').forEach(function(b){ b.addEventListener('click', function(){
     document.querySelectorAll('.seg button').forEach(function(x){ x.setAttribute('aria-pressed','false'); });
     b.setAttribute('aria-pressed','true'); }); });
-  function show(src){ stageWork.style.display='none'; stageImg.src=src; stageImg.style.display='block'; dlBtn.href=src; dlBtn.style.display='inline'; genBtn.disabled=false; genBtn.innerHTML='<span>Generate with Nano Banana 2</span><span>↗</span>'; }
+  var isGenerating = false;
+  function show(src){ stageWork.style.display='none'; stageImg.src=src; stageImg.style.display='block'; dlBtn.href=src; dlBtn.style.display='inline'; isGenerating=false; genBtn.disabled=false; genBtn.style.opacity=''; genBtn.style.cursor=''; genBtn.innerHTML='<span>Generate with Nano Banana 2</span><span>↗</span>'; }
   genBtn.addEventListener('click', function(){
+    if (isGenerating) return;
+    isGenerating = true;
     var text = promptEl.value.trim();
-    genBtn.disabled = true; genBtn.innerHTML = '<span>Generating…</span><span>···</span>';
+    genBtn.disabled = true; genBtn.style.opacity='0.6'; genBtn.style.cursor='wait'; genBtn.innerHTML = '<span>Generating…</span><span>···</span>';
     stageImg.style.display='none'; dlBtn.style.display='none'; stageEmpty.style.display='none'; stageWork.style.display='block';
     fetch('/api/generate', { method:'POST', headers:{'Content-Type':'application/json'},
       body: JSON.stringify({ prompt: text || 'a creative AI image', model:'GPT Image 2.5', size: sizeEl.value }) })
@@ -541,7 +544,7 @@ nav.main{display:none}
     .then(function(d){ if(!d || !d.image) throw new Error('no_image'); show(d.image); })
     .catch(function(){ var i; do { i = Math.floor(Math.random()*samples.length); } while(i===lastIdx); lastIdx=i;
       var img = new Image(); img.onload = function(){ setTimeout(function(){ show(samples[i]); }, 900); };
-      img.onerror = function(){ stageWork.style.display='none'; stageEmpty.style.display='block'; genBtn.disabled=false; genBtn.innerHTML='<span>Generate with Nano Banana 2</span><span>↗</span>'; };
+      img.onerror = function(){ stageWork.style.display='none'; stageEmpty.style.display='block'; isGenerating=false; genBtn.disabled=false; genBtn.style.opacity=''; genBtn.style.cursor=''; genBtn.innerHTML='<span>Generate with Nano Banana 2</span><span>↗</span>'; };
       img.src = samples[i]; });
   });
 })();
