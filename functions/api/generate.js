@@ -24,6 +24,20 @@ const MODEL_MAP = {
 const FREE_LIMIT = 5; // one-time welcome grant per new account (cookie stand-in until accounts launch)
 const POLL_INTERVAL_MS = 3000;
 const POLL_TIMEOUT_MS = 50000; // stay inside a single request; on timeout we surface task_id instead of silently failing
+const SUBMIT_TIMEOUT_MS = 25000; // submit must answer fast; APIMart normally responds in <10s
+const POLL_REQ_TIMEOUT_MS = 12000; // each poll request bounded so one hung poll can't stall the loop
+
+// fetch with a hard wall-clock timeout: a hung upstream must degrade to a
+// JSON error, never hang the function past the edge gateway timeout.
+async function fetchWithTimeout(url, opts, ms) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), ms);
+  try {
+    return await fetch(url, { ...opts, signal: ctrl.signal });
+  } finally {
+    clearTimeout(timer);
+  }
+}
 
 // Frontend sends pixel sizes (1024x1024 / 1536x1024 / 1024x1536). APIMart wants ratio + resolution tier.
 function toApimartSize(pixelSize) {
@@ -74,9 +88,14 @@ export async function onRequestPost(context) {
       submitBody.version = (body.version || 'flare').toString().toLowerCase() === 'sunburst' ? 'sunburst' : 'flare';
     }
 
-    const submit = await fetch(`${base}/images/generations`, {
-      method: 'POST', headers: authHeaders, body: JSON.stringify(submitBody),
-    });
+    let submit;
+    try {
+      submit = await fetchWithTimeout(`${base}/images/generations`, {
+        method: 'POST', headers: authHeaders, body: JSON.stringify(submitBody),
+      }, SUBMIT_TIMEOUT_MS);
+    } catch {
+      return json({ error: 'upstream_timeout', stage: 'submit' }, 504);
+    }
     if (!submit.ok) {
       const detail = await submit.text().catch(() => '');
       return json({ error: 'upstream_error', status: submit.status, detail: detail.slice(0, 300) }, 502);
@@ -95,7 +114,12 @@ export async function onRequestPost(context) {
       const deadline = Date.now() + POLL_TIMEOUT_MS;
       while (Date.now() < deadline) {
         await new Promise((r) => setTimeout(r, POLL_INTERVAL_MS));
-        const poll = await fetch(`${base}/tasks/${encodeURIComponent(taskId)}`, { headers: { 'Authorization': `Bearer ${key}` } });
+        let poll;
+        try {
+          poll = await fetchWithTimeout(`${base}/tasks/${encodeURIComponent(taskId)}`, { headers: { 'Authorization': `Bearer ${key}` } }, POLL_REQ_TIMEOUT_MS);
+        } catch {
+          continue; // hung poll: treat as transient, keep trying until deadline
+        }
         if (!poll.ok) continue; // transient poll errors: keep trying until deadline
         const pollData = await poll.json().catch(() => null);
         image = extractImage(pollData);
@@ -110,10 +134,15 @@ export async function onRequestPost(context) {
     }
   } else {
     // --- Synchronous path (official OpenAI-style) ---
-    const upstream = await fetch(`${base}/images/generations`, {
-      method: 'POST', headers: authHeaders,
-      body: JSON.stringify({ model: modelId, prompt, size: body.size || '1024x1024', n: 1 }),
-    });
+    let upstream;
+    try {
+      upstream = await fetchWithTimeout(`${base}/images/generations`, {
+        method: 'POST', headers: authHeaders,
+        body: JSON.stringify({ model: modelId, prompt, size: body.size || '1024x1024', n: 1 }),
+      }, SUBMIT_TIMEOUT_MS);
+    } catch {
+      return json({ error: 'upstream_timeout', stage: 'submit' }, 504);
+    }
     if (!upstream.ok) {
       const detail = await upstream.text().catch(() => '');
       return json({ error: 'upstream_error', status: upstream.status, detail: detail.slice(0, 300) }, 502);
