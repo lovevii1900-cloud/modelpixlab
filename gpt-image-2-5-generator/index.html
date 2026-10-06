@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="color-scheme" content="light dark" />
     <link rel="icon" type="image/png" href="/mp-icon.png" />
-    <link rel="canonical" href="https://modelpixlab.com/" />
+    <link rel="canonical" href="https://modelpixlab.com/gpt-image-2-5-generator/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="ModelPixLab" />
     <meta property="og:title" content="GPT Image 2.5 Generator — Free AI Image Creator Online" />
     <meta property="og:description" content="Create AI images free with GPT Image 2.5, OpenAI's GPT Image 2.5 model. Text to image, sketch-to-image and multi-round editing up to 4K. New accounts get 3 free images. Try now." />
-    <meta property="og:url" content="https://modelpixlab.com/" />
+    <meta property="og:url" content="https://modelpixlab.com/gpt-image-2-5-generator/" />
     <meta property="og:image" content="https://modelpixlab.com/assets/gpt25-sample-1.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="https://modelpixlab.com/assets/gpt25-sample-1.jpg" />
-    <title>Free AI Image Generator Online — GPT Image 2.5 | ModelPixLab</title>
+    <title>GPT Image 2.5 Generator — Free AI Image Creator Online</title>
     <meta name="description" content="Free GPT Image 2.5 generator: create and edit AI images in your browser. Text to image, sketch-to-image and multi-round editing up to 4K. New accounts get 3 free images — no card required." />
     <script type="application/ld+json">
     {
@@ -683,7 +683,7 @@
     <footer class="site">
       <div class="wrap">
         <div class="cols">
-          <a class="brand" href="/" style="font-size:15px"><span class="brand-mark" style="width:30px;height:26px;font-size:10px">M<i>P</i></span><span>Model<em style="color:var(--accent);font-style:normal">Pix</em>Lab</span></a>
+          <a class="brand" href="#create" style="font-size:15px"><span class="brand-mark" style="width:30px;height:26px;font-size:10px">M<i>P</i></span><span>Model<em style="color:var(--accent);font-style:normal">Pix</em>Lab</span></a>
           <a href="#create">GPT Image 2.5 Generator</a>
           <a href="#examples">Examples</a>
           <a href="#models">Flare vs Sunburst</a>
@@ -1290,6 +1290,7 @@
           workText.textContent = window.mplT('working', model);
         }
         function doGenerate(text, tsToken) {
+          showLoading();
           var sizeMap = { '3840×2160': '1536x1024', '2048×2048': '1024x1024', '2160×3840': '1024x1536' };
           fetch('/api/generate', {
             method: 'POST',
@@ -1307,10 +1308,10 @@
             genBtn.disabled = false;
             genBtn.innerHTML = window.mplT('generate');
             // Refresh credits after successful generation
-            if (typeof mplUser !== 'undefined' && mplUser) { mplUser.credits = Math.max(0, (mplUser.credits || 1) - 1); if (typeof refreshAuthUI !== 'undefined') refreshAuthUI(); }
+            if (window.mplUser) { window.mplUser.credits = Math.max(0, (window.mplUser.credits || 1) - 1); if (window.refreshAuthUI) window.refreshAuthUI(); }
           }).catch(function (err) {
             // Auth/credits handling
-            if (err === 401) { mplUser = null; openAuth('register'); return; }
+            if (err === 401) { window.mplUser = null; window.openAuth('register'); return; }
             stageWork.style.display = 'none';
             var big = stageEmpty.querySelector('.big');
             var msg = window.mplT('genError');
@@ -1345,8 +1346,8 @@
         // cookie free-cap remain as abuse protection.
         genBtn.addEventListener('click', function () {
           // Auth gate: must be signed in (Google) to generate
-          if (!mplUser) {
-            openAuth('register');
+          if (!window.mplUser) {
+            window.openAuth('register');
             return;
           }
           var text = promptEl.value.trim();
@@ -1450,7 +1451,7 @@
           var sw = document.getElementById('altSwitch');
           if (sw) sw.addEventListener('click', function () { setMode(mode === 'register' ? 'signin' : 'register'); });
         }
-        function openAuth(next) {
+        window.openAuth = function (next) {
           setMode(next || 'register');
           formWrap.style.display = 'block';
           doneView.hidden = true;
@@ -1492,13 +1493,13 @@
         var authTitleEl = document.getElementById('authTitle');
         if (authTitleEl) authTitleEl.textContent = 'Get 3 free images';
 
-        var mplUser = null; // {user:{name,email,avatar}, credits}
+        window.mplUser = null; // {user:{name,email,avatar}, credits}
         var creditsPill = null;
-        function refreshAuthUI() {
+        window.refreshAuthUI = function () {
           var signinOpener = document.querySelector('[data-open-auth="signin"]');
-          if (mplUser && mplUser.user) {
+          if (window.mplUser && window.mplUser.user) {
             if (signinOpener) {
-              var nm = mplUser.user.name || mplUser.user.email || 'Account';
+              var nm = window.mplUser.user.name || window.mplUser.user.email || 'Account';
               signinOpener.textContent = nm.split(' ')[0];
               signinOpener.setAttribute('data-open-auth', 'account');
             }
@@ -1508,13 +1509,13 @@
               creditsPill.style.cssText = 'display:inline-block;margin-left:8px;padding:4px 10px;border-radius:99px;background:#1a2b1a;color:#7CFC00;font-size:12px;font-weight:600;';
               if (signinOpener && signinOpener.parentNode) signinOpener.parentNode.insertBefore(creditsPill, signinOpener.nextSibling);
             }
-            if (creditsPill) creditsPill.textContent = '● ' + mplUser.credits + ' left';
+            if (creditsPill) creditsPill.textContent = '● ' + window.mplUser.credits + ' left';
           }
         }
         function checkAuth() {
           fetch('/api/auth/me', { credentials: 'same-origin' })
             .then(function (r) { return r.ok ? r.json() : null; })
-            .then(function (d) { if (d && d.user && d.user.email) { mplUser = d; refreshAuthUI(); } })
+            .then(function (d) { if (d && d.user && d.user.email) { window.mplUser = d; window.refreshAuthUI(); } })
             .catch(function () {});
         }
         // After OAuth callback (?auth=ok), refresh state
