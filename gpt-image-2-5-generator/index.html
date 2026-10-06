@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="color-scheme" content="light dark" />
     <link rel="icon" type="image/png" href="/mp-icon.png" />
-    <link rel="canonical" href="https://modelpixlab.com/gpt-image-2-5-generator/" />
+    <link rel="canonical" href="https://modelpixlab.com/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="ModelPixLab" />
     <meta property="og:title" content="GPT Image 2.5 Generator — Free AI Image Creator Online" />
     <meta property="og:description" content="Create AI images free with GPT Image 2.5, OpenAI's GPT Image 2.5 model. Text to image, sketch-to-image and multi-round editing up to 4K. New accounts get 5 free images. Try now." />
-    <meta property="og:url" content="https://modelpixlab.com/gpt-image-2-5-generator/" />
+    <meta property="og:url" content="https://modelpixlab.com/" />
     <meta property="og:image" content="https://modelpixlab.com/assets/gpt25-sample-1.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="https://modelpixlab.com/assets/gpt25-sample-1.jpg" />
-    <title>GPT Image 2.5 Generator — Free AI Image Creator Online</title>
+    <title>Free AI Image Generator Online — GPT Image 2.5 | ModelPixLab</title>
     <meta name="description" content="Free GPT Image 2.5 generator: create and edit AI images in your browser. Text to image, sketch-to-image and multi-round editing up to 4K. New accounts get 5 free images — no card required." />
     <script type="application/ld+json">
     {
@@ -683,7 +683,7 @@
     <footer class="site">
       <div class="wrap">
         <div class="cols">
-          <a class="brand" href="#create" style="font-size:15px"><span class="brand-mark" style="width:30px;height:26px;font-size:10px">M<i>P</i></span><span>Model<em style="color:var(--accent);font-style:normal">Pix</em>Lab</span></a>
+          <a class="brand" href="/" style="font-size:15px"><span class="brand-mark" style="width:30px;height:26px;font-size:10px">M<i>P</i></span><span>Model<em style="color:var(--accent);font-style:normal">Pix</em>Lab</span></a>
           <a href="#create">GPT Image 2.5 Generator</a>
           <a href="#examples">Examples</a>
           <a href="#models">Flare vs Sunburst</a>
@@ -1246,27 +1246,39 @@
         }
 
         // ---- Turnstile (invisible) bot check ----
-        // TS_SITEKEY is filled with the real Cloudflare site key at deploy time.
         var TS_SITEKEY = '0x4AAAAAAFO799r9vGF8ZwDL';
         var tsWidget = null;
         var pendingTsPrompt = '';
+        var tsTimer = null;
         function tsReady() {
           return TS_SITEKEY && TS_SITEKEY.indexOf('__') !== 0 && typeof turnstile !== 'undefined';
         }
+        function tsResetUI(msgKey) {
+          if (tsTimer) { clearTimeout(tsTimer); tsTimer = null; }
+          stageWork.style.display = 'none';
+          var big = stageEmpty.querySelector('.big');
+          if (big) big.textContent = window.mplT(msgKey || 'genError');
+          stageEmpty.style.display = 'block';
+          genBtn.disabled = false;
+          genBtn.innerHTML = window.mplT('generate');
+        }
         function ensureTsWidget() {
           if (tsWidget !== null || !tsReady()) return;
-          tsWidget = turnstile.render('#tsWidget', {
-            sitekey: TS_SITEKEY,
-            size: 'invisible',
-            callback: function (token) {
-              doGenerate(pendingTsPrompt, token);
-              try { turnstile.reset(tsWidget); } catch (e) {}
-            },
-            'expired-callback': function () { try { turnstile.reset(tsWidget); } catch (e) {} },
-            'error-callback': function () { doGenerate(pendingTsPrompt, ''); }
-          });
+          try {
+            tsWidget = turnstile.render('#tsWidget', {
+              sitekey: TS_SITEKEY,
+              size: 'invisible',
+              callback: function (token) {
+                if (tsTimer) { clearTimeout(tsTimer); tsTimer = null; }
+                doGenerate(pendingTsPrompt, token);
+                try { turnstile.reset(tsWidget); } catch (e) {}
+              },
+              'expired-callback': function () { try { turnstile.reset(tsWidget); } catch (e) {} },
+              'error-callback': function () { tsResetUI('genError'); }
+            });
+          } catch (e) { tsWidget = null; }
         }
-        function doGenerate(text, tsToken) {
+        function showLoading() {
           genBtn.disabled = true;
           genBtn.innerHTML = window.mplT('generating');
           stageImg.style.display = 'none';
@@ -1274,6 +1286,8 @@
           dlBtn.style.display = 'none';
           stageWork.style.display = 'block';
           workText.textContent = window.mplT('working', model);
+        }
+        function doGenerate(text, tsToken) {
           var sizeMap = { '3840×2160': '1536x1024', '2048×2048': '1024x1024', '2160×3840': '1024x1536' };
           fetch('/api/generate', {
             method: 'POST',
@@ -1301,9 +1315,12 @@
         }
         genBtn.addEventListener('click', function () {
           var text = promptEl.value.trim();
+          showLoading();
           ensureTsWidget();
           if (tsWidget !== null) {
             pendingTsPrompt = text;
+            // If Turnstile never returns a token, don't hang forever.
+            tsTimer = setTimeout(function () { tsResetUI('genError'); }, 20000);
             try { turnstile.execute(tsWidget); } catch (e) { doGenerate(text, ''); }
             return;
           }
