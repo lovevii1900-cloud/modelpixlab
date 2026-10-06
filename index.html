@@ -1307,12 +1307,17 @@
             dlBtn.style.display = 'inline-block';
             genBtn.disabled = false;
             genBtn.innerHTML = window.mplT('generate');
+            // Refresh credits after successful generation
+            if (typeof mplUser !== 'undefined' && mplUser) { mplUser.credits = Math.max(0, (mplUser.credits || 1) - 1); if (typeof refreshAuthUI !== 'undefined') refreshAuthUI(); }
           }).catch(function (err) {
+            // Auth/credits handling
+            if (err === 401) { mplUser = null; openAuth('register'); return; }
             stageWork.style.display = 'none';
             var big = stageEmpty.querySelector('.big');
             var msg = window.mplT('genError');
             if (err === 429) msg = window.mplT('limitError');
             else if (err === 403) msg = window.mplT('verifyError');
+            else if (err === 402) msg = 'Out of credits — top up to keep creating.';
             if (big) big.textContent = msg;
             stageEmpty.style.display = 'block';
             genBtn.disabled = false;
@@ -1340,6 +1345,11 @@
         // Re-enable by restoring tsExecute() call below. Rate limiting +
         // cookie free-cap remain as abuse protection.
         genBtn.addEventListener('click', function () {
+          // Auth gate: must be signed in (Google) to generate
+          if (!mplUser) {
+            openAuth('register');
+            return;
+          }
           var text = promptEl.value.trim();
           doGenerate(text, '');
         });
@@ -1466,7 +1476,53 @@
         tabRegister.addEventListener('click', function () { setMode('register'); });
         tabSignin.addEventListener('click', function () { setMode('signin'); });
 
-        googleBtn.addEventListener('click', function () { googleNote.classList.add('show'); });
+        // ---- Real Google auth (2026-10-06): replaces demo ----
+        // Google button goes to real OAuth; email form hidden (Google-only).
+        googleBtn.addEventListener('click', function () {
+          window.location.href = '/api/auth/login';
+        });
+        // Hide email/password form — Google-only now
+        var orDiv = document.querySelector('#authFormWrap .or');
+        if (orDiv) orDiv.style.display = 'none';
+        if (form) form.style.display = 'none';
+        var tabsEl = document.querySelector('.auth-tabs');
+        if (tabsEl) tabsEl.style.display = 'none';
+        // Update modal copy for the 3-free-images policy
+        var authSubEl = document.getElementById('authSub');
+        if (authSubEl) authSubEl.textContent = 'Sign in with Google to get 3 free images.';
+        var authTitleEl = document.getElementById('authTitle');
+        if (authTitleEl) authTitleEl.textContent = 'Get 3 free images';
+
+        var mplUser = null; // {user:{name,email,avatar}, credits}
+        var creditsPill = null;
+        function refreshAuthUI() {
+          var signinOpener = document.querySelector('[data-open-auth="signin"]');
+          if (mplUser && mplUser.user) {
+            if (signinOpener) {
+              var nm = mplUser.user.name || mplUser.user.email || 'Account';
+              signinOpener.textContent = nm.split(' ')[0];
+              signinOpener.setAttribute('data-open-auth', 'account');
+            }
+            if (!creditsPill) {
+              creditsPill = document.createElement('span');
+              creditsPill.className = 'credits-pill';
+              creditsPill.style.cssText = 'display:inline-block;margin-left:8px;padding:4px 10px;border-radius:99px;background:#1a2b1a;color:#7CFC00;font-size:12px;font-weight:600;';
+              if (signinOpener && signinOpener.parentNode) signinOpener.parentNode.insertBefore(creditsPill, signinOpener.nextSibling);
+            }
+            if (creditsPill) creditsPill.textContent = '● ' + mplUser.credits + ' left';
+          }
+        }
+        function checkAuth() {
+          fetch('/api/auth/me', { credentials: 'same-origin' })
+            .then(function (r) { return r.ok ? r.json() : null; })
+            .then(function (d) { if (d && d.user && d.user.email) { mplUser = d; refreshAuthUI(); } })
+            .catch(function () {});
+        }
+        // After OAuth callback (?auth=ok), refresh state
+        if (window.location.search.indexOf('auth=ok') !== -1) {
+          window.history.replaceState({}, '', window.location.pathname);
+        }
+        checkAuth();
 
         pwToggle.addEventListener('click', function () {
           var show = pwInput.type === 'password';
