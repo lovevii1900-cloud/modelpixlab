@@ -14,6 +14,24 @@ function rid() {
 }
 function nowSec() { return Math.floor(Date.now() / 1000); }
 
+// Notify admin of new registration via Resend (fire-and-forget)
+async function notifyNewUser(env, provider, name, email) {
+  const apiKey = env.RESEND_API_KEY;
+  if (!apiKey) return;
+  try {
+    await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer ' + apiKey, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        from: 'ModelPixLab <notify@modelpixlab.com>',
+        to: 'lovevii1900@gmail.com',
+        subject: '[ModelPixLab] New user: ' + (name || email),
+        html: '<p>New registration via ' + provider + '</p><ul><li>Name: ' + (name || '-') + '</li><li>Email: ' + (email || '-') + '</li><li>Time: ' + new Date().toISOString() + '</li></ul><p>3 free credits granted.</p>',
+      }),
+    });
+  } catch { /* notification failure must not break signup */ }
+}
+
 export async function onRequestGet(context) {
   const { request, env } = context;
   const fail = (msg) => Response.redirect('https://modelpixlab.com/?auth=' + encodeURIComponent(msg), 302);
@@ -76,6 +94,8 @@ export async function onRequestGet(context) {
         .bind(userId, info.sub, info.email, info.name || '', info.picture || '', now).run();
       await db.prepare('INSERT INTO credits (user_id, balance, granted_free) VALUES (?, ?, 1)')
         .bind(userId, FREE_GRANT).run();
+      // New user — notify admin (don't await)
+      notifyNewUser(env, 'Google', name, emailVal);
     }
 
     // Create session
