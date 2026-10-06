@@ -1507,9 +1507,12 @@
           if (window.mplUser && window.mplUser.user) {
             if (signinOpener) {
               var nm = window.mplUser.user.name || window.mplUser.user.email || 'Account';
+              signinOpener.removeAttribute('data-i18n');
               signinOpener.textContent = nm.split(' ')[0];
               signinOpener.setAttribute('data-open-auth', 'account');
             }
+            var regOpener = document.querySelector('[data-open-auth="register"].hcta, [data-open-auth="register"].cta-btn');
+            if (regOpener) regOpener.style.display = 'none';
             if (!creditsPill) {
               creditsPill = document.createElement('span');
               creditsPill.className = 'credits-pill';
