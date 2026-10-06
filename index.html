@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="color-scheme" content="light dark" />
     <link rel="icon" type="image/png" href="/mp-icon.png" />
-    <link rel="canonical" href="https://modelpixlab.com/gpt-image-2-5-generator/" />
+    <link rel="canonical" href="https://modelpixlab.com/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="ModelPixLab" />
     <meta property="og:title" content="GPT Image 2.5 Generator — Free AI Image Creator Online" />
     <meta property="og:description" content="Create AI images free with GPT Image 2.5, OpenAI's GPT Image 2.5 model. Text to image, sketch-to-image and multi-round editing up to 4K. New accounts get 5 free images. Try now." />
-    <meta property="og:url" content="https://modelpixlab.com/gpt-image-2-5-generator/" />
+    <meta property="og:url" content="https://modelpixlab.com/" />
     <meta property="og:image" content="https://modelpixlab.com/assets/gpt25-sample-1.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="https://modelpixlab.com/assets/gpt25-sample-1.jpg" />
-    <title>GPT Image 2.5 Generator — Free AI Image Creator Online</title>
+    <title>Free AI Image Generator Online — GPT Image 2.5 | ModelPixLab</title>
     <meta name="description" content="Free GPT Image 2.5 generator: create and edit AI images in your browser. Text to image, sketch-to-image and multi-round editing up to 4K. New accounts get 5 free images — no card required." />
     <script type="application/ld+json">
     {
@@ -683,7 +683,7 @@
     <footer class="site">
       <div class="wrap">
         <div class="cols">
-          <a class="brand" href="#create" style="font-size:15px"><span class="brand-mark" style="width:30px;height:26px;font-size:10px">M<i>P</i></span><span>Model<em style="color:var(--accent);font-style:normal">Pix</em>Lab</span></a>
+          <a class="brand" href="/" style="font-size:15px"><span class="brand-mark" style="width:30px;height:26px;font-size:10px">M<i>P</i></span><span>Model<em style="color:var(--accent);font-style:normal">Pix</em>Lab</span></a>
           <a href="#create">GPT Image 2.5 Generator</a>
           <a href="#examples">Examples</a>
           <a href="#models">Flare vs Sunburst</a>
@@ -1110,7 +1110,7 @@
           }
         };
         var DYN = {
-          en: { generate:"<span>Generate</span><span>↗</span>", generating:"<span>Generating…</span><span>•••</span>", working:"Generating with {m}…", sampleOut:"sample output", genError:"Generation failed — please try again.", sketchAttached:"Sketch attached — describe the style, then Generate.", payNow:"Pay", processing:"Processing…", planWord:"Plan", packWord:"Pack", cycleMonthly:"Monthly", cycleOnce:"One-time",
+          en: { generate:"<span>Generate</span><span>↗</span>", generating:"<span>Generating…</span><span>•••</span>", working:"Generating with {m}…", sampleOut:"sample output", genError:"Generation failed — please try again.", verifyError:"Verification failed (code 403) — please try again.", limitError:"Free images used up (code 429).", timeoutError:"Verification timed out — please try again.", sketchAttached:"Sketch attached — describe the style, then Generate.", payNow:"Pay", processing:"Processing…", planWord:"Plan", packWord:"Pack", cycleMonthly:"Monthly", cycleOnce:"One-time",
             aTitleCreate:"Create your free account", aTitleSignin:"Welcome back", aSubCreate:"Takes about 20 seconds. No credit card required.", aSubSignin:"Sign in to pick up your creations where you left off.", aBtnCreate:"<span>Create free account</span><span>↗</span>", aBtnSignin:"<span>Sign in</span><span>↗</span>", aAltCreate:"Already have an account? <button type='button' id='altSwitch'>Sign in</button>", aAltSignin:"New here? <button type='button' id='altSwitch'>Create an account</button>" },
           es: { generate:"<span>Generar</span><span>↗</span>", generating:"<span>Generando…</span><span>•••</span>", working:"Generando con {m}…", sampleOut:"resultado de ejemplo", sketchAttached:"Boceto adjunto: describe el estilo y pulsa Generar.", payNow:"Pagar", processing:"Procesando…", planWord:"Plan", packWord:"Paquete", cycleMonthly:"Mensual", cycleOnce:"Pago único",
             aTitleCreate:"Crea tu cuenta gratis", aTitleSignin:"Bienvenido de nuevo", aSubCreate:"Tarda unos 20 segundos. No necesitas tarjeta.", aSubSignin:"Inicia sesión para seguir con tus creaciones.", aBtnCreate:"<span>Crear cuenta gratis</span><span>↗</span>", aBtnSignin:"<span>Iniciar sesión</span><span>↗</span>", aAltCreate:"¿Ya tienes cuenta? <button type='button' id='altSwitch'>Iniciar sesión</button>", aAltSignin:"¿Nuevo aquí? <button type='button' id='altSwitch'>Crear una cuenta</button>" },
@@ -1288,7 +1288,6 @@
           workText.textContent = window.mplT('working', model);
         }
         function doGenerate(text, tsToken) {
-          showLoading();
           var sizeMap = { '3840×2160': '1536x1024', '2048×2048': '1024x1024', '2160×3840': '1024x1536' };
           fetch('/api/generate', {
             method: 'POST',
@@ -1305,10 +1304,13 @@
             dlBtn.style.display = 'inline-block';
             genBtn.disabled = false;
             genBtn.innerHTML = window.mplT('generate');
-          }).catch(function () {
+          }).catch(function (err) {
             stageWork.style.display = 'none';
             var big = stageEmpty.querySelector('.big');
-            if (big) big.textContent = window.mplT('genError');
+            var msg = window.mplT('genError');
+            if (err === 429) msg = window.mplT('limitError');
+            else if (err === 403) msg = window.mplT('verifyError');
+            if (big) big.textContent = msg;
             stageEmpty.style.display = 'block';
             genBtn.disabled = false;
             genBtn.innerHTML = window.mplT('generate');
@@ -1321,7 +1323,7 @@
           if (tsWidget !== null) {
             pendingTsPrompt = text;
             // If Turnstile never returns a token, don't hang forever.
-            tsTimer = setTimeout(function () { tsResetUI('genError'); }, 20000);
+            tsTimer = setTimeout(function () { tsResetUI('timeoutError'); }, 20000);
             try { turnstile.execute(tsWidget); } catch (e) { doGenerate(text, ''); }
             return;
           }
