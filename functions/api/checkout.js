@@ -9,13 +9,13 @@ const WAFFO_API = 'https://api.waffo.ai';
 // Product IDs are filled in after creating products in Waffo dashboard.
 const PRODUCTS = {
   // Subscriptions
-  'basic':    { waffoId: null, type: 'subscription', credits: 250 },
-  'pro':      { waffoId: null, type: 'subscription', credits: 700 },
-  'studio':   { waffoId: null, type: 'subscription', credits: 1600 },
+  'basic':    { waffoId: 'PROD_6Q68GKFmBo0gPh8zKBRFcJ', type: 'subscription', credits: 250 },
+  'pro':      { waffoId: 'PROD_1YlukSzURp7mJW6frGndHC', type: 'subscription', credits: 700 },
+  'studio':   { waffoId: 'PROD_6O3U8r8QWEmwfBdyBy1lID', type: 'subscription', credits: 1600 },
   // One-time credit packs
-  'starter':  { waffoId: null, type: 'onetime', credits: 100 },
-  'creator':  { waffoId: null, type: 'onetime', credits: 300 },
-  'studio-pack': { waffoId: null, type: 'onetime', credits: 800 },
+  'starter':  { waffoId: 'PROD_0TZrMjQCkJj6D9kRQAE5D1', type: 'onetime', credits: 100 },
+  'creator':  { waffoId: 'PROD_04hY3AtubODf0rwJNqPyCD', type: 'onetime', credits: 300 },
+  'studio-pack': { waffoId: 'PROD_4IeIYfmCaO9cg4TpSaGgIo', type: 'onetime', credits: 800 },
 };
 
 function json(data, status = 200) {
