@@ -1335,16 +1335,12 @@
             }
           }, 25000);
         }
+        // Turnstile temporarily disabled (2026-10-06): the invisible challenge
+        // never completes on slow/VPN networks in CN, blocking real users.
+        // Re-enable by restoring tsExecute() call below. Rate limiting +
+        // cookie free-cap remain as abuse protection.
         genBtn.addEventListener('click', function () {
           var text = promptEl.value.trim();
-          showLoading();
-          ensureTsWidget();
-          if (tsWidget !== null) {
-            pendingTsPrompt = text;
-            tsAttempts = 0;
-            tsExecute();
-            return;
-          }
           doGenerate(text, '');
         });
         function demoGenerate() {
