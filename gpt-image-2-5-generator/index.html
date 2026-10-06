@@ -11,7 +11,9 @@
     <meta property="og:title" content="GPT Image 2.5 Generator — Free AI Image Creator Online" />
     <meta property="og:description" content="Create AI images free with GPT Image 2.5, OpenAI's GPT Image 2.5 model. Text to image, sketch-to-image and multi-round editing up to 4K. New accounts get 5 free images. Try now." />
     <meta property="og:url" content="https://modelpixlab.com/gpt-image-2-5-generator/" />
+    <meta property="og:image" content="https://modelpixlab.com/assets/gpt25-sample-1.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://modelpixlab.com/assets/gpt25-sample-1.jpg" />
     <title>GPT Image 2.5 Generator — Free AI Image Creator Online</title>
     <meta name="description" content="Free GPT Image 2.5 generator: create and edit AI images in your browser. Text to image, sketch-to-image and multi-round editing up to 4K. New accounts get 5 free images — no card required." />
     <script type="application/ld+json">
@@ -1106,7 +1108,7 @@
           }
         };
         var DYN = {
-          en: { generate:"<span>Generate</span><span>↗</span>", generating:"<span>Generating…</span><span>•••</span>", working:"Generating with {m}…", sampleOut:"sample output", sketchAttached:"Sketch attached — describe the style, then Generate.", payNow:"Pay", processing:"Processing…", planWord:"Plan", packWord:"Pack", cycleMonthly:"Monthly", cycleOnce:"One-time",
+          en: { generate:"<span>Generate</span><span>↗</span>", generating:"<span>Generating…</span><span>•••</span>", working:"Generating with {m}…", sampleOut:"sample output", genError:"Generation failed — please try again.", sketchAttached:"Sketch attached — describe the style, then Generate.", payNow:"Pay", processing:"Processing…", planWord:"Plan", packWord:"Pack", cycleMonthly:"Monthly", cycleOnce:"One-time",
             aTitleCreate:"Create your free account", aTitleSignin:"Welcome back", aSubCreate:"Takes about 20 seconds. No credit card required.", aSubSignin:"Sign in to pick up your creations where you left off.", aBtnCreate:"<span>Create free account</span><span>↗</span>", aBtnSignin:"<span>Sign in</span><span>↗</span>", aAltCreate:"Already have an account? <button type='button' id='altSwitch'>Sign in</button>", aAltSignin:"New here? <button type='button' id='altSwitch'>Create an account</button>" },
           es: { generate:"<span>Generar</span><span>↗</span>", generating:"<span>Generando…</span><span>•••</span>", working:"Generando con {m}…", sampleOut:"resultado de ejemplo", sketchAttached:"Boceto adjunto: describe el estilo y pulsa Generar.", payNow:"Pagar", processing:"Procesando…", planWord:"Plan", packWord:"Paquete", cycleMonthly:"Mensual", cycleOnce:"Pago único",
             aTitleCreate:"Crea tu cuenta gratis", aTitleSignin:"Bienvenido de nuevo", aSubCreate:"Tarda unos 20 segundos. No necesitas tarjeta.", aSubSignin:"Inicia sesión para seguir con tus creaciones.", aBtnCreate:"<span>Crear cuenta gratis</span><span>↗</span>", aBtnSignin:"<span>Iniciar sesión</span><span>↗</span>", aAltCreate:"¿Ya tienes cuenta? <button type='button' id='altSwitch'>Iniciar sesión</button>", aAltSignin:"¿Nuevo aquí? <button type='button' id='altSwitch'>Crear una cuenta</button>" },
@@ -1266,7 +1268,14 @@
             dlBtn.style.display = 'inline-block';
             genBtn.disabled = false;
             genBtn.innerHTML = window.mplT('generate');
-          }).catch(function () { demoGenerate(); });
+          }).catch(function () {
+            stageWork.style.display = 'none';
+            var big = stageEmpty.querySelector('.big');
+            if (big) big.textContent = window.mplT('genError');
+            stageEmpty.style.display = 'block';
+            genBtn.disabled = false;
+            genBtn.innerHTML = window.mplT('generate');
+          });
           return;
         });
         function demoGenerate() {
