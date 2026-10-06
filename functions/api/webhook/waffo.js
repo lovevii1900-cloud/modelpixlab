@@ -48,6 +48,32 @@ function b64ToBytes(b64) {
   return bytes;
 }
 
+// Notify admin of successful payment via Resend (fire-and-forget)
+async function notifyPayment(env, info) {
+  const apiKey = env.RESEND_API_KEY;
+  if (!apiKey) return;
+  try {
+    const label = info.type === 'order.completed' ? 'One-time purchase'
+      : info.type === 'subscription.activated' ? 'New subscription'
+      : 'Subscription renewal';
+    await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer ' + apiKey, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        from: 'ModelPixLab <notify@modelpixlab.com>',
+        to: 'lovevii1900@gmail.com',
+        subject: `[ModelPixLab] 💰 Payment: ${info.amount} ${info.currency} (${label})`,
+        html: `<p><b>${label}</b> — ${info.amount} ${info.currency}</p>` +
+          `<ul><li>Product: ${info.productName || '-'}</li>` +
+          `<li>Credits granted: ${info.credits}</li>` +
+          `<li>Buyer: ${info.buyerEmail || '-'}</li>` +
+          `<li>Order: ${info.orderId || '-'}</li>` +
+          `<li>Time: ${new Date().toISOString()}</li></ul>`,
+      }),
+    });
+  } catch { /* notification failure must not break webhook */ }
+}
+
 async function verifySignature(rawBody, sigHeader, env) {
   if (!sigHeader) throw new Error('missing signature header');
   const m = sigHeader.match(/t=(\d+).*?v1=([A-Za-z0-9+/=]+)/);
@@ -152,6 +178,15 @@ export async function onRequestPost(context) {
           Date.now()
         ).run();
         console.log(`Waffo: granted ${credits} credits to user ${userId} (${type})`);
+        // Notify admin of payment (fire-and-forget)
+        notifyPayment(env, {
+          type, userId, credits,
+          amount: data.amount || 0,
+          currency: data.currency || 'USD',
+          orderId: data.orderId || '',
+          buyerEmail: data.buyerEmail || '',
+          productName: data.productName || meta.planId || '',
+        });
       } catch (e) {
         console.error('Credit grant failed:', e.message);
         return new Response('OK'); // ack anyway to avoid redelivery loop; investigate manually
