@@ -60,6 +60,29 @@ export async function onRequestPost(context) {
   const prompt = (body.prompt || '').toString().trim().slice(0, 2000);
   if (!prompt) return json({ error: 'empty_prompt' }, 400);
 
+  // Turnstile bot check — runs before the free quota is touched.
+  // Skipped gracefully if TURNSTILE_SECRET_KEY isn't configured yet.
+  const tsSecret = env.TURNSTILE_SECRET_KEY;
+  if (tsSecret) {
+    const tsToken = (body.turnstileToken || '').toString();
+    if (!tsToken) return json({ error: 'turnstile_required' }, 403);
+    let tsOk = false;
+    try {
+      const vr = await fetchWithTimeout(
+        'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams({ secret: tsSecret, response: tsToken }).toString(),
+        },
+        8000
+      );
+      const vj = await vr.json().catch(() => ({}));
+      tsOk = !!(vj && vj.success);
+    } catch { tsOk = false; }
+    if (!tsOk) return json({ error: 'turnstile_failed' }, 403);
+  }
+
   const modelId = env.IMAGE_MODEL || MODEL_MAP[body.model] || 'gpt-image-2.5';
   const key = env.IMAGE_API_KEY || env.OPENAI_API_KEY_FREE || env.OPENAI_API_KEY;
   if (!key) return json({ error: 'api_not_configured' }, 503);
