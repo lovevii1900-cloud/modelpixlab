@@ -5,9 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="color-scheme" content="light dark" />
 <link rel="icon" type="image/png" href="/mp-icon.png" />
-<title>Pricing — ModelPixLab</title>
-<meta name="description" content="New accounts get 5 free images on every model. Upgrade for HD output, no watermark and commercial use." />
-<link rel="canonical" href="https://modelpixlab.com/pricing/" />
+<title>How to Edit Photos with AI — Backgrounds, Objects, Lighting | ModelPixLab</title>
+<meta name="description" content="Learn how to edit photos with AI: swap backgrounds, remove objects, relight scenes and restyle images with one-sentence prompts. Step-by-step tutorial." />
+<link rel="canonical" href="https://modelpixlab.com/ai-photo-editing-guide/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="ModelPixLab" />
+<meta property="og:title" content="How to Edit Photos with AI — Backgrounds, Objects, Lighting | ModelPixLab" />
+<meta property="og:description" content="AI photo editing tutorial: backgrounds, object removal, relighting and restyling with copy-paste prompts." />
+<meta property="og:url" content="https://modelpixlab.com/ai-photo-editing-guide/" />
+<meta property="og:image" content="https://modelpixlab.com/assets/gpt25-sample-3.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://modelpixlab.com/assets/gpt25-sample-3.jpg" />
 <style>
       :root{
         --bg:#0c0e0c;
@@ -320,9 +328,33 @@ nav.main{display:none}
 
       .wrap{max-width:1400px}
 </style>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "How to edit photos with AI",
+ "description": "Step-by-step guide to AI photo editing: swap backgrounds, remove objects, relight scenes and restyle images.",
+ "step": [
+  {
+   "@type": "HowToStep",
+   "position": 1,
+   "name": "Upload your photo"
+  },
+  {
+   "@type": "HowToStep",
+   "position": 2,
+   "name": "Describe one change"
+  },
+  {
+   "@type": "HowToStep",
+   "position": 3,
+   "name": "Refine round by round"
+  }
+ ]
+}
+</script>
 </head>
 <body>
-<div class="ribbon">🔍 <b>Preview build</b> — live image generation API is not connected yet.</div>
 <header class="site"><div class="wrap"><div class="bar">
 <a class="brand" href="/"><span class="brand-mark">M<i>P</i></span><span>Model<em>Pix</em>Lab</span></a>
 <nav class="main"><a href="/gpt-image-2-5-generator/">GPT Image 2.5</a><a href="/nano-banana-2-generator/">Nano Banana 2</a><a href="/pricing/">Pricing</a><a href="/how-to-use/">How to use</a></nav>
@@ -333,35 +365,68 @@ nav.main{display:none}
 
 <div class="wrap">
 <section class="hero" style="padding:44px 0 8px">
-  <span class="eyebrow"><i></i>Simple pricing</span>
-  <h1>Start free. <span class="thin">Upgrade when it runs out.</span></h1>
-  <p class="cn-title">Start free. Upgrade only when your credits run out — never before.</p>
-  <div class="stats">
-    <div class="stat"><b>5 free</b><span>Images for new accounts</span></div>
-    <div class="stat"><b>4</b><span>Ways to pay</span></div>
-    <div class="stat"><b>0</b><span>Lock-in</span></div>
+  <span class="eyebrow"><i></i>Editing guide</span>
+  <h1>Edit photos with AI <span class="thin">in plain words.</span></h1>
+  <p class="cn-title">How to change backgrounds, remove objects, relight and restyle photos — no Photoshop needed.</p>
+  <div class="hero-side" style="max-width:640px;padding-top:18px">
+    <p>Upload a photo, describe the change in one sentence, and the AI does the edit while keeping faces and details consistent. These are the five edits people use most, with prompts you can copy.</p>
   </div>
 </section>
 
 <section class="block" style="padding:34px 0 8px">
-  <div class="sec-head"><div><p class="kicker">Subscriptions</p><h2 style="margin:0;font-size:30px;letter-spacing:-.03em">Monthly plans</h2></div>
-  <p class="lead" style="color:var(--muted);max-width:420px;margin:0">Credits land monthly. Cancel anytime.</p></div>
-  <div class="plans2">
-    <article class="plan2"><h3>Free</h3><div class="pr">$0</div><p style="color:var(--muted);font-size:13.5px">For trying things out</p><ul><li>✓ 5 welcome generations (one-time)</li><li>✓ All live models</li><li>✓ Standard resolution</li><li>✓ Personal use</li></ul><a class="cta" href="/gpt-image-2-5-generator/">Start free</a></article>
-    <article class="plan2"><h3>Basic</h3><div class="pr">$9.9<small>/mo</small></div><p style="color:var(--muted);font-size:13.5px">For getting started</p><ul><li>✓ 250 credits / month</li><li>✓ HD output</li><li>✓ No watermark</li><li>✓ Commercial license</li></ul><a class="cta" data-plan="basic" href="#">Go Basic</a></article>
-    <article class="plan2 pop"><h3>Pro</h3><div class="pr">$19.9<small>/mo</small></div><p style="color:var(--muted);font-size:13.5px">For creators &amp; sellers</p><ul><li>✓ 700 credits / month</li><li>✓ HD + 4K output</li><li>✓ No watermark</li><li>✓ Commercial license</li><li>✓ Priority queue + batch</li></ul><a class="cta solid" data-plan="pro" href="#">Go Pro</a></article>
-    <article class="plan2"><h3>Studio</h3><div class="pr">$39.9<small>/mo</small></div><p style="color:var(--muted);font-size:13.5px">For teams &amp; heavy use</p><ul><li>✓ 1,600 credits / month</li><li>✓ HD + 4K output</li><li>✓ No watermark</li><li>✓ Commercial license</li><li>✓ Priority queue + batch</li></ul><a class="cta" data-plan="studio" href="#">Go Studio</a></article>
+  <div class="sec-head"><div><p class="kicker">Workflows</p><h2 style="margin:0;font-size:30px;letter-spacing:-.03em">The 5 edits everyone wants</h2></div></div>
+  <div class="steps">
+    <div class="step"><div class="n">EDIT 1</div><h3>Swap the background</h3><p>Upload your photo, then: <em>"Replace the background with a Santorini sunset over the sea, keep the person exactly the same."</em> Portraits, product shots and pet photos all work — lighting on the subject is matched automatically.</p></div>
+    <div class="step"><div class="n">EDIT 2</div><h3>Remove objects &amp; people</h3><p><em>"Remove the tourists in the background"</em> or <em>"erase the trash can on the left, fill in naturally."</em> One object per round gives the cleanest result.</p></div>
+    <div class="step"><div class="n">EDIT 3</div><h3>Relight the scene</h3><p><em>"Make it golden hour"</em> or <em>"change to moody blue night lighting."</em> The fastest way to rescue a flat midday photo — faces stay recognizable.</p></div>
+    <div class="step"><div class="n">EDIT 4</div><h3>Change outfits &amp; details</h3><p><em>"Change her jacket to a red leather jacket"</em> or <em>"give him round glasses."</em> Small, named changes beat vague ones like "make it cooler".</p></div>
+    <div class="step"><div class="n">EDIT 5</div><h3>Restyle the photo</h3><p><em>"Turn this into a watercolor painting"</em> or <em>"make it look like a 1990s film photo."</em> The composition stays, the medium changes.</p></div>
   </div>
 </section>
 
-<section class="block" style="padding:34px 0 30px">
-  <div class="sec-head"><div><p class="kicker">Credits packs</p><h2 style="margin:0;font-size:30px;letter-spacing:-.03em">One-time top-ups</h2></div>
-  <p class="lead" style="color:var(--muted);max-width:420px;margin:0">Credits never expire.</p></div>
-  <div class="plans2" style="grid-template-columns:repeat(3,1fr)">
-    <article class="plan2"><h3>Starter pack</h3><div class="pr">$4.9</div><p style="color:var(--muted);font-size:13.5px">100 credits, never expire</p><ul><li>✓ 100 generations</li><li>✓ HD output</li><li>✓ No watermark</li><li>✓ Commercial license</li></ul><a class="cta" href="/gpt-image-2-5-generator/"data-plan="starter" href="#">Buy credits</a></article>
-    <article class="plan2"><h3>Creator pack</h3><div class="pr">$12.9</div><p style="color:var(--muted);font-size:13.5px">300 credits, never expire</p><ul><li>✓ 300 generations</li><li>✓ HD output</li><li>✓ No watermark</li><li>✓ Commercial license</li></ul><a class="cta" href="/gpt-image-2-5-generator/"data-plan="creator" href="#">Buy credits</a></article>
-    <article class="plan2"><h3>Studio pack</h3><div class="pr">$29.9</div><p style="color:var(--muted);font-size:13.5px">800 credits, never expire</p><ul><li>✓ 800 generations</li><li>✓ HD output</li><li>✓ No watermark</li><li>✓ Commercial license</li></ul><a class="cta" href="/gpt-image-2-5-generator/"data-plan="studio-pack" href="#">Buy credits</a></article>
+<section class="block" style="padding:40px 0 8px">
+  <div class="sec-head"><div><p class="kicker">Step by step</p><h2 style="margin:0;font-size:30px;letter-spacing:-.03em">How an edit works</h2></div></div>
+  <div class="steps">
+    <div class="step"><div class="n">STEP 1</div><h3>Upload your photo</h3><p>Open the <a href="/nano-banana-2-generator/" style="color:var(--ink)">Nano Banana 2 page</a>, switch to Edit mode and upload. JPG or PNG both work; bigger is better for detail.</p></div>
+    <div class="step"><div class="n">STEP 2</div><h3>Describe one change</h3><p>Write what should be different, not the whole picture: "remove the car behind me". The AI keeps everything you did not mention.</p></div>
+    <div class="step"><div class="n">STEP 3</div><h3>Refine round by round</h3><p>Each edit builds on the last result. Fix one thing per round — background first, then light, then details — and you stay in control.</p></div>
   </div>
+</section>
+
+<section class="block" style="padding:40px 0 8px">
+  <div class="sec-head"><div><p class="kicker">Copy &amp; try</p><h2 style="margin:0;font-size:30px;letter-spacing:-.03em">Prompts for common fixes</h2></div></div>
+  <div class="faq">
+    <details><summary>Fix a cluttered background</summary><div class="a">"Blur the background into a soft bokeh, keep the subject sharp."</div></details>
+    <details><summary>Save a backlit photo</summary><div class="a">"Brighten the person's face naturally, keep the sunset background."</div></details>
+    <details><summary>Clean product shot</summary><div class="a">"Put this product on a clean white studio background with soft shadow."</div></details>
+    <details><summary>ID-style photo</summary><div class="a">"Replace background with plain light blue, formal portrait lighting, keep face identical."</div></details>
+    <details><summary>Old photo restore</summary><div class="a">"Restore this old photo: remove scratches and stains, gentle color, keep faces unchanged."</div></details>
+    <details><summary>Season swap</summary><div class="a">"Change the scene to autumn: golden leaves on trees, warm light, everything else the same."</div></details>
+    <details><summary>Cartoon avatar</summary><div class="a">"Turn this portrait into a Pixar-style 3D character, keep the likeness and smile."</div></details>
+    <details><summary>Night to day</summary><div class="a">"Change this night street photo to a bright daytime scene, same angle and buildings."</div></details>
+  </div>
+</section>
+
+<section class="block" style="padding:40px 0 8px">
+  <div class="sec-head"><div><p class="kicker">Tips</p><h2 style="margin:0;font-size:30px;letter-spacing:-.03em">Edits that come out clean</h2></div></div>
+  <div class="feats">
+    <article class="feat"><div class="num">01</div><h3>One change per round</h3><p>"Remove the dog AND change the sky AND make it night" splits the model's attention. Stack edits one at a time.</p></article>
+    <article class="feat"><div class="num">02</div><h3>Name what stays</h3><p>"Keep the face exactly the same" protects what matters. The model preserves unmentioned areas, but naming them helps.</p></article>
+    <article class="feat"><div class="num">03</div><h3>Start from the best photo</h3><p>AI edits inherit the source quality. A sharp, well-lit original gives a sharp result; blur in, blur out.</p></article>
+    <article class="feat"><div class="num">04</div><h3>Check hands and text</h3><p>Regenerated hands and small text are the usual weak spots. Zoom in before downloading.</p></article>
+  </div>
+</section>
+
+<section class="block" id="faq" style="padding:40px 0 30px">
+  <div class="sec-head"><div><p class="kicker">FAQ</p><h2 style="margin:0;font-size:30px;letter-spacing:-.03em">Editing questions</h2></div></div>
+  <div class="faq">
+    <details><summary>Will AI editing change my face?</summary><div class="a">Nano Banana 2 is built to keep faces consistent across edits. Say "keep the face identical" in your prompt for extra safety, and always compare with the original before downloading.</div></details>
+    <details><summary>What photo formats can I upload?</summary><div class="a">JPG and PNG work. Larger images keep more detail through the edit — phone photos are usually fine.</div></details>
+    <details><summary>Can I undo an edit?</summary><div class="a">Each edit starts from your last result, so re-upload the original to start over. For multi-step edits, download the versions you like along the way.</div></details>
+    <details><summary>Is it free to try?</summary><div class="a">New accounts get 3 free images. Edits count the same as generations — one credit per successful result.</div></details>
+    <details><summary>Can I use edited photos commercially?</summary><div class="a">Paid plans include a commercial license for generated and edited images. See <a href="/pricing/" style="color:var(--ink)">pricing</a> for details.</div></details>
+  </div>
+  <p style="margin-top:26px"><a class="hcta" href="/nano-banana-2-generator/" style="text-decoration:none"><b></b>Edit a photo free</a></p>
 </section>
 </div>
 
@@ -375,53 +440,7 @@ nav.main{display:none}
 <a href="/how-to-use/">How to use</a>
 </div>
 <div class="foot-contact"><a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a> · <a href="/about/">About</a><br />Contact: <a href="mailto:support@modelpixlab.com">support@modelpixlab.com</a></div>
-<p class="fine">Prices in USD. Subscriptions renew monthly and can be cancelled anytime; credits packs never expire.</p>
+<p class="fine">ModelPixLab is an independent tool interface. Model names belong to their respective owners.</p>
 </div></footer>
-<script>
-// Waffo checkout integration
-async function buyPlan(planId, btn) {
-  const orig = btn.textContent;
-  btn.textContent = 'Loading...';
-  btn.style.pointerEvents = 'none';
-  try {
-    const r = await fetch('/api/checkout', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ planId }),
-    });
-    const d = await r.json();
-    if (r.status === 401) {
-      // Not logged in: prompt to sign in first
-      alert('Please sign in first to purchase credits.');
-      window.location.href = '/gpt-image-2-5-generator/';
-      return;
-    }
-    if (!r.ok || !d.checkoutUrl) {
-      alert('Checkout unavailable right now. Please try again later.');
-      return;
-    }
-    window.open(d.checkoutUrl, '_blank', 'noopener,noreferrer');
-  } catch (e) {
-    alert('Checkout unavailable right now. Please try again later.');
-  } finally {
-    btn.textContent = orig;
-    btn.style.pointerEvents = '';
-  }
-}
-document.querySelectorAll('[data-plan]').forEach(btn => {
-  btn.addEventListener('click', e => {
-    e.preventDefault();
-    buyPlan(btn.dataset.plan, btn);
-  });
-});
-// Show success message after returning from payment
-if (new URLSearchParams(location.search).get('paid') === '1') {
-  const n = document.createElement('div');
-  n.style.cssText = 'position:fixed;top:18px;left:50%;transform:translateX(-50%);background:#0a0f0a;color:#b8ff5c;padding:12px 22px;border-radius:12px;font-size:14px;z-index:9999;border:1px solid #2a3a1a';
-  n.textContent = 'Payment successful! Your credits will arrive shortly.';
-  document.body.appendChild(n);
-  setTimeout(() => n.remove(), 6000);
-}
-</script>
 </body>
 </html>
