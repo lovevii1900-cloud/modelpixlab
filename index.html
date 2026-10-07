@@ -281,15 +281,15 @@
       .finalcta .big{display:inline-flex;background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:800;font-size:14px;padding:13px 20px;border-radius:999px;white-space:nowrap}
       .topbanner{display:flex;align-items:center;justify-content:center;gap:28px;flex-wrap:wrap;padding:20px 40px;background:linear-gradient(120deg,#0c0e0c,#16210a,#0c0e0c);background-size:200% 100%;animation:tbShift 8s ease-in-out infinite;border-bottom:1px solid rgba(184,255,46,.25);max-width:1400px;margin:0 auto}
       @keyframes tbShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-      .topbanner .tb-badge{position:relative;overflow:hidden;background:var(--accent);color:var(--accent-ink);font-weight:900;font-size:16px;padding:8px 22px;border-radius:999px;letter-spacing:.03em;white-space:nowrap;box-shadow:0 0 20px rgba(184,255,46,.45);animation:tbPulse 2.4s ease-in-out infinite}
+      .topbanner .tb-badge{position:relative;overflow:hidden;background:var(--accent);color:var(--accent-ink);font-weight:900;font-size:16px;padding:12px 30px;border-radius:999px;letter-spacing:.03em;white-space:nowrap;box-shadow:0 0 20px rgba(184,255,46,.45);animation:tbPulse 2.4s ease-in-out infinite}
       @keyframes tbPulse{0%,100%{box-shadow:0 0 16px rgba(184,255,46,.35);transform:scale(1)}50%{box-shadow:0 0 32px rgba(184,255,46,.65);transform:scale(1.04)}}
       .topbanner .tb-badge::after{content:"";position:absolute;top:0;left:-80%;width:50%;height:100%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:tbShine 3s ease-in-out infinite}
       @keyframes tbShine{0%{left:-80%}60%,100%{left:130%}}
       .topbanner .tb-text{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;justify-content:center}
-      .topbanner .tb-text strong{color:#f2f4ef;font-size:16px;font-weight:800;letter-spacing:-.01em;animation:tbBreathe 2.4s ease-in-out infinite}
-      @keyframes tbBreathe{0%,100%{opacity:.85;text-shadow:0 0 8px rgba(184,255,46,.2)}50%{opacity:1;text-shadow:0 0 20px rgba(184,255,46,.55)}}
-      .topbanner .tb-text em{color:#c5d1bd;font-style:normal;font-size:16px;font-weight:600;animation:tbBreathe 2.4s ease-in-out .4s infinite}
-      .topbanner .tb-btn{background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:800;font-size:16px;padding:12px 28px;border-radius:999px;white-space:nowrap;transition:transform .2s;animation:tbPulse 2.4s ease-in-out .8s infinite}
+      .topbanner .tb-text strong{color:#f2f4ef;font-size:24px;font-weight:800;letter-spacing:-.01em;animation:tbTextPulse 2.4s ease-in-out infinite}
+      @keyframes tbTextPulse{0%,100%{transform:scale(1);text-shadow:0 0 10px rgba(184,255,46,.25)}50%{transform:scale(1.04);text-shadow:0 0 26px rgba(184,255,46,.6)}}
+      .topbanner .tb-text em{color:#c5d1bd;font-style:normal;font-size:24px;font-weight:600;animation:tbTextPulse 2.4s ease-in-out infinite}
+      .topbanner .tb-btn{background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:800;font-size:16px;padding:12px 30px;border-radius:999px;white-space:nowrap;letter-spacing:.03em;transition:transform .2s;animation:tbPulse 2.4s ease-in-out infinite}
       .topbanner .tb-btn:hover{transform:translateY(-1px)}
       footer.site{padding:28px 0 42px;color:var(--faint)}
       footer.site .cols{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center;justify-content:center}
