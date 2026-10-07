@@ -279,11 +279,18 @@
       .finalcta h2{font-size:clamp(24px,4vw,36px);letter-spacing:-.03em;line-height:1;margin:0 0 8px}
       .finalcta p{margin:0;opacity:.7;font-size:14px;max-width:520px}
       .finalcta .big{display:inline-flex;background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:800;font-size:14px;padding:13px 20px;border-radius:999px;white-space:nowrap}
-      .topcta{margin:40px 0 8px;background:linear-gradient(135deg,var(--ink) 0%,#1a2410 100%);color:var(--bg);border-radius:22px;padding:44px 36px;text-align:center;border:2px solid var(--accent)}
-      .topcta .free-badge{display:inline-block;background:var(--accent);color:var(--accent-ink);font-weight:900;font-size:clamp(18px,3vw,26px);padding:10px 28px;border-radius:999px;margin-bottom:18px;letter-spacing:.02em;box-shadow:0 4px 24px rgba(184,255,46,.35)}
-      .topcta h2{font-size:clamp(32px,5.5vw,52px);letter-spacing:-.03em;line-height:1.1;margin:0 0 12px}
-      .topcta p{margin:0 auto 22px;font-size:clamp(17px,2.5vw,22px);font-weight:600;max-width:600px;opacity:.92}
-      .topcta .big{display:inline-flex;background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:800;font-size:17px;padding:16px 32px;border-radius:999px;white-space:nowrap}
+      .topbanner{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;padding:14px 20px;background:linear-gradient(120deg,#0c0e0c,#16210a,#0c0e0c);background-size:200% 100%;animation:tbShift 8s ease-in-out infinite;border-bottom:1px solid rgba(184,255,46,.25)}
+      @keyframes tbShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+      .topbanner .tb-badge{position:relative;overflow:hidden;background:var(--accent);color:var(--accent-ink);font-weight:900;font-size:15px;padding:8px 22px;border-radius:999px;letter-spacing:.03em;white-space:nowrap;box-shadow:0 0 20px rgba(184,255,46,.45);animation:tbPulse 2.4s ease-in-out infinite}
+      @keyframes tbPulse{0%,100%{box-shadow:0 0 16px rgba(184,255,46,.35);transform:scale(1)}50%{box-shadow:0 0 32px rgba(184,255,46,.65);transform:scale(1.04)}}
+      .topbanner .tb-badge::after{content:"";position:absolute;top:0;left:-80%;width:50%;height:100%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:tbShine 3s ease-in-out infinite}
+      @keyframes tbShine{0%{left:-80%}60%,100%{left:130%}}
+      .topbanner .tb-text{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;justify-content:center}
+      .topbanner .tb-text strong{color:#f2f4ef;font-size:19px;font-weight:800;letter-spacing:-.02em;background:linear-gradient(90deg,#f2f4ef,#b8ff2e,#f2f4ef);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:tbTextShine 4s linear infinite}
+      @keyframes tbTextShine{to{background-position:200% center}}
+      .topbanner .tb-text em{color:#aebaa9;font-style:normal;font-size:14px}
+      .topbanner .tb-btn{background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:800;font-size:14px;padding:10px 24px;border-radius:999px;white-space:nowrap;transition:transform .2s}
+      .topbanner .tb-btn:hover{transform:translateY(-1px)}
       footer.site{padding:28px 0 42px;color:var(--faint)}
       footer.site .cols{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center;justify-content:center}
       footer.site a{color:var(--muted);text-decoration:none;font-size:13px}
@@ -462,6 +469,12 @@
         <button class="hcta" type="button" data-open-auth="register"><b></b> <span data-i18n="startFree">Start free</span></button>
       </div>
     </header>
+    <div class="topbanner">
+      <span class="tb-badge" data-i18n="pillFree">3 free images</span>
+      <span class="tb-text"><strong data-i18n="ctaH2">Make your first image now</strong><em data-i18n="ctaP">New accounts get 3 free images.</em></span>
+      <a class="tb-btn" href="#create" data-i18n="ctaBtn">Start creating →</a>
+    </div>
+
 
     <main class="wrap">
       <div class="hero">
@@ -597,13 +610,6 @@
           </figcaption>
         </figure>
       </section>
-
-      <div class="topcta">
-        <span class="free-badge" data-i18n="pillFree">3 free images</span>
-        <h2 data-i18n="ctaH2">Make your first image now</h2>
-        <p data-i18n="ctaP">New accounts get 3 free images.</p>
-        <a class="big" href="#create" data-i18n="ctaBtn">Start creating →</a>
-      </div>
 
       <section class="block" id="how">
         <div class="sec-head">
