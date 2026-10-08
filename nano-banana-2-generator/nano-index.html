@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" type="image/png" href="/mp-icon.png" />
+<title>Nano Banana 2 Generator — AI Photo Editor Online | ModelPixLab</title>
+<meta name="description" content="Free Nano Banana 2 generator and AI photo editor in your browser. Swap backgrounds, restyle photos and keep faces consistent — no Photoshop. New accounts get 3 free images." />
+<link rel="canonical" href="https://modelpixlab.com/nano-banana-2-generator/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="ModelPixLab" />
+<meta property="og:title" content="Nano Banana 2 Generator — AI Photo Editor Online | ModelPixLab" />
+<meta property="og:description" content="Free Nano Banana 2 generator and AI photo editor in your browser. Swap backgrounds, restyle photos and keep faces consistent — no Photoshop. New accounts get 3 free images." />
+<meta property="og:url" content="https://modelpixlab.com/nano-banana-2-generator/" />
+<meta property="og:image" content="https://modelpixlab.com/assets/nanob-sample-1.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://modelpixlab.com/assets/nanob-sample-1.jpg" />
+<style>
+      :root{
+        --bg:#0c0e0c;
+        --bg2:#111411;
+        --surface:#171a17;
+        --surface2:#1d211d;
+        --line:#262b26;
+        --line2:#323832;
+        --ink:#f2f4ef;
+        --muted:#aebaa9;
+        --faint:#7d8a7a;
+        --accent:#b8ff2e;
+        --accent-ink:#0c1005;
+        --accent-dim:rgba(184,255,46,.12);
+        --radius:18px;
+        --font:"Avenir Next","Segoe UI",system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+        --mono:ui-monospace,"SF Mono","Cascadia Mono",Consolas,monospace;
+      }
+
+        :root{
+          --bg:#f2f3ee;
+          --bg2:#eceee6;
+          --surface:#ffffff;
+          --surface2:#f7f8f3;
+          --line:#dde2d6;
+          --line2:#cbd3c0;
+          --ink:#141714;
+          --muted:#4a5648;
+          --faint:#7a8776;
+          --accent:#65a800;
+          --accent-ink:#ffffff;
+          --accent-dim:rgba(101,168,0,.09);
+        }
+
+      .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+      .bar{display:flex;align-items:center;gap:16px;height:62px}
+
+      .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.02em;font-size:17px;white-space:nowrap;text-decoration:none}
+
+      .brand-mark{width:34px;height:30px;flex:none;background:var(--ink);color:var(--bg);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:11px;border-radius:8px;letter-spacing:-.02em;white-space:nowrap;overflow:hidden}
+
+      .brand-mark i{color:var(--accent);font-style:normal}
+
+      .brand span em{color:var(--accent);font-style:normal}
+
+      nav.main{display:flex;gap:6px;margin-left:18px}
+
+      nav.main a{font-size:13.5px;color:var(--muted);text-decoration:none;padding:7px 11px;border-radius:999px}
+
+      nav.main a:hover{background:var(--surface);color:var(--ink)}
+
+      .hcta{margin-left:auto;background:var(--ink);color:var(--bg);text-decoration:none;font-weight:700;font-size:13.5px;padding:9px 16px;border-radius:999px;white-space:nowrap;display:inline-flex;align-items:center;gap:7px}
+
+      .hcta b{width:7px;height:7px;background:var(--accent);border-radius:50%;display:inline-block;box-shadow:0 0 0 3px var(--accent-dim)}
+
+      .ghost-btn{margin-left:auto;background:transparent;color:var(--muted);border:1px solid var(--line);font:inherit;font-size:13.5px;font-weight:600;padding:8px 15px;border-radius:999px;cursor:pointer;white-space:nowrap}
+
+      .ghost-btn:hover{color:var(--ink);border-color:var(--line2)}
+
+      .ghost-btn + .hcta{margin-left:0}
+
+      .bar .hcta{margin-left:0}
+.brand>span:not(.brand-mark){display:none}
+nav.main{display:none}
+.hcta{margin-left:auto}
+.ghost-btn + .hcta{margin-left:0}
+
+        .ghost-btn{display:none}
+
+        .brand{font-size:15px;gap:8px}
+
+        .brand-mark{width:30px;height:27px}
+
+        .hcta{font-size:12.5px;padding:8px 12px}
+
+        .bar{gap:10px}
+
+      .hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:28px;flex-wrap:wrap}
+
+      .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);background:var(--surface);padding:6px 10px;border-radius:999px}
+
+      .eyebrow i{width:6px;height:6px;background:var(--accent);border-radius:50%;display:block}
+
+      .hero h1{font-size:clamp(38px,6vw,64px);line-height:.95;letter-spacing:-.04em;margin:16px 0 10px;font-weight:900;max-width:720px}
+
+      .hero h1 .thin{font-weight:300;color:var(--muted)}
+
+      .hero h1 .hl{color:var(--accent);position:relative}
+
+      .hero .cn-title{font-size:15px;color:var(--muted);font-weight:600;margin:0}
+
+      .hero-side{max-width:360px;padding-top:42px}
+
+      .hero-side p{margin:0;color:var(--muted);font-size:15px;line-height:1.65}
+
+      .hero-side p.cn{margin-top:8px;font-size:13.5px;color:var(--faint)}
+
+      .stats{display:flex;gap:0;margin-top:18px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface)}
+
+      .stat{flex:1;padding:12px 14px;border-right:1px solid var(--line)}
+
+      .stat:last-child{border-right:0}
+
+      .stat b{display:block;font-size:18px;letter-spacing:-.03em;line-height:1}
+
+      .stat span{font-size:11px;color:var(--faint);font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em}
+.hero-side{padding-top:0;max-width:100%}
+.hero-top{flex-direction:column}
+.workspace{grid-template-columns:1fr}
+
+      .panel{padding:22px;border-right:1px solid var(--line);display:flex;flex-direction:column;background:var(--surface)}
+.panel{border-right:0;border-bottom:1px solid var(--line)}
+
+      .panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+
+      .panel-head strong{font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+
+      .panel-head span{font-family:var(--mono);font-size:11px;color:var(--faint);border:1px solid var(--line);padding:4px 8px;border-radius:999px}
+
+      label.lbl{display:block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin:16px 0 8px}
+
+      label.lbl:first-of-type{margin-top:0}
+
+      textarea#prompt{width:100%;min-height:110px;resize:vertical;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:14px;font:inherit;font-size:14.5px;line-height:1.55}
+
+      textarea#prompt:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+
+      .chip{font-size:12.5px;padding:7px 11px;border-radius:999px;cursor:pointer;border:1px solid var(--line);background:var(--bg);color:var(--muted)}
+
+      .chip:hover{border-color:var(--accent);color:var(--ink)}
+
+      .seg{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--bg)}
+
+      .seg button{appearance:none;border:0;background:transparent;color:var(--muted);font:inherit;padding:11px 10px;cursor:pointer;text-align:left}
+
+      .seg button + button{border-left:1px solid var(--line)}
+
+      .seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+
+      .seg button strong{display:block;font-size:14px;line-height:1.1}
+
+      .seg button small{display:block;font-size:11px;opacity:.75;margin-top:3px}
+
+      select#size{width:100%;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:11px 12px;font:inherit;font-size:13.5px}
+
+      .gen{margin-top:18px;width:100%;background:var(--accent);color:var(--accent-ink);border:0;font:inherit;font-size:15px;font-weight:800;padding:14px 18px;border-radius:13px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+
+      .gen:disabled{opacity:.55;cursor:wait}
+
+      .gen span:last-child{font-family:var(--mono);font-size:12px;font-weight:700;opacity:.7}
+
+      .bar2{width:200px;height:6px;border-radius:999px;background:var(--line);margin:14px auto 0;overflow:hidden}
+
+      .bar2 i{display:block;height:100%;width:38%;background:var(--accent);border-radius:999px;animation:slide .9s infinite alternate ease-in-out}
+.bar2 i{animation:none}
+
+      .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:22px}
+
+      .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 8px;font-weight:700}
+
+      .gallery{display:grid;grid-template-columns:1.15fr .85fr;gap:16px}
+.gallery{grid-template-columns:1fr}
+
+      .gallery-col{display:grid;gap:16px}
+
+      figure.shot{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+
+      figure.shot img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+
+      figure.shot.tall img{aspect-ratio:3/3.4}
+
+      figure.shot figcaption{padding:14px}
+
+      figure.shot .p{font-size:13.5px;line-height:1.55}
+
+      figure.shot .m{margin-top:10px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+
+      figure.shot .m span{font-family:var(--mono);font-size:11px;color:var(--faint)}
+
+      figure.shot button.use{font:inherit;font-size:12px;font-weight:700;cursor:pointer;background:var(--bg);color:var(--ink);border:1px solid var(--line);padding:7px 10px;border-radius:999px}
+
+      figure.shot button.use:hover{border-color:var(--accent)}
+
+
+      .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--surface)}
+.steps{grid-template-columns:1fr}
+
+      .step{padding:22px;border-right:1px solid var(--line)}
+
+      .step:last-child{border-right:0}
+.step{border-right:0;border-bottom:1px solid var(--line)}
+.step:last-child{border-bottom:0}
+
+      .step .n{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.1em}
+
+      .step h3{margin:10px 0 6px;font-size:17px;letter-spacing:-.02em}
+
+      .step h3 .cn{display:block;font-size:12.5px;color:var(--faint);font-weight:600;margin-top:2px}
+
+      .step p{margin:0;color:var(--muted);font-size:13.5px}
+
+      .step p.cn{color:var(--faint);font-size:12.5px;margin-top:6px}
+
+
+      .feats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.feats{grid-template-columns:1fr}
+
+      .feat{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px}
+
+      .feat .num{font-family:var(--mono);font-size:11px;color:var(--accent)}
+
+      .feat h3{margin:8px 0 6px;font-size:17px}
+
+      .feat h3 .cn{color:var(--faint);font-size:12.5px;font-weight:600}
+
+      .feat p{margin:0;color:var(--muted);font-size:13.5px}
+
+      .feat p.cn{color:var(--faint);font-size:12.5px;margin-top:5px}
+
+
+      .faq{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--surface)}
+
+      .faq details{border-bottom:1px solid var(--line)}
+
+      .faq details:last-child{border-bottom:0}
+
+      .faq summary{cursor:pointer;list-style:none;padding:17px 18px;font-weight:700;font-size:15px;display:flex;justify-content:space-between;gap:12px;align-items:center}
+
+      .faq summary::-webkit-details-marker{display:none}
+
+      .faq summary .cn{color:var(--faint);font-size:12.5px;font-weight:600}
+
+      .faq summary::after{content:"+";width:28px;height:28px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;color:var(--accent);flex:none;font-weight:800}
+
+      .faq details[open] summary::after{content:"–"}
+
+      .faq .a{padding:0 18px 18px;color:var(--muted);font-size:14px;max-width:760px}
+
+      .faq .a .cn{color:var(--faint);font-size:13px;margin-top:6px}
+
+      footer.site{padding:28px 0 42px;color:var(--faint)}
+
+      footer.site .cols{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center;justify-content:center}
+
+      footer.site a{color:var(--muted);text-decoration:none;font-size:13px}
+
+      footer.site a:hover{color:var(--ink)}
+
+      footer.site .fine{font-size:12px;margin-top:14px;line-height:1.6;text-align:center}
+
+      footer.site button.flink{background:none;border:0;font:inherit;color:var(--muted);font-size:13px;cursor:pointer;padding:0}
+
+      footer.site button.flink:hover{color:var(--ink)}
+      .models{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+      @media(max-width:900px){.models{grid-template-columns:1fr 1fr}}
+      @media(max-width:560px){.models{grid-template-columns:1fr}}
+      .mcard{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:8px}
+      .mcard h3{margin:0;font-size:17px;letter-spacing:-.02em}
+      .mcard p{margin:0;color:var(--muted);font-size:13.5px;flex:1}
+      .mcard .tagrow{display:flex;gap:8px;align-items:center}
+      .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border-radius:999px;border:1px solid var(--line);color:var(--faint)}
+      .tag.live{color:var(--accent-ink);background:var(--accent);border-color:var(--accent);font-weight:700}
+      .mcard a.go{font-weight:700;font-size:14px;text-decoration:none;color:var(--ink)}
+      .mcard a.go:hover{color:var(--accent)}
+      .workspace{display:grid;grid-template-columns:400px 1fr;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--surface);margin-top:26px}
+      @media(max-width:900px){.workspace{grid-template-columns:1fr}}
+      .stage{position:relative;display:flex;flex-direction:column;background:var(--bg2);min-height:420px}
+      .stage-top{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line)}
+      .stage-top .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);display:inline-block;margin-right:8px}
+      .stage-body{flex:1;display:grid;place-items:center;padding:22px;text-align:center}
+      .stage-body img{max-width:100%;border-radius:12px;display:none}
+      .stage-empty{color:var(--faint);font-size:14px;max-width:340px}
+      .stage-empty b{display:block;color:var(--muted);font-size:16px;margin-bottom:6px}
+      .workbar{display:none;margin:0 auto}
+      .workbar .bar2{margin:12px auto 0}
+      .plans2{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+      @media(max-width:1000px){.plans2{grid-template-columns:1fr 1fr}}
+      @media(max-width:560px){.plans2{grid-template-columns:1fr}}
+      .plan2{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column}
+      .plan2.pop{border-color:var(--accent)}
+      .plan2 h3{margin:0;font-size:16px}
+      .plan2 .pr{font-size:32px;font-weight:900;letter-spacing:-.03em;margin:8px 0 2px}
+      .plan2 .pr small{font-size:13px;color:var(--muted);font-weight:600}
+      .plan2 ul{list-style:none;margin:14px 0 18px;padding:0;color:var(--muted);font-size:13.5px}
+      .plan2 li{margin:6px 0}
+      .plan2 .cta{margin-top:auto;text-align:center;text-decoration:none;font-weight:700;font-size:14px;padding:11px 14px;border-radius:12px;border:1px solid var(--line);color:var(--ink)}
+      .plan2 .cta.solid{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+      .ribbon{background:var(--bg2);border-bottom:1px solid var(--line);color:var(--muted);font-size:12.5px;text-align:center;padding:8px 14px}
+      .ribbon b{color:var(--accent)}
+
+      /* responsive repair: restore desktop header/layout rules that were flattened from media queries */
+      @media(max-width:720px){nav.main{display:none}}
+      @media(min-width:721px){nav.main{display:flex}.brand>span:not(.brand-mark){display:inline}}
+      @media(max-width:560px){.brand>span:not(.brand-mark){display:none}.ghost-btn{display:none}}
+      @media(min-width:561px){.brand{font-size:17px;gap:10px}.brand-mark{width:34px;height:30px}.hcta{font-size:13.5px;padding:9px 16px}.bar{gap:16px}.ghost-btn{display:inline-flex;align-items:center}}
+      @media(min-width:761px){.hero-top{flex-direction:row}.hero-side{padding-top:42px;max-width:360px}.panel{border-right:1px solid var(--line);border-bottom:0}.gallery{grid-template-columns:1.15fr .85fr}.steps{grid-template-columns:repeat(3,1fr)}.step{border-right:1px solid var(--line);border-bottom:0}.step:last-child{border-right:0}.feats{grid-template-columns:repeat(2,1fr)}}
+
+      /* bigger logo + mobile fit */
+      .brand{font-size:21px;gap:12px}
+      .brand-mark{width:46px;height:40px;font-size:15px;border-radius:11px}
+      @media(max-width:560px){
+        .brand{font-size:19px;gap:10px}
+        .brand-mark{width:40px;height:35px;font-size:13px}
+        .brand>span:not(.brand-mark){display:inline}
+      }
+
+      .foot-contact{margin-top:14px;font-size:13px;color:var(--muted,#8a919e);text-align:center}
+      .foot-contact a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+
+      .wrap{max-width:1400px}
+
+      /* layout parity with GPT page */
+      @media(min-width:901px){.workspace{grid-template-columns:460px 1fr}}
+      .hero{padding:38px 0 22px}
+      .hero-side{max-width:430px}
+      .hero-side p{margin:0}
+      .stats{margin-top:16px}
+</style>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebApplication",
+   "name": "Nano Banana 2 Generator — ModelPixLab",
+   "url": "https://modelpixlab.com/nano-banana-2-generator/",
+   "applicationCategory": "MultimediaApplication",
+   "operatingSystem": "Web",
+   "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+   },
+   "description": "Generate and edit photos with Nano Banana 2 in your browser. Swap backgrounds, restyle photos and keep faces and details consistent."
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Is the Nano Banana 2 generator free?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "New accounts get 3 free images — sign in to claim them. Heavy use, HD output and no-watermark downloads are on paid plans."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Can it edit my own photos?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes — upload a photo and describe the change. Face-consistent editing is what this model is known for."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "How fast is it?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Most images finish in about 10 seconds at standard resolution."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><div class="bar">
+<a class="brand" href="/"><span class="brand-mark">M<i>P</i></span><span>Model<em>Pix</em>Lab</span></a>
+<nav class="main"><a href="/gpt-image-2-5-generator/">GPT Image 2.5</a><a href="/nano-banana-2-generator/">Nano Banana 2</a><a href="/pricing/">Pricing</a><a href="/how-to-use/">How to use</a></nav>
+<a class="ghost-btn" href="/gpt-image-2-5-generator/" style="text-decoration:none">Sign in</a>
+<a class="hcta" href="/gpt-image-2-5-generator/"><b></b>Start free</a>
+</div></div></header>
+<main>
+
+<div class="wrap">
+<section class="hero" style="padding:44px 0 8px" id="create">
+  <div class="hero-top">
+    <div>
+      <span class="eyebrow"><i></i>Trending now — the model everyone is searching for</span>
+      <h1>Nano Banana 2 <span class="thin">Generator.</span></h1>
+      <p class="cn-title">Generate and edit photos in seconds.</p>
+    </div>
+    <div class="hero-side">
+      <p>The Nano Banana 2 AI image generator and editor, right in your browser. Swap backgrounds, restyle photos, or create from a single sentence.</p>
+<div class="stats">
+    <div class="stat"><b>3 free</b><span>Images for new accounts</span></div>
+    <div class="stat"><b>~10s</b><span>Per image</span></div>
+    <div class="stat"><b>4K</b><span>Max output</span></div></div> </div> </div>
+
+  <div class="workspace">
+    <div class="panel">
+      <div class="panel-head"><strong>Creator</strong><span>LAB 01</span></div>
+      <label class="lbl" for="prompt">Describe or edit</label>
+      <textarea id="prompt" placeholder="Turn this portrait into a watercolor painting…">A tiny banana astronaut floating in a kitchen, Pixar style</textarea>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+        <button class="chip" type="button" data-prompt="Product photo of a glass perfume bottle on wet stone, morning mist">Perfume product shot</button>
+        <button class="chip" type="button" data-prompt="Turn this selfie into a 90s film photo, warm grain">90s film photo</button>
+        <button class="chip" type="button" data-prompt="A tiny banana astronaut floating in a kitchen, Pixar style">Banana astronaut</button>
+      </div>
+      <label class="lbl">Mode</label>
+      <div class="seg" role="group" aria-label="Mode">
+        <button type="button" aria-pressed="true"><strong>Generate</strong><small>Text to image</small></button>
+        <button type="button" aria-pressed="false"><strong>Edit photo</strong><small>Restyle &amp; swap</small></button>
+      </div>
+      <label class="lbl" for="size">Size</label>
+      <select id="size"><option value="1024x1024">Square · 1024×1024</option><option value="1536x1024">Landscape · 1536×1024</option><option value="1024x1536">Portrait · 1024×1536</option></select>
+      <button class="gen" id="genBtn" type="button"><span>Generate with Nano Banana 2</span><span>↗</span></button>
+    </div>
+    <div class="stage">
+      <div class="stage-top"><span><span class="dot"></span>Canvas</span><a id="dlBtn" style="display:none;font-size:13px;font-weight:700;color:var(--ink);text-decoration:none" download="modelpixlab-image.png">Download ↓</a></div>
+      <div class="stage-body">
+        <div class="stage-empty" id="stageEmpty"><b>Your image will appear here</b>Press Generate — most images take seconds.</div>
+        <div class="workbar" id="stageWork"><div style="color:var(--muted);font-size:14px">Generating with Nano Banana 2…</div><div class="bar2"><i></i></div></div>
+        <img id="stageImg" alt="Generated image" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="examples" style="padding:40px 0 8px">
+  <div class="sec-head"><div><p class="kicker">Example outputs</p><h2 style="margin:0;font-size:30px;letter-spacing:-.03em">See the kinds of images you can create</h2></div>
+  <p class="lead" style="color:var(--muted);max-width:440px;margin:0">Preview gallery: product scenes, character portraits, city scenes and food photography. Tap a prompt to load it into the editor above.</p></div>
+  <div class="gallery">
+    <figure class="shot tall">
+      <img src="/assets/gpt25-sample-3.jpg" alt="Stylized 3D animated character portrait of a young explorer" loading="lazy" />
+      <figcaption><div class="p">“Stylized 3D animated character portrait of a young explorer with a backpack, warm cinematic light”</div><div class="m"><span>Character portrait</span><button class="use" type="button" data-prompt="Stylized 3D animated character portrait of a young explorer with a backpack, warm cinematic light">Use this prompt</button></div></figcaption>
+    </figure>
+    <div class="gallery-col">
+      <figure class="shot">
+        <img src="/assets/gpt25-sample-2.jpg" alt="Frosted glass perfume bottle on a stone pedestal with sage green backdrop" loading="lazy" />
+        <figcaption><div class="p">“Minimalist product photo of a frosted glass perfume bottle on a stone pedestal, sage green studio backdrop”</div><div class="m"><span>Product scene</span><button class="use" type="button" data-prompt="Minimalist product photo of a frosted glass perfume bottle on a stone pedestal, sage green studio backdrop">Use this prompt</button></div></figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="/assets/gpt25-sample-1.jpg" alt="Rainy Tokyo street at dusk with neon signs reflecting on wet pavement" loading="lazy" />
+        <figcaption><div class="p">“A rainy Tokyo street at dusk, neon signs reflecting on wet pavement, people with transparent umbrellas”</div><div class="m"><span>City scene</span><button class="use" type="button" data-prompt="A rainy Tokyo street at dusk, neon signs reflecting on wet pavement, people with transparent umbrellas">Use this prompt</button></div></figcaption>
+      </figure>
+    </div>
+  </div>
+  <figure class="shot" style="margin-top:16px">
+    <img src="/assets/gpt25-sample-4.jpg" alt="Overhead flat lay of a rustic breakfast table with toast, eggs and coffee" style="aspect-ratio:21/9" loading="lazy" />
+    <figcaption><div class="p">“Overhead flat lay of a rustic breakfast table, sourdough toast, eggs and coffee, natural window light”</div><div class="m"><span>Food photography</span><button class="use" type="button" data-prompt="Overhead flat lay of a rustic breakfast table, sourdough toast, eggs and coffee, natural window light">Use this prompt</button></div></figcaption>
+  </figure>
+</section>
+
+<section class="block" id="how" style="padding:40px 0 8px">
+  <div class="sec-head"><div><p class="kicker">How it works</p><h2 style="margin:0;font-size:30px;letter-spacing:-.03em">Three steps to your image</h2></div>
+  <p class="lead" style="color:var(--muted);max-width:420px;margin:0">No Photoshop, no layers. Describe the change and the model does the editing.</p></div>
+  <div class="steps">
+    <div class="step"><div class="n">STEP 01</div><h3>Describe — or upload</h3><p>Type what you want to create, or upload a photo and describe the change: background, light, outfit, style.</p></div>
+    <div class="step"><div class="n">STEP 02</div><h3>Generate or edit</h3><p>Generate builds from text; Edit works on your photo and keeps faces and key details consistent while it changes the rest.</p></div>
+    <div class="step"><div class="n">STEP 03</div><h3>Refine &amp; download</h3><p>Adjust one detail at a time — "warmer light", "cleaner background" — then download up to 4K, ready to post or ship.</p></div>
+  </div>
+
+  <div class="gallery" style="margin-top:16px">
+    <figure class="shot tall">
+      <img src="/assets/nanob-sample-5.jpg" alt="A golden puppy, an orange kitten, a white bunny and a duckling in a sunny meadow" loading="lazy" />
+      <figcaption><div class="p">“A golden puppy, an orange kitten, a white bunny and a duckling sitting in a sunny meadow”</div><div class="m"><span>Character portrait</span><button class="use" type="button" data-prompt="A golden puppy, an orange kitten, a white bunny and a duckling sitting in a sunny meadow">Use this prompt</button></div></figcaption>
+    </figure>
+    <div class="gallery-col">
+      <figure class="shot">
+        <img src="/assets/nanob-sample-6.jpg" alt="A sunny 3D hillside path lined with sunflowers and tulips" loading="lazy" />
+        <figcaption><div class="p">“A sunny 3D hillside path lined with sunflowers and tulips, balloons in a blue sky”</div><div class="m"><span>Product scene</span><button class="use" type="button" data-prompt="A sunny 3D hillside path lined with sunflowers and tulips, balloons in a blue sky">Use this prompt</button></div></figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="/assets/nanob-sample-7.jpg" alt="A satellite catching golden sunrise above Earth" loading="lazy" />
+        <figcaption><div class="p">“A satellite catching the golden sunrise above Earth, stars and warm light”</div><div class="m"><span>City scene</span><button class="use" type="button" data-prompt="A satellite catching the golden sunrise above Earth, stars and warm light">Use this prompt</button></div></figcaption>
+      </figure>
+    </div>
+  </div>
+  <figure class="shot" style="margin-top:16px">
+    <img src="/assets/nanob-sample-8.jpg" alt="Sunflowers and daisies with morning dew in warm sunlight" style="aspect-ratio:21/9" loading="lazy" />
+    <figcaption><div class="p">“Sunflowers and daisies with morning dew, warm sunlight through green leaves”</div><div class="m"><span>Food photography</span><button class="use" type="button" data-prompt="Sunflowers and daisies with morning dew, warm sunlight through green leaves">Use this prompt</button></div></figcaption>
+  </figure>
+</section>
+
+
+<section class="block" style="padding:40px 0 8px">
+  <div class="sec-head"><div><p class="kicker">What is Nano Banana 2?</p><h2 style="margin:0;font-size:30px;letter-spacing:-.03em">The photo editor that listens</h2></div></div>
+  <div class="feats">
+    <article class="feat"><div class="num">01</div><h3>Edit by sentence</h3><p>"Make it sunset", "remove the crowd", done — plain-language edits on real photos.</p></article>
+    <article class="feat"><div class="num">02</div><h3>Character consistency</h3><p>The same face across many generated scenes — what this model became famous for.</p></article>
+    <article class="feat"><div class="num">03</div><h3>Fast drafts</h3><p>Near-instant previews for product shots and social posts, then upscale the winner.</p></article>
+    <article class="feat"><div class="num">04</div><h3>Text touch-ups</h3><p>Fix or add short text inside images without redoing the whole picture.</p></article>
+  </div>
+</section>
+
+<section class="block" id="bestfor" style="padding:40px 0 8px">
+  <div class="sec-head"><div><p class="kicker">Nano Banana 2 vs GPT Image 2.5</p><h2 style="margin:0;font-size:30px;letter-spacing:-.03em">Pick by the job</h2></div>
+  <p class="lead" style="color:var(--muted);max-width:420px;margin:0">Already have a photo? Start here. Starting from a blank page with text to render? The other bench is faster.</p></div>
+  <div class="models">
+    <article class="mcard"><div class="tagrow"><span class="tag live">This page</span><span class="tag">Google</span></div><h3>Nano Banana 2 — edit &amp; restyle</h3><p>Best when the starting point is a real photo: swap backgrounds, relight a scene, change outfits, keep the same face across shots.</p><span style="color:var(--faint);font-size:13px">You are in the right place ↓</span></article>
+    <article class="mcard"><div class="tagrow"><span class="tag live">Live</span><span class="tag">OpenAI</span></div><h3>GPT Image 2.5 — create &amp; typeset</h3><p>Best from a blank canvas: posters, covers and product shots, especially when the image needs accurate text in it.</p><a class="go" href="/gpt-image-2-5-generator/">Open GPT Image 2.5 →</a></article>
+    <article class="mcard"><div class="tagrow"><span class="tag">Shared</span></div><h3>Same lab, same credits</h3><p>Both benches share one account and one credit balance. New accounts get 3 free images — try both benches and keep the one that fits your picture.</p><a class="go" href="/pricing/">See plans →</a></article>
+  </div>
+</section>
+
+<section class="block" id="faq" style="padding:40px 0 30px">
+  <div class="sec-head"><div><p class="kicker">FAQ</p><h2 style="margin:0;font-size:30px;letter-spacing:-.03em">Nano Banana 2 FAQ</h2></div></div>
+  <div class="faq">
+    <details><summary>Is the Nano Banana 2 generator free?</summary><div class="a">New accounts get 3 free images — sign in to claim them. Heavy use, HD output and no-watermark downloads are on paid plans.</div></details>
+    <details><summary>Can it edit my own photos?</summary><div class="a">Yes — upload a photo and describe the change. Face-consistent editing is what this model is known for.</div></details>
+    <details><summary>How fast is it?</summary><div class="a">Most images finish in about 10 seconds at standard resolution.</div></details>
+  </div>
+</section>
+</div>
+<script>
+(function(){
+  var samples = ['/assets/gpt25-sample-1.jpg','/assets/gpt25-sample-2.jpg','/assets/gpt25-sample-3.jpg','/assets/gpt25-sample-4.jpg'];
+  var promptEl = document.getElementById('prompt'), genBtn = document.getElementById('genBtn'),
+      sizeEl = document.getElementById('size'), stageEmpty = document.getElementById('stageEmpty'),
+      stageWork = document.getElementById('stageWork'), stageImg = document.getElementById('stageImg'),
+      dlBtn = document.getElementById('dlBtn'), lastIdx = -1;
+  document.querySelectorAll('[data-prompt]').forEach(function(c){ c.addEventListener('click', function(){ promptEl.value = c.getAttribute('data-prompt'); promptEl.focus(); }); });
+  document.querySelectorAll('.seg button').forEach(function(b){ b.addEventListener('click', function(){
+    document.querySelectorAll('.seg button').forEach(function(x){ x.setAttribute('aria-pressed','false'); });
+    b.setAttribute('aria-pressed','true'); }); });
+  function show(src){ stageWork.style.display='none'; stageImg.src=src; stageImg.style.display='block'; dlBtn.href=src; dlBtn.style.display='inline'; genBtn.disabled=false; genBtn.innerHTML='<span>Generate with Nano Banana 2</span><span>↗</span>'; }
+  genBtn.addEventListener('click', function(){
+    var text = promptEl.value.trim();
+    genBtn.disabled = true; genBtn.innerHTML = '<span>Generating…</span><span>···</span>';
+    stageImg.style.display='none'; dlBtn.style.display='none'; stageEmpty.style.display='none'; stageWork.style.display='block';
+    fetch('/api/generate', { method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ prompt: text || 'a creative AI image', model:'GPT Image 2.5', size: sizeEl.value }) })
+    .then(function(r){ return r.ok ? r.json() : Promise.reject(r.status); })
+    .then(function(d){ if(!d || !d.image) throw new Error('no_image'); show(d.image); })
+    .catch(function(){ var i; do { i = Math.floor(Math.random()*samples.length); } while(i===lastIdx); lastIdx=i;
+      var img = new Image(); img.onload = function(){ setTimeout(function(){ show(samples[i]); }, 900); };
+      img.onerror = function(){ stageWork.style.display='none'; stageEmpty.style.display='block'; genBtn.disabled=false; genBtn.innerHTML='<span>Generate with Nano Banana 2</span><span>↗</span>'; };
+      img.src = samples[i]; });
+  });
+})();
+</script>
+
+</main>
+<footer class="site"><div class="wrap">
+<div class="cols">
+<a class="brand" href="/" style="font-size:15px"><span class="brand-mark" style="width:30px;height:26px;font-size:10px">M<i>P</i></span><span>Model<em>Pix</em>Lab</span></a>
+<a href="/gpt-image-2-5-generator/">GPT Image 2.5 Generator</a>
+<a href="/nano-banana-2-generator/">Nano Banana 2 Generator</a>
+<a href="/pricing/">Pricing</a>
+<a href="/how-to-use/">How to use</a>
+</div>
+<div class="foot-contact"><a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a> · <a href="/about/">About</a><br />Contact: <a href="mailto:support@modelpixlab.com">support@modelpixlab.com</a></div>
+<p class="fine">Nano Banana 2 is a model by Google. This page is an independent tool interface.</p>
+</div></footer>
+</body>
+</html>
