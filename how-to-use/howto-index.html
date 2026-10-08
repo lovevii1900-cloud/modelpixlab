@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" type="image/png" href="/mp-icon.png" />
+<title>How to Use ModelPixLab — AI Image Generator Guide</title>
+<meta name="description" content="Step-by-step guide to generating and editing images on ModelPixLab: prompts, models, sizes, free credits and downloads." />
+<link rel="canonical" href="https://modelpixlab.com/how-to-use/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="ModelPixLab" />
+<meta property="og:title" content="How to Use ModelPixLab — AI Image Generator Guide" />
+<meta property="og:description" content="Step-by-step guide to generating and editing images on ModelPixLab: prompts, models, sizes, free credits and downloads." />
+<meta property="og:url" content="https://modelpixlab.com/how-to-use/" />
+<meta property="og:image" content="https://modelpixlab.com/assets/gpt25-sample-3.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://modelpixlab.com/assets/gpt25-sample-3.jpg" />
+<style>
+      :root{
+        --bg:#0c0e0c;
+        --bg2:#111411;
+        --surface:#171a17;
+        --surface2:#1d211d;
+        --line:#262b26;
+        --line2:#323832;
+        --ink:#f2f4ef;
+        --muted:#aebaa9;
+        --faint:#7d8a7a;
+        --accent:#b8ff2e;
+        --accent-ink:#0c1005;
+        --accent-dim:rgba(184,255,46,.12);
+        --radius:18px;
+        --font:"Avenir Next","Segoe UI",system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+        --mono:ui-monospace,"SF Mono","Cascadia Mono",Consolas,monospace;
+      }
+
+        :root{
+          --bg:#f2f3ee;
+          --bg2:#eceee6;
+          --surface:#ffffff;
+          --surface2:#f7f8f3;
+          --line:#dde2d6;
+          --line2:#cbd3c0;
+          --ink:#141714;
+          --muted:#4a5648;
+          --faint:#7a8776;
+          --accent:#65a800;
+          --accent-ink:#ffffff;
+          --accent-dim:rgba(101,168,0,.09);
+        }
+
+      .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+      .bar{display:flex;align-items:center;gap:16px;height:62px}
+
+      .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.02em;font-size:17px;white-space:nowrap;text-decoration:none}
+
+      .brand-mark{width:34px;height:30px;flex:none;background:var(--ink);color:var(--bg);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:11px;border-radius:8px;letter-spacing:-.02em;white-space:nowrap;overflow:hidden}
+
+      .brand-mark i{color:var(--accent);font-style:normal}
+
+      .brand span em{color:var(--accent);font-style:normal}
+
+      nav.main{display:flex;gap:6px;margin-left:18px}
+
+      nav.main a{font-size:13.5px;color:var(--muted);text-decoration:none;padding:7px 11px;border-radius:999px}
+
+      nav.main a:hover{background:var(--surface);color:var(--ink)}
+
+      .hcta{margin-left:auto;background:var(--ink);color:var(--bg);text-decoration:none;font-weight:700;font-size:13.5px;padding:9px 16px;border-radius:999px;white-space:nowrap;display:inline-flex;align-items:center;gap:7px}
+
+      .hcta b{width:7px;height:7px;background:var(--accent);border-radius:50%;display:inline-block;box-shadow:0 0 0 3px var(--accent-dim)}
+
+      .ghost-btn{margin-left:auto;background:transparent;color:var(--muted);border:1px solid var(--line);font:inherit;font-size:13.5px;font-weight:600;padding:8px 15px;border-radius:999px;cursor:pointer;white-space:nowrap}
+
+      .ghost-btn:hover{color:var(--ink);border-color:var(--line2)}
+
+      .ghost-btn + .hcta{margin-left:0}
+
+      .bar .hcta{margin-left:0}
+.brand>span:not(.brand-mark){display:none}
+nav.main{display:none}
+.hcta{margin-left:auto}
+.ghost-btn + .hcta{margin-left:0}
+
+        .ghost-btn{display:none}
+
+        .brand{font-size:15px;gap:8px}
+
+        .brand-mark{width:30px;height:27px}
+
+        .hcta{font-size:12.5px;padding:8px 12px}
+
+        .bar{gap:10px}
+
+      .hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:28px;flex-wrap:wrap}
+
+      .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);background:var(--surface);padding:6px 10px;border-radius:999px}
+
+      .eyebrow i{width:6px;height:6px;background:var(--accent);border-radius:50%;display:block}
+
+      .hero h1{font-size:clamp(38px,6vw,64px);line-height:.95;letter-spacing:-.04em;margin:16px 0 10px;font-weight:900;max-width:720px}
+
+      .hero h1 .thin{font-weight:300;color:var(--muted)}
+
+      .hero h1 .hl{color:var(--accent);position:relative}
+
+      .hero .cn-title{font-size:15px;color:var(--muted);font-weight:600;margin:0}
+
+      .hero-side{max-width:360px;padding-top:42px}
+
+      .hero-side p{margin:0;color:var(--muted);font-size:15px;line-height:1.65}
+
+      .hero-side p.cn{margin-top:8px;font-size:13.5px;color:var(--faint)}
+
+      .stats{display:flex;gap:0;margin-top:18px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface)}
+
+      .stat{flex:1;padding:12px 14px;border-right:1px solid var(--line)}
+
+      .stat:last-child{border-right:0}
+
+      .stat b{display:block;font-size:18px;letter-spacing:-.03em;line-height:1}
+
+      .stat span{font-size:11px;color:var(--faint);font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em}
+.hero-side{padding-top:0;max-width:100%}
+.hero-top{flex-direction:column}
+.workspace{grid-template-columns:1fr}
+
+      .panel{padding:22px;border-right:1px solid var(--line);display:flex;flex-direction:column;background:var(--surface)}
+.panel{border-right:0;border-bottom:1px solid var(--line)}
+
+      .panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+
+      .panel-head strong{font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+
+      .panel-head span{font-family:var(--mono);font-size:11px;color:var(--faint);border:1px solid var(--line);padding:4px 8px;border-radius:999px}
+
+      label.lbl{display:block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin:16px 0 8px}
+
+      label.lbl:first-of-type{margin-top:0}
+
+      textarea#prompt{width:100%;min-height:110px;resize:vertical;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:14px;font:inherit;font-size:14.5px;line-height:1.55}
+
+      textarea#prompt:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+
+      .chip{font-size:12.5px;padding:7px 11px;border-radius:999px;cursor:pointer;border:1px solid var(--line);background:var(--bg);color:var(--muted)}
+
+      .chip:hover{border-color:var(--accent);color:var(--ink)}
+
+      .seg{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--bg)}
+
+      .seg button{appearance:none;border:0;background:transparent;color:var(--muted);font:inherit;padding:11px 10px;cursor:pointer;text-align:left}
+
+      .seg button + button{border-left:1px solid var(--line)}
+
+      .seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+
+      .seg button strong{display:block;font-size:14px;line-height:1.1}
+
+      .seg button small{display:block;font-size:11px;opacity:.75;margin-top:3px}
+
+      select#size{width:100%;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:11px 12px;font:inherit;font-size:13.5px}
+
+      .gen{margin-top:18px;width:100%;background:var(--accent);color:var(--accent-ink);border:0;font:inherit;font-size:15px;font-weight:800;padding:14px 18px;border-radius:13px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+
+      .gen:disabled{opacity:.55;cursor:wait}
+
+      .gen span:last-child{font-family:var(--mono);font-size:12px;font-weight:700;opacity:.7}
+
+      .bar2{width:200px;height:6px;border-radius:999px;background:var(--line);margin:14px auto 0;overflow:hidden}
+
+      .bar2 i{display:block;height:100%;width:38%;background:var(--accent);border-radius:999px;animation:slide .9s infinite alternate ease-in-out}
+.bar2 i{animation:none}
+
+      .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:22px}
+
+      .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 8px;font-weight:700}
+
+      .gallery{display:grid;grid-template-columns:1.15fr .85fr;gap:16px}
+.gallery{grid-template-columns:1fr}
+
+      .gallery-col{display:grid;gap:16px}
+
+      figure.shot{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+
+      figure.shot img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+
+      figure.shot.tall img{aspect-ratio:3/3.4}
+
+      figure.shot figcaption{padding:14px}
+
+      figure.shot .p{font-size:13.5px;line-height:1.55}
+
+      figure.shot .m{margin-top:10px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+
+      figure.shot .m span{font-family:var(--mono);font-size:11px;color:var(--faint)}
+
+      figure.shot button.use{font:inherit;font-size:12px;font-weight:700;cursor:pointer;background:var(--bg);color:var(--ink);border:1px solid var(--line);padding:7px 10px;border-radius:999px}
+
+      figure.shot button.use:hover{border-color:var(--accent)}
+
+
+      .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--surface)}
+.steps{grid-template-columns:1fr}
+
+      .step{padding:22px;border-right:1px solid var(--line)}
+
+      .step:last-child{border-right:0}
+.step{border-right:0;border-bottom:1px solid var(--line)}
+.step:last-child{border-bottom:0}
+
+      .step .n{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.1em}
+
+      .step h3{margin:10px 0 6px;font-size:17px;letter-spacing:-.02em}
+
+      .step h3 .cn{display:block;font-size:12.5px;color:var(--faint);font-weight:600;margin-top:2px}
+
+      .step p{margin:0;color:var(--muted);font-size:13.5px}
+
+      .step p.cn{color:var(--faint);font-size:12.5px;margin-top:6px}
+
+
+      .feats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.feats{grid-template-columns:1fr}
+
+      .feat{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px}
+
+      .feat .num{font-family:var(--mono);font-size:11px;color:var(--accent)}
+
+      .feat h3{margin:8px 0 6px;font-size:17px}
+
+      .feat h3 .cn{color:var(--faint);font-size:12.5px;font-weight:600}
+
+      .feat p{margin:0;color:var(--muted);font-size:13.5px}
+
+      .feat p.cn{color:var(--faint);font-size:12.5px;margin-top:5px}
+
+
+      .faq{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--surface)}
+
+      .faq details{border-bottom:1px solid var(--line)}
+
+      .faq details:last-child{border-bottom:0}
+
+      .faq summary{cursor:pointer;list-style:none;padding:17px 18px;font-weight:700;font-size:15px;display:flex;justify-content:space-between;gap:12px;align-items:center}
+
+      .faq summary::-webkit-details-marker{display:none}
+
+      .faq summary .cn{color:var(--faint);font-size:12.5px;font-weight:600}
+
+      .faq summary::after{content:"+";width:28px;height:28px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;color:var(--accent);flex:none;font-weight:800}
+
+      .faq details[open] summary::after{content:"–"}
+
+      .faq .a{padding:0 18px 18px;color:var(--muted);font-size:14px;max-width:760px}
+
+      .faq .a .cn{color:var(--faint);font-size:13px;margin-top:6px}
+
+      footer.site{padding:28px 0 42px;color:var(--faint)}
+
+      footer.site .cols{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center;justify-content:center}
+
+      footer.site a{color:var(--muted);text-decoration:none;font-size:13px}
+
+      footer.site a:hover{color:var(--ink)}
+
+      footer.site .fine{font-size:12px;margin-top:14px;line-height:1.6;text-align:center}
+
+      footer.site button.flink{background:none;border:0;font:inherit;color:var(--muted);font-size:13px;cursor:pointer;padding:0}
+
+      footer.site button.flink:hover{color:var(--ink)}
+      .models{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+      @media(max-width:900px){.models{grid-template-columns:1fr 1fr}}
+      @media(max-width:560px){.models{grid-template-columns:1fr}}
+      .mcard{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:8px}
+      .mcard h3{margin:0;font-size:17px;letter-spacing:-.02em}
+      .mcard p{margin:0;color:var(--muted);font-size:13.5px;flex:1}
+      .mcard .tagrow{display:flex;gap:8px;align-items:center}
+      .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border-radius:999px;border:1px solid var(--line);color:var(--faint)}
+      .tag.live{color:var(--accent-ink);background:var(--accent);border-color:var(--accent);font-weight:700}
+      .mcard a.go{font-weight:700;font-size:14px;text-decoration:none;color:var(--ink)}
+      .mcard a.go:hover{color:var(--accent)}
+      .workspace{display:grid;grid-template-columns:400px 1fr;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--surface);margin-top:26px}
+      @media(max-width:900px){.workspace{grid-template-columns:1fr}}
+      .stage{position:relative;display:flex;flex-direction:column;background:var(--bg2);min-height:420px}
+      .stage-top{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line)}
+      .stage-top .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);display:inline-block;margin-right:8px}
+      .stage-body{flex:1;display:grid;place-items:center;padding:22px;text-align:center}
+      .stage-body img{max-width:100%;border-radius:12px;display:none}
+      .stage-empty{color:var(--faint);font-size:14px;max-width:340px}
+      .stage-empty b{display:block;color:var(--muted);font-size:16px;margin-bottom:6px}
+      .workbar{display:none;margin:0 auto}
+      .workbar .bar2{margin:12px auto 0}
+      .plans2{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+      @media(max-width:1000px){.plans2{grid-template-columns:1fr 1fr}}
+      @media(max-width:560px){.plans2{grid-template-columns:1fr}}
+      .plan2{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column}
+      .plan2.pop{border-color:var(--accent)}
+      .plan2 h3{margin:0;font-size:16px}
+      .plan2 .pr{font-size:32px;font-weight:900;letter-spacing:-.03em;margin:8px 0 2px}
+      .plan2 .pr small{font-size:13px;color:var(--muted);font-weight:600}
+      .plan2 ul{list-style:none;margin:14px 0 18px;padding:0;color:var(--muted);font-size:13.5px}
+      .plan2 li{margin:6px 0}
+      .plan2 .cta{margin-top:auto;text-align:center;text-decoration:none;font-weight:700;font-size:14px;padding:11px 14px;border-radius:12px;border:1px solid var(--line);color:var(--ink)}
+      .plan2 .cta.solid{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+      .ribbon{background:var(--bg2);border-bottom:1px solid var(--line);color:var(--muted);font-size:12.5px;text-align:center;padding:8px 14px}
+      .ribbon b{color:var(--accent)}
+
+      /* responsive repair: restore desktop header/layout rules that were flattened from media queries */
+      @media(max-width:720px){nav.main{display:none}}
+      @media(min-width:721px){nav.main{display:flex}.brand>span:not(.brand-mark){display:inline}}
+      @media(max-width:560px){.brand>span:not(.brand-mark){display:none}.ghost-btn{display:none}}
+      @media(min-width:561px){.brand{font-size:17px;gap:10px}.brand-mark{width:34px;height:30px}.hcta{font-size:13.5px;padding:9px 16px}.bar{gap:16px}.ghost-btn{display:inline-flex;align-items:center}}
+      @media(min-width:761px){.hero-top{flex-direction:row}.hero-side{padding-top:42px;max-width:360px}.panel{border-right:1px solid var(--line);border-bottom:0}.gallery{grid-template-columns:1.15fr .85fr}.steps{grid-template-columns:repeat(3,1fr)}.step{border-right:1px solid var(--line);border-bottom:0}.step:last-child{border-right:0}.feats{grid-template-columns:repeat(2,1fr)}}
+
+      /* bigger logo + mobile fit */
+      .brand{font-size:21px;gap:12px}
+      .brand-mark{width:46px;height:40px;font-size:15px;border-radius:11px}
+      @media(max-width:560px){
+        .brand{font-size:19px;gap:10px}
+        .brand-mark{width:40px;height:35px;font-size:13px}
+        .brand>span:not(.brand-mark){display:inline}
+      }
+
+      .foot-contact{margin-top:14px;font-size:13px;color:var(--muted,#8a919e);text-align:center}
+      .foot-contact a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+
+      .wrap{max-width:1400px}
+</style>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "How to use ModelPixLab — AI image generator guide",
+ "description": "Step-by-step guide to generating and editing images on ModelPixLab: prompts, models, sizes and downloads.",
+ "step": [
+  {
+   "@type": "HowToStep",
+   "position": 1,
+   "name": "Describe your image"
+  },
+  {
+   "@type": "HowToStep",
+   "position": 2,
+   "name": "Pick model &amp; settings"
+  },
+  {
+   "@type": "HowToStep",
+   "position": 3,
+   "name": "Generate &amp; download"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><div class="bar">
+<a class="brand" href="/"><span class="brand-mark">M<i>P</i></span><span>Model<em>Pix</em>Lab</span></a>
+<nav class="main"><a href="/gpt-image-2-5-generator/">GPT Image 2.5</a><a href="/nano-banana-2-generator/">Nano Banana 2</a><a href="/pricing/">Pricing</a><a href="/how-to-use/">How to use</a></nav>
+<a class="ghost-btn" href="/gpt-image-2-5-generator/" style="text-decoration:none">Sign in</a>
+<a class="hcta" href="/gpt-image-2-5-generator/"><b></b>Start free</a>
+</div></div></header>
+<main>
+
+<div class="wrap">
+<section class="hero" style="padding:44px 0 8px">
+  <span class="eyebrow"><i></i>User guide</span>
+  <h1>How to use <span class="thin">ModelPixLab.</span></h1>
+  <p class="cn-title">Three steps to your image — plus tips for better prompts.</p>
+  <div class="hero-side" style="max-width:640px;padding-top:18px">
+    <p>No installs, no Photoshop. Everything happens on the model pages: describe what you want, pick a model, generate, download. This page walks through each step and shows how to write prompts that get better results.</p>
+    
+  </div>
+</section>
+
+<section class="block" style="padding:34px 0 8px">
+  <div class="sec-head"><div><p class="kicker">Getting started</p><h2 style="margin:0;font-size:30px;letter-spacing:-.03em">Three steps to your image</h2></div></div>
+  <div class="steps">
+    <div class="step"><div class="n">STEP 1</div><h3>Describe your image</h3><p>Open a model page and type what you want to see in the prompt box. Plain sentences work: "a cozy cabin in snowy mountains at dusk". Not sure where to start? Tap one of the example chips to fill the box, then edit it.</p></div>
+    <div class="step"><div class="n">STEP 2</div><h3>Pick model &amp; settings</h3><p>Each page is one model. Choose the image size (square, landscape or portrait) and, where offered, the style or mode. Editing a photo? Switch to Edit mode and upload your picture first.</p></div>
+    <div class="step"><div class="n">STEP 3</div><h3>Generate &amp; download</h3><p>Press Generate. Most images take seconds. Happy with it? Download up to 4K. Want another take? Adjust one detail in the prompt and generate again — small changes, better odds.</p></div>
+  </div>
+</section>
+
+<section class="block" style="padding:40px 0 8px">
+  <div class="sec-head"><div><p class="kicker">Prompt tips</p><h2 style="margin:0;font-size:30px;letter-spacing:-.03em">Write prompts that work</h2></div>
+  <p class="lead" style="color:var(--muted);max-width:520px;margin:0">Four habits that make the biggest difference.</p></div>
+  <div class="feats">
+    <article class="feat"><div class="num">01</div><h3>Say what you see</h3><p>Name the subject, setting and mood: "product photo of a sneaker on a pastel background, soft studio light" beats "nice shoes". Details in, details out.</p></article>
+    <article class="feat"><div class="num">02</div><h3>Add a style word</h3><p>Finish with the look you want: photo, anime, illustration, 3D render, watercolor. One style word anchors the whole image.</p></article>
+    <article class="feat"><div class="num">03</div><h3>Put text in quotes</h3><p>Words inside the image go in quotation marks: a neon sign that says "OPEN". Short text works best — a few words, spelled exactly.</p></article>
+    <article class="feat"><div class="num">04</div><h3>Change one thing at a time</h3><p>Regenerating with the same prompt gives variations. To fix a result, change one detail per round instead of rewriting everything.</p></article>
+  </div>
+</section>
+
+<section class="block" style="padding:40px 0 8px">
+  <div class="sec-head"><div><p class="kicker">Prompt → result</p><h2 style="margin:0;font-size:30px;letter-spacing:-.03em">Read an image like a prompt</h2></div>
+  <p class="lead" style="color:var(--muted);max-width:480px;margin:0">Every strong result can be read backwards: subject + place + light + style. When your image misses, add the missing piece instead of starting over.</p></div>
+  <div class="gallery">
+    <figure class="shot tall">
+      <img src="/assets/gpt25-sample-1.jpg" alt="Rainy Tokyo street at dusk with neon signs reflecting on wet pavement" loading="lazy" />
+      <figcaption><div class="p"><b>Subject:</b> Tokyo street · <b>Setting:</b> rainy dusk · <b>Details:</b> neon reflections, transparent umbrellas</div><div class="m"><span>Scene + mood + details</span><a href="/gpt-image-2-5-generator/" style="font-size:12px;font-weight:700;color:var(--ink);text-decoration:none">Try this style →</a></div></figcaption>
+    </figure>
+    <div class="gallery-col">
+      <figure class="shot">
+        <img src="/assets/gpt25-sample-2.jpg" alt="Frosted glass perfume bottle on a stone pedestal with sage green backdrop" loading="lazy" />
+        <figcaption><div class="p"><b>Subject:</b> frosted perfume bottle · <b>Setting:</b> stone pedestal, sage backdrop · <b>Style:</b> minimalist product photo</div><div class="m"><span>Product prompts need staging</span><a href="/gpt-image-2-5-generator/" style="font-size:12px;font-weight:700;color:var(--ink);text-decoration:none">Make a product shot →</a></div></figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="/assets/gpt25-sample-3.jpg" alt="Stylized 3D animated character portrait of a young explorer" loading="lazy" />
+        <figcaption><div class="p"><b>Subject:</b> young explorer · <b>Setting:</b> mountain sunset · <b>Style:</b> stylized 3D animated portrait</div><div class="m"><span>Style words steer the whole image</span><a href="/gpt-image-2-5-generator/" style="font-size:12px;font-weight:700;color:var(--ink);text-decoration:none">Make a character →</a></div></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="padding:40px 0 8px">
+  <div class="sec-head"><div><p class="kicker">Editing photos</p><h2 style="margin:0;font-size:30px;letter-spacing:-.03em">Edit by describing the change</h2></div></div>
+  <div class="steps">
+    <div class="step"><div class="n">UPLOAD</div><h3>Add your photo</h3><p>On the Nano Banana 2 page, switch to Edit mode and upload the photo you want to change.</p></div>
+    <div class="step"><div class="n">DESCRIBE</div><h3>Say what changes</h3><p>"Make it golden hour", "remove the people in the back", "turn this into a watercolor painting". Faces and details stay consistent.</p></div>
+    <div class="step"><div class="n">REFINE</div><h3>Go round by round</h3><p>Each edit builds on the last. Fix one thing per message and the result stays under your control.</p></div>
+  </div>
+</section>
+
+<section class="block" style="padding:40px 0 8px">
+  <div class="sec-head"><div><p class="kicker">Which model?</p><h2 style="margin:0;font-size:30px;letter-spacing:-.03em">Pick by the job</h2></div></div>
+  <div class="models">
+    <article class="mcard"><div class="tagrow"><span class="tag live">Live</span><span class="tag">OpenAI</span></div><h3>GPT Image 2.5</h3><p>Posters, covers and product shots — especially anything with text in the image or step-by-step instructions to follow.</p><a class="go" href="/gpt-image-2-5-generator/">Open generator →</a></article>
+    <article class="mcard"><div class="tagrow"><span class="tag live">Live</span><span class="tag">Google</span></div><h3>Nano Banana 2</h3><p>Editing real photos: background swaps, relighting, outfit changes — while keeping faces consistent.</p><a class="go" href="/nano-banana-2-generator/">Open generator →</a></article>
+    <article class="mcard"><div class="tagrow"><span class="tag">Guide</span></div><h3>Not sure yet?</h3><p>Start on the homepage, look at what each model does, and try the free generations on both pages — same account, same credits.</p><a class="go" href="/">Browse models →</a></article>
+  </div>
+</section>
+
+<section class="block" id="faq" style="padding:40px 0 30px">
+  <div class="sec-head"><div><p class="kicker">FAQ</p><h2 style="margin:0;font-size:30px;letter-spacing:-.03em">Using the lab</h2></div></div>
+  <div class="faq">
+    <details><summary>Do I need an account to try it?</summary><div class="a">Yes — sign in with Google or GitHub to get 3 free images on us. Your credits and history stay in one place.</div></details>
+    <details><summary>How many free generations do I get?</summary><div class="a">New accounts get 3 free generations to try the tools. Paid plans add monthly credits; one-time credit packs never expire.</div></details>
+    <details><summary>What size should I choose?</summary><div class="a">Square for avatars and product shots, landscape for banners and covers, portrait for posters and phone wallpapers. You can always regenerate in another size.</div></details>
+    <details><summary>Can I use the images commercially?</summary><div class="a">Paid plans include a commercial license. Free-plan images are for personal use.</div></details>
+    <details><summary>The result is not what I wanted. Now what?</summary><div class="a">Change one detail in the prompt and generate again — subject, setting, style, in that order. The prompt tips above cover the fixes that work most often.</div></details>
+  </div>
+</section>
+</div>
+
+</main>
+<footer class="site"><div class="wrap">
+<div class="cols">
+<a class="brand" href="/" style="font-size:15px"><span class="brand-mark" style="width:30px;height:26px;font-size:10px">M<i>P</i></span><span>Model<em>Pix</em>Lab</span></a>
+<a href="/gpt-image-2-5-generator/">GPT Image 2.5 Generator</a>
+<a href="/nano-banana-2-generator/">Nano Banana 2 Generator</a>
+<a href="/pricing/">Pricing</a>
+<a href="/how-to-use/">How to use</a>
+</div>
+<div class="foot-contact"><a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a> · <a href="/about/">About</a><br />Contact: <a href="mailto:support@modelpixlab.com">support@modelpixlab.com</a></div>
+<p class="fine">ModelPixLab is an independent tool interface. Model names belong to their respective owners.</p>
+</div></footer>
+</body>
+</html>
