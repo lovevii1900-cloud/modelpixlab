@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /fixupload/
 
 Sitemap: https://modelpixlab.com/sitemap.xml
