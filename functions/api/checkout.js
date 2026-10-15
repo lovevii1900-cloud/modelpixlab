@@ -100,7 +100,9 @@ export async function onRequestPost(context) {
   if (!product.waffoId) return json({ error: 'product_not_configured' }, 503);
 
   const merchantId = env.WAFFO_MERCHANT_ID;
-  const privateKeyPem = env.WAFFO_PRIVATE_KEY;
+  // Test mode: WAFFO_MODE=test uses the test private key. Waffo routes by key;
+  // product IDs are shared between test and production.
+  const privateKeyPem = env.WAFFO_MODE === 'test' ? env.WAFFO_TEST_PRIVATE_KEY : env.WAFFO_PRIVATE_KEY;
   if (!merchantId || !privateKeyPem) {
     return json({ error: 'payment_not_configured' }, 503);
   }
