@@ -67,17 +67,20 @@ async function signRequest(method, path, body, timestamp, privateKey) {
   return btoa(binary);
 }
 
-// Get user from session cookie (reuse auth logic pattern)
+// Get user from session cookie (same convention as auth/me and generate:
+// sessions.token column, expires_at stored in seconds)
 async function getUserId(request, env) {
   const cookie = request.headers.get('Cookie') || '';
-  const match = cookie.match(/mpl_session=([^;]+)/);
+  const match = cookie.match(/mpl_session=([A-Za-z0-9\-_]+)/);
   if (!match) return null;
-  const sessionId = match[1];
+  const sessionToken = match[1];
   try {
     const db = env.DB;
-    const sess = await db.prepare('SELECT user_id FROM sessions WHERE id = ? AND expires_at > ?')
-      .bind(sessionId, Date.now()).first();
-    return sess ? sess.user_id : null;
+    const nowSec = Math.floor(Date.now() / 1000);
+    const sess = await db.prepare('SELECT user_id, expires_at FROM sessions WHERE token = ?')
+      .bind(sessionToken).first();
+    if (!sess || sess.expires_at < nowSec) return null;
+    return sess.user_id;
   } catch { return null; }
 }
 
