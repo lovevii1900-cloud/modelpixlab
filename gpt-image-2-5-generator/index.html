@@ -1669,17 +1669,37 @@
           });
         }
 
+        function syncBalanceDisplay() {
+          var c = window.mplUser && window.mplUser.credits;
+          balanceNum.textContent = (typeof c === 'number') ? fmt(c) : '–';
+        }
+
+        // Re-check login state via API. Covers the race where the Top-up dialog
+        // is opened before the page's initial checkAuth() has resolved.
+        function ensureUser() {
+          if (window.mplUser && window.mplUser.user) return Promise.resolve(window.mplUser);
+          return fetch('/api/auth/me', { credentials: 'same-origin' })
+            .then(function (r) { return r.ok ? r.json() : null; })
+            .then(function (d) {
+              if (d && d.user && d.user.email) {
+                window.mplUser = d;
+                if (window.refreshAuthUI) window.refreshAuthUI();
+                return d;
+              }
+              return null;
+            })
+            .catch(function () { return null; });
+        }
+
         function openPay() {
           formWrap.style.display = 'block';
           doneView.hidden = true;
           payBtn.disabled = false;
           if (payErr) { payErr.hidden = true; payErr.textContent = ''; }
           // Show the real credit balance when logged in
-          if (window.mplUser && typeof window.mplUser.credits === 'number') {
-            balanceNum.textContent = fmt(window.mplUser.credits);
-          } else {
-            balanceNum.textContent = '–';
-          }
+          syncBalanceDisplay();
+          // Refresh in case the dialog was opened before the initial auth check resolved
+          ensureUser().then(function () { syncBalanceDisplay(); });
           syncSummary();
           overlay.hidden = false;
           document.body.style.overflow = 'hidden';
@@ -1706,40 +1726,44 @@
         // POST /api/checkout { planId } -> { checkoutUrl } -> redirect to Waffo hosted page.
         payBtn.addEventListener('click', function () {
           if (!selected || !selected.planId) return;
-          if (!window.mplUser || !window.mplUser.user) {
-            closePay();
-            if (window.openAuth) window.openAuth('signin');
-            return;
-          }
           payBtn.disabled = true;
           if (payErr) { payErr.hidden = true; payErr.textContent = ''; }
           payBtnLabel.textContent = window.mplT('processing');
-          fetch('/api/checkout', {
-            method: 'POST',
-            credentials: 'same-origin',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ planId: selected.planId })
-          })
-            .then(function (r) {
-              return r.json().then(function (d) { return { ok: r.ok, status: r.status, d: d }; })
-                .catch(function () { return { ok: r.ok, status: r.status, d: null }; });
+          ensureUser().then(function (u) {
+            if (!u) {
+              payBtn.disabled = false;
+              syncSummary();
+              closePay();
+              if (window.openAuth) window.openAuth('signin');
+              return;
+            }
+            return fetch('/api/checkout', {
+              method: 'POST',
+              credentials: 'same-origin',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ planId: selected.planId })
             })
-            .then(function (res) {
-              if (res.ok && res.d && res.d.checkoutUrl) {
-                window.location.href = res.d.checkoutUrl;
-                return;
-              }
-              if (res.status === 401) {
-                window.mplUser = null;
-                closePay();
-                if (window.openAuth) window.openAuth('signin');
-                return;
-              }
-              showPayError("Couldn't start checkout — please try again.");
-            })
-            .catch(function () {
-              showPayError("Couldn't start checkout — please try again.");
-            });
+              .then(function (r) {
+                return r.json().then(function (d) { return { ok: r.ok, status: r.status, d: d }; })
+                  .catch(function () { return { ok: r.ok, status: r.status, d: null }; });
+              })
+              .then(function (res) {
+                if (res.ok && res.d && res.d.checkoutUrl) {
+                  window.location.href = res.d.checkoutUrl;
+                  return;
+                }
+                if (res.status === 401) {
+                  window.mplUser = null;
+                  closePay();
+                  if (window.openAuth) window.openAuth('signin');
+                  return;
+                }
+                showPayError("Couldn't start checkout — please try again.");
+              })
+              .catch(function () {
+                showPayError("Couldn't start checkout — please try again.");
+              });
+          });
         });
         doneBtn.addEventListener('click', function () {
           closePay();
