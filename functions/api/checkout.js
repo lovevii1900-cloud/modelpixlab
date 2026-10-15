@@ -149,10 +149,12 @@ export async function onRequestPost(context) {
       return json({ error: 'checkout_failed', detail: data }, 502);
     }
 
-    // Response: { checkoutUrl, sessionId, expiresAt }
+    // Response envelope: { data: { checkoutUrl, sessionId, expiresAt }, errors: [] }
+    // (the SDK's unwrapAction spreads r.data). Unwrap one level, with fallback.
+    const payload = (data && typeof data === 'object' && data.data) ? data.data : data;
     return json({
-      checkoutUrl: data.checkoutUrl,
-      sessionId: data.sessionId,
+      checkoutUrl: payload.checkoutUrl,
+      sessionId: payload.sessionId,
     });
   } catch (e) {
     console.error('Checkout exception:', e.message);
