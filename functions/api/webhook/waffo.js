@@ -173,7 +173,7 @@ export async function onRequestPost(context) {
           data.orderId || '',
           type,
           credits,
-          data.amount || 0,
+          data.chargedAmount || data.amount || 0,
           data.currency || 'USD',
           Date.now()
         ).run();
@@ -181,7 +181,7 @@ export async function onRequestPost(context) {
         // Notify admin of payment (fire-and-forget)
         notifyPayment(env, {
           type, userId, credits,
-          amount: data.amount || 0,
+          amount: data.chargedAmount || data.amount || 0,
           currency: data.currency || 'USD',
           orderId: data.orderId || '',
           buyerEmail: data.buyerEmail || '',
