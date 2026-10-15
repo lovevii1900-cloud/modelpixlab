@@ -142,7 +142,9 @@ export async function onRequestPost(context) {
     });
 
     const data = await resp.json();
-    if (!resp.ok) {
+    // Waffo may return HTTP 200 with an error envelope { data: null, errors: [...] }
+    // (the SDK's unwrapAction throws on errors[]). Check both.
+    if (!resp.ok || (data && Array.isArray(data.errors) && data.errors.length)) {
       console.error('Waffo checkout error:', resp.status, JSON.stringify(data).slice(0, 500));
       return json({ error: 'checkout_failed', detail: data }, 502);
     }
