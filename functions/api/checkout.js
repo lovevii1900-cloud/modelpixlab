@@ -114,7 +114,9 @@ export async function onRequestPost(context) {
   } catch {}
 
   const path = '/v1/actions/checkout/create-session';
-  const timestamp = new Date().toISOString();
+  // X-Timestamp MUST be unix seconds (official SDK behavior). ISO 8601 gets
+  // rejected by the Waffo gateway as expired -> 401 "Authentication required".
+  const timestamp = Math.floor(Date.now() / 1000).toString();
   const reqBody = JSON.stringify({
     productId: product.waffoId,
     productType: product.type,
