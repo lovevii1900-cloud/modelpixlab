@@ -356,6 +356,22 @@ nav.main{display:none}
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://modelpixlab.com/"},{"@type":"ListItem","position":2,"name":"AI Image Prompt Guide","item":"https://modelpixlab.com/ai-image-prompt-guide/"}]}
 </script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {"@type": "Question", "name": "How long should an AI image prompt be?", "acceptedAnswer": {"@type": "Answer", "text": "One to three sentences is the sweet spot — enough for subject, setting, light and style. Longer prompts dilute; the model weighs the start more than the end."}},
+  {"@type": "Question", "name": "Do I need to write prompts in English?", "acceptedAnswer": {"@type": "Answer", "text": "English gives the most reliable results on current models. Short, concrete English sentences beat long poetic ones in any language."}},
+  {"@type": "Question", "name": "Why do my images look different every time?", "acceptedAnswer": {"@type": "Answer", "text": "Generation is random by design — the same prompt gives variations. When one is close, keep the prompt and regenerate, or change a single detail."}},
+  {"@type": "Question", "name": "Can I copy prompts from other people?", "acceptedAnswer": {"@type": "Answer", "text": "Yes — prompts are ideas, not property. Start from an example on this page, then swap the subject or style to make it yours."}},
+  {"@type": "Question", "name": "Which model is best for text in images?", "acceptedAnswer": {"@type": "Answer", "text": "GPT Image 2.5 handles short text reliably — put the exact words in quotation marks. Try it on the GPT Image 2.5 page."}},
+  {"@type": "Question", "name": "How is prompting GPT Image 2.5 different from other models?", "acceptedAnswer": {"@type": "Answer", "text": "Structure matters more. Organize the prompt into labeled parts — scene, subject, details, constraints — put any in-image text in quotation marks, and for edits state what changes and what stays the same. The GPT Image 2.5 section on this page has copy-paste examples."}},
+  {"@type": "Question", "name": "Should I use Flare or Sunburst for my prompt?", "acceptedAnswer": {"@type": "Answer", "text": "The same prompt works on both. Flare is faster — use it for drafts and variations. Sunburst is more precise — use it when editing a photo or product shot where details must not change."}},
+  {"@type": "Question", "name": "How do I edit a photo with a prompt?", "acceptedAnswer": {"@type": "Answer", "text": "Upload the photo, then describe the change and the locks in one prompt: change the background to a beach at sunset, keep the person, face and clothes exactly the same. One change per round keeps the rest of the image stable."}}
+ ]
+}
+</script>
 </head>
 <body>
 <header class="site"><div class="wrap"><div class="bar">
@@ -429,6 +445,30 @@ nav.main{display:none}
   </div>
 </section>
 
+<section class="block" id="gpt-image-2-5-prompts" style="padding:40px 0 8px">
+  <div class="sec-head"><div><p class="kicker">GPT Image 2.5</p><h2 style="margin:0;font-size:30px;letter-spacing:-.03em">GPT Image 2.5 prompts: what to do differently</h2></div></div>
+  <p class="lead" style="color:var(--muted);max-width:560px;margin:0 0 18px">The formula above works on every model. GPT Image 2.5 rewards one extra habit: structure. OpenAI's own image prompting guide recommends organizing a prompt into labeled parts — scene, subject, details, constraints — instead of one long sentence. Here is how that changes your workflow.</p>
+  <div class="steps">
+    <div class="step"><div class="n">1 · LABEL IT</div><h3>Give each part a job</h3><p>Write the scene first, then the subject, then the details that matter, then your constraints ("no text", "keep the logo unchanged"). Labeled parts beat clever adjectives.</p></div>
+    <div class="step"><div class="n">2 · QUOTE TEXT</div><h3>Exact words in quotes</h3><p>Any words that must appear in the image go in quotation marks, with a position and a lettering style: at the top, bold white sans-serif. Keep it short — a title, a sign, a label.</p></div>
+    <div class="step"><div class="n">3 · SPLIT EDITS</div><h3>Change vs. keep</h3><p>For edits, say what changes and what stays identical in the same prompt: "Replace the background with a beach at sunset. Keep the person, face and clothes exactly the same." One change per round.</p></div>
+  </div>
+  <div class="feats" style="margin-top:16px">
+    <article class="feat"><div class="num">FLARE OR SUNBURST?</div><h3>Same prompt, two engines</h3><p>Your prompt works identically on both. Flare is tuned for speed — use it for drafts and variations. Sunburst is tuned for precision — switch to it when you are editing a real photo or product shot and details must not drift. Pick by task, not by prompt.</p></article>
+    <article class="feat"><div class="num">REFERENCE IMAGES</div><h3>Assign each image a role</h3><p>When you upload more than one image, tell the model what each one is for: "Use the first image for the person's face, the second for the background." Unassigned references get blended in ways you did not ask for.</p></article>
+  </div>
+  <p class="lead" style="color:var(--muted);max-width:520px;margin:22px 0 18px">Six GPT Image 2.5 prompts to copy — each one uses the labeled structure:</p>
+  <div class="faq">
+    <details><summary>Product photo</summary><div class="a">"Studio product photo of a matte black water bottle. Setting: light gray background, soft shadow under the bottle. Light: one soft light from the left. Style: photorealistic. Constraints: no text, no props."</div></details>
+    <details><summary>Poster with a title</summary><div class="a">"Minimalist movie poster. Scene: a lone lighthouse on a rocky coast at dusk, deep blue and orange palette. Text: at the top, in bold white letters, 'THE LAST LIGHT'. Constraints: no other text."</div></details>
+    <details><summary>Portrait retouch (edit)</summary><div class="a">"Edit this photo: remove the people in the background and soften the light on the face. Keep the person, their face, clothes and pose exactly the same."</div></details>
+    <details><summary>Sketch to finished image</summary><div class="a">"Turn this sketch into a finished product photo: a ceramic coffee mug with the same shape and handle position as the drawing, warm beige glaze, on a wooden table, soft window light."</div></details>
+    <details><summary>Social post with headline space</summary><div class="a">"Overhead photo of a brunch table — avocado toast, coffee and orange juice — bright natural light, clean white table. Leave empty space at the top for a headline."</div></details>
+    <details><summary>Logo with text</summary><div class="a">"Clean logo on a white background: a mountain peak drawn with three simple lines. Under it, the text 'SUMMIT COFFEE' in bold sans-serif letters, dark green."</div></details>
+  </div>
+  <p style="margin-top:22px">Try them in the <a href="/gpt-image-2-5-generator/" style="color:var(--ink)">GPT Image 2.5 generator</a> — new accounts get 3 free images.</p>
+</section>
+
 <section class="block" id="faq" style="padding:40px 0 30px">
   <div class="sec-head"><div><p class="kicker">FAQ</p><h2 style="margin:0;font-size:30px;letter-spacing:-.03em">Prompt questions</h2></div></div>
   <div class="faq">
@@ -437,6 +477,9 @@ nav.main{display:none}
     <details><summary>Why do my images look different every time?</summary><div class="a">Generation is random by design — the same prompt gives variations. When one is close, keep the prompt and regenerate, or change a single detail.</div></details>
     <details><summary>Can I copy prompts from other people?</summary><div class="a">Yes — prompts are ideas, not property. Start from an example on this page, then swap the subject or style to make it yours.</div></details>
     <details><summary>Which model is best for text in images?</summary><div class="a">GPT Image 2.5 handles short text reliably — put the exact words in quotation marks. Try it on the <a href="/gpt-image-2-5-generator/" style="color:var(--ink)">GPT Image 2.5 page</a>.</div></details>
+    <details><summary>How is prompting GPT Image 2.5 different from other models?</summary><div class="a">Structure matters more. Organize the prompt into labeled parts — scene, subject, details, constraints — put any in-image text in quotation marks, and for edits state what changes and what stays the same. The <a href="#gpt-image-2-5-prompts" style="color:var(--ink)">GPT Image 2.5 section above</a> has copy-paste examples.</div></details>
+    <details><summary>Should I use Flare or Sunburst for my prompt?</summary><div class="a">The same prompt works on both. Flare is faster — use it for drafts and variations. Sunburst is more precise — use it when editing a photo or product shot where details must not change.</div></details>
+    <details><summary>How do I edit a photo with a prompt?</summary><div class="a">Upload the photo, then describe the change and the locks in one prompt: "Change the background to a beach at sunset. Keep the person, face and clothes exactly the same." One change per round keeps the rest of the image stable.</div></details>
   </div>
   <p style="margin-top:26px"><a class="hcta" href="/gpt-image-2-5-generator/" style="text-decoration:none"><b></b>Try these prompts free</a></p>
 </section>
