@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" type="image/png" href="/mp-icon.png" />
+<title>GPT Image 2.5 Pricing (2026): Cost Per Image Explained | ModelPixLab</title>
+<meta name="description" content="GPT Image 2.5 pricing explained: official API token rates, measured cost per image, Flare vs Sunburst, and the cheapest way to generate in 2026." />
+<link rel="canonical" href="https://modelpixlab.com/gpt-image-2-5-pricing/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="ModelPixLab" />
+<meta property="og:title" content="GPT Image 2.5 Pricing (2026): What Does It Actually Cost Per Image?" />
+<meta property="og:description" content="Official API rates, measured per-image costs, Flare vs Sunburst — and the cheapest way to use GPT Image 2.5 right now." />
+<meta property="og:url" content="https://modelpixlab.com/gpt-image-2-5-pricing/" />
+<meta property="og:image" content="https://modelpixlab.com/assets/gpt25-sample-3.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://modelpixlab.com/assets/gpt25-sample-3.jpg" />
+<style>
+:root{--bg:#f2f3ee;--bg2:#eceee6;--surface:#ffffff;--surface2:#f7f8f3;--line:#dde2d6;--line2:#cbd3c0;--ink:#141714;--muted:#4a5648;--faint:#7a8776;--accent:#65a800;--accent-ink:#ffffff;--accent-dim:rgba(101,168,0,.09);--radius:18px;--font:"Avenir Next","Segoe UI",system-ui,-apple-system,sans-serif;--mono:ui-monospace,"SF Mono",Consolas,monospace}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.6}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.bar{display:flex;align-items:center;gap:16px;height:62px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;text-decoration:none;color:var(--ink);white-space:nowrap}
+.brand-mark{width:34px;height:30px;background:var(--ink);color:var(--bg);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:11px;border-radius:8px}
+.brand-mark i{color:var(--accent);font-style:normal}
+.brand em{color:var(--accent);font-style:normal}
+nav.main{display:flex;gap:6px;margin-left:18px}
+nav.main a{font-size:13.5px;color:var(--muted);text-decoration:none;padding:7px 11px;border-radius:999px}
+nav.main a:hover{background:var(--surface);color:var(--ink)}
+.hcta{margin-left:auto;background:var(--ink);color:var(--bg);text-decoration:none;font-weight:700;font-size:13.5px;padding:9px 16px;border-radius:999px;white-space:nowrap;display:inline-flex;align-items:center;gap:7px}
+.hcta b{width:7px;height:7px;background:var(--accent);border-radius:50%;display:inline-block;box-shadow:0 0 0 3px var(--accent-dim)}
+@media(max-width:720px){nav.main{display:none}}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);background:var(--surface);padding:6px 10px;border-radius:999px}
+.eyebrow i{width:6px;height:6px;background:var(--accent);border-radius:50%;display:block}
+.hero h1{font-size:clamp(34px,5.4vw,56px);line-height:1.02;letter-spacing:-.04em;margin:16px 0 10px;font-weight:900;max-width:780px}
+.hero h1 .hl{color:var(--accent)}
+.lede{color:var(--muted);font-size:16px;max-width:680px}
+.verdict{margin:26px 0;background:var(--ink);color:var(--bg);border-radius:var(--radius);padding:26px 28px}
+.verdict .k{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.verdict p{margin:10px 0 0;font-size:16px;line-height:1.65}
+.verdict strong{color:var(--accent)}
+.block{padding:36px 0 8px}
+.kicker{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 8px;font-weight:700}
+.block h2{margin:0 0 6px;font-size:30px;letter-spacing:-.03em}
+.sub{color:var(--muted);max-width:620px;margin:0 0 20px}
+.cmp{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;font-size:14px}
+.cmp th,.cmp td{padding:13px 16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+.cmp tr:last-child th,.cmp tr:last-child td{border-bottom:0}
+.cmp thead th{background:var(--surface2);font-size:13px}
+.cmp tbody th{font-weight:700;width:30%;color:var(--muted);font-size:13px}
+.cmp .win{color:var(--accent);font-weight:800}
+.tablewrap{overflow-x:auto;border-radius:var(--radius)}
+.feats{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:720px){.feats{grid-template-columns:1fr}}
+.feat{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+.feat .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:var(--accent);color:var(--accent-ink);font-weight:700;display:inline-block;margin-bottom:10px}
+.feat .tag.alt{background:var(--ink);color:var(--bg)}
+.feat h3{margin:0 0 6px;font-size:17px}
+.feat p{margin:0;color:var(--muted);font-size:13.5px}
+.faq{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--surface)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq details:last-child{border-bottom:0}
+.faq summary{cursor:pointer;list-style:none;padding:17px 18px;font-weight:700;font-size:15px;display:flex;justify-content:space-between;gap:12px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";width:28px;height:28px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;color:var(--accent);flex:none;font-weight:800}
+.faq details[open] summary::after{content:"–"}
+.faq .a{padding:0 18px 18px;color:var(--muted);font-size:14px;max-width:780px}
+.faq .a a{color:var(--ink)}
+.cta-band{margin:40px 0;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:30px;text-align:center}
+.cta-band h2{margin:0 0 8px;font-size:24px;letter-spacing:-.02em}
+.cta-band p{color:var(--muted);margin:0 0 18px}
+footer.site{padding:28px 0 42px;color:var(--faint)}
+footer.site .cols{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center;justify-content:center}
+footer.site a{color:var(--muted);text-decoration:none;font-size:13px}
+footer.site a:hover{color:var(--ink)}
+.foot-contact{margin-top:14px;font-size:13px;color:var(--muted);text-align:center}
+.foot-contact a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+.fine{font-size:12px;margin-top:14px;line-height:1.6;text-align:center}
+.note{font-size:12.5px;color:var(--faint);margin-top:14px}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Is GPT Image 2.5 free to use?","acceptedAnswer":{"@type":"Answer","text":"The API is not free — it bills per token and needs a paid OpenAI tier. It is included in ChatGPT subscriptions at no per-image charge, and tools like ModelPixLab give new accounts 3 free images with no credit card."}},
+{"@type":"Question","name":"How much does one GPT Image 2.5 image cost via the API?","acceptedAnswer":{"@type":"Answer","text":"OpenAI charges $30 per million output image tokens. Independent measurements put a 1024x1024 image at roughly $0.013 at medium quality and $0.053 at high quality. Token accounting can change, so treat these as a snapshot."}},
+{"@type":"Question","name":"Is there a price difference between Flare and Sunburst?","acceptedAnswer":{"@type":"Answer","text":"No. OpenAI publishes identical token rates for gpt-image-2.5-flare and gpt-image-2.5-sunburst. Flare is tuned for fast everyday generation; Sunburst for precise editing — pick by task, not by price."}},
+{"@type":"Question","name":"What is the cheapest way to use GPT Image 2.5?","acceptedAnswer":{"@type":"Answer","text":"For a handful of images, a free trial (for example ModelPixLab's 3 free images) costs nothing. For developers, the raw API at medium quality is the cheapest per-image route at roughly $0.013. For regular use without code, a flat tool subscription is usually simpler than managing API billing."}},
+{"@type":"Question","name":"Is GPT Image 2.5 included in ChatGPT?","acceptedAnswer":{"@type":"Answer","text":"Yes. ChatGPT subscribers can generate with it inside ChatGPT with no per-image billing; usage is governed by the subscription's own limits instead."}},
+{"@type":"Question","name":"Can I try GPT Image 2.5 for free on ModelPixLab?","acceptedAnswer":{"@type":"Answer","text":"Yes. New ModelPixLab accounts get 3 free images with no credit card, and GPT Image 2.5 is one of the available models."}}
+]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://modelpixlab.com/"},{"@type":"ListItem","position":2,"name":"GPT Image 2.5 Pricing","item":"https://modelpixlab.com/gpt-image-2-5-pricing/"}]}
+</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><div class="bar">
+<a class="brand" href="/"><span class="brand-mark">M<i>P</i></span><span>Model<em>Pix</em>Lab</span></a>
+<nav class="main"><a href="/gpt-image-2-5-generator/">GPT Image 2.5</a><a href="/nano-banana-2-generator/">Nano Banana 2</a><a href="/pricing/">Pricing</a><a href="/how-to-use/">How to use</a></nav>
+<a class="hcta" href="/gpt-image-2-5-generator/"><b></b>Start free</a>
+</div></div></header>
+<main><div class="wrap">
+
+<section class="hero" style="padding:44px 0 8px">
+<span class="eyebrow"><i></i>Pricing guide</span>
+<h1>GPT Image 2.5 pricing: <span class="hl">what does it actually cost</span> per image?</h1>
+<p class="lede">OpenAI bills GPT Image 2.5 by the token, not by the image — so the real per-image price depends on quality and resolution. Here are the official rates, measured costs, and the cheapest way to use it.</p>
+<div class="verdict">
+<div class="k">TL;DR verdict</div>
+<p>Three honest paths: <strong>developers</strong> pay the raw API — roughly <strong>$0.013–$0.053 per 1K image</strong> depending on quality. <strong>ChatGPT subscribers</strong> already have it with no per-image billing. <strong>Everyone else</strong> is better off with an all-in-one tool: <a href="/pricing/" style="color:var(--accent)">ModelPixLab plans work out to $0.025–$0.049 per image</a>, and new accounts get <strong>3 free images</strong> with no card. The raw API is the cheapest per image — tools charge for not having to manage keys, code, and billing.</p>
+</div>
+</section>
+
+<section class="block">
+<p class="kicker">Official rates</p>
+<h2>How OpenAI prices GPT Image 2.5</h2>
+<p class="sub">There is no flat per-image price. Both <span style="font-family:var(--mono);font-size:13px">gpt-image-2.5-flare</span> and <span style="font-family:var(--mono);font-size:13px">gpt-image-2.5-sunburst</span> bill per million tokens at identical rates:</p>
+<div class="tablewrap"><table class="cmp">
+<thead><tr><th></th><th>Rate (per 1M tokens)</th><th>What counts</th></tr></thead>
+<tbody>
+<tr><th>Text input</th><td>$5.00</td><td>Your prompt words</td></tr>
+<tr><th>Image input</th><td>$8.00</td><td>Reference/edit images you attach</td></tr>
+<tr><th>Image output</th><td><span class="win">$30.00</span></td><td>The generated image — this dominates the bill</td></tr>
+</tbody></table></div>
+<p class="note">Published OpenAI API rates as documented across pricing references in 2026. OpenAI can change rates or token accounting at any time — check their pricing page before budgeting a project.</p>
+</section>
+
+<section class="block">
+<p class="kicker">Per-image math</p>
+<h2>What that means per image</h2>
+<p class="sub">Token counts below come from an independent measurement (own API key, September 2026) at 1024&times;1024. Your prompt length and reference images move the number.</p>
+<div class="tablewrap"><table class="cmp">
+<thead><tr><th></th><th>Output tokens</th><th>Approx. cost</th></tr></thead>
+<tbody>
+<tr><th>Medium quality, 1K</th><td>~439</td><td><span class="win">~$0.013</span></td></tr>
+<tr><th>High quality, 1K</th><td>~1,756</td><td>~$0.053</td></tr>
+<tr><th>2K / 4K, high quality</th><td>Higher token counts</td><td>$0.10+ (gateway list prices: ~$0.10 at 2K, ~$0.16 at 4K)</td></tr>
+</tbody></table></div>
+<p class="note">Measured values are a snapshot, not a guarantee. Editing with reference images adds input-image tokens on top.</p>
+</section>
+
+<section class="block">
+<p class="kicker">Flare vs Sunburst</p>
+<h2>Same price, different job</h2>
+<p class="sub">A common question — the answer is simple:</p>
+<div class="feats">
+<article class="feat"><span class="tag">Flare</span><h3>Fast everyday generation</h3><p>Same token rates as Sunburst. Tuned for speed: lower latency on standard text-to-image work. Pick it when you want the image quickly.</p></article>
+<article class="feat"><span class="tag alt">Sunburst</span><h3>Precise editing</h3><p>Same token rates as Flare. Tuned for tighter control on edits and intricate detail. Pick it when you are iterating on an existing image.</p></article>
+</div>
+<p class="note">Price is not a reason to choose between them — task fit is.</p>
+</section>
+
+<section class="block">
+<p class="kicker">Cheapest route</p>
+<h2>The cheapest way, by use case</h2>
+<p class="sub">Honest answer: the raw API wins on per-image price, but price isn't the whole cost.</p>
+<div class="feats">
+<article class="feat"><span class="tag">Just trying it</span><h3>Use a free trial</h3><p>New <a href="/" style="color:var(--ink)">ModelPixLab</a> accounts get 3 free images, no credit card. Enough to judge the model before spending anything.</p></article>
+<article class="feat"><span class="tag alt">Developer</span><h3>Raw API, medium quality</h3><p>~$0.013 per 1K image is the cheapest measured route. You manage the key, the code, retries, and billing — fine if that's already your stack.</p></article>
+<article class="feat"><span class="tag">ChatGPT subscriber</span><h3>Already included</h3><p>If you pay for ChatGPT, generation inside ChatGPT has no per-image charge — it falls under your subscription's usage limits instead.</p></article>
+<article class="feat"><span class="tag alt">Regular creator</span><h3>Flat tool pricing</h3><p>No keys, no token math, editing UI included. Compare per-image equivalents below — pick the tier that matches your volume.</p></article>
+</div>
+</section>
+
+<section class="block">
+<p class="kicker">On ModelPixLab</p>
+<h2>What it costs here, per image</h2>
+<p class="sub">Our plans converted to a per-image equivalent (1 credit = 1 generation), straight from the <a href="/pricing/" style="color:var(--ink)">pricing page</a>:</p>
+<div class="tablewrap"><table class="cmp">
+<thead><tr><th></th><th>Price</th><th>Images</th><th>Per image</th></tr></thead>
+<tbody>
+<tr><th>Free trial</th><td>$0</td><td>3 (one-time)</td><td><span class="win">$0</span></td></tr>
+<tr><th>Starter pack</th><td>$4.9 one-time</td><td>100</td><td>$0.049</td></tr>
+<tr><th>Creator pack</th><td>$12.9 one-time</td><td>300</td><td>$0.043</td></tr>
+<tr><th>Studio pack</th><td>$29.9 one-time</td><td>800</td><td>$0.037</td></tr>
+<tr><th>Basic</th><td>$9.9/mo</td><td>250/mo</td><td>$0.040</td></tr>
+<tr><th>Pro</th><td>$19.9/mo</td><td>700/mo</td><td><span class="win">$0.028</span></td></tr>
+<tr><th>Studio</th><td>$39.9/mo</td><td>1,600/mo</td><td><span class="win">$0.025</span></td></tr>
+</tbody></table></div>
+<p class="note">Credit packs never expire; subscriptions renew monthly and cancel anytime. Heavy users land near $0.025/image with zero API setup.</p>
+</section>
+
+<section class="block" id="faq">
+<p class="kicker">FAQ</p>
+<h2>Common questions</h2>
+<div class="faq" style="margin-top:16px">
+<details><summary>Is GPT Image 2.5 free to use?</summary><div class="a">The API is not free — it bills per token and needs a paid OpenAI tier. It is included in ChatGPT subscriptions at no per-image charge, and tools like <a href="/">ModelPixLab</a> give new accounts 3 free images with no credit card.</div></details>
+<details><summary>How much does one GPT Image 2.5 image cost via the API?</summary><div class="a">OpenAI charges $30 per million output image tokens. Independent measurements put a 1024&times;1024 image at roughly $0.013 at medium quality and $0.053 at high quality. Token accounting can change, so treat these as a snapshot.</div></details>
+<details><summary>Is there a price difference between Flare and Sunburst?</summary><div class="a">No. OpenAI publishes identical token rates for both. Flare is tuned for fast everyday generation; Sunburst for precise editing — pick by task, not by price.</div></details>
+<details><summary>What is the cheapest way to use GPT Image 2.5?</summary><div class="a">For a handful of images, a free trial costs nothing. For developers, the raw API at medium quality is the cheapest per-image route at roughly $0.013. For regular use without code, a flat tool subscription is usually simpler than managing API billing.</div></details>
+<details><summary>Is GPT Image 2.5 included in ChatGPT?</summary><div class="a">Yes. ChatGPT subscribers can generate with it inside ChatGPT with no per-image billing; usage is governed by the subscription's own limits instead.</div></details>
+<details><summary>Can I try GPT Image 2.5 for free on ModelPixLab?</summary><div class="a">Yes. New <a href="/">ModelPixLab</a> accounts get 3 free images with no credit card — <a href="/gpt-image-2-5-generator/">try the GPT Image 2.5 generator</a> directly.</div></details>
+</div>
+</section>
+
+<div class="cta-band">
+<h2>Try GPT Image 2.5 free</h2>
+<p>3 free images, no credit card. See what the model does before you think about pricing at all.</p>
+<p><a class="hcta" href="/gpt-image-2-5-generator/" style="text-decoration:none;margin:0"><b></b>Start generating free</a></p>
+<p class="note" style="margin-top:16px">Also see: <a href="/gpt-image-2-5-vs-midjourney/" style="color:var(--ink)">GPT Image 2.5 vs Midjourney</a> · <a href="/nano-banana-2-vs-gpt-image-2-5/" style="color:var(--ink)">GPT Image 2.5 vs Nano Banana 2</a> · <a href="/ai-image-prompt-guide/" style="color:var(--ink)">prompt guide</a></p>
+</div>
+
+</div></main>
+<footer class="site"><div class="wrap">
+<div class="cols">
+<a class="brand" href="/" style="font-size:15px"><span class="brand-mark" style="width:30px;height:26px;font-size:10px">M<i>P</i></span><span>Model<em>Pix</em>Lab</span></a>
+<a href="/gpt-image-2-5-generator/">GPT Image 2.5 Generator</a>
+<a href="/nano-banana-2-generator/">Nano Banana 2 Generator</a>
+<a href="/pricing/">Pricing</a>
+<a href="/how-to-use/">How to use</a>
+</div>
+<div class="foot-contact"><a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a> · <a href="/about/">About</a><br />Contact: <a href="mailto:support@modelpixlab.com">support@modelpixlab.com</a></div>
+<p class="fine">ModelPixLab is an independent tool interface. Model names belong to their respective owners.</p>
+</div></footer>
+</body>
+</html>
