@@ -1,0 +1,26 @@
+# ModelPixLab
+
+> Free AI image generator online. Generate images with GPT Image 2.5 and Nano Banana 2 — no subscription required, start free and pay per use.
+
+## Pages
+
+- [Free AI Image Generator Online | ModelPixLab](https://modelpixlab.com/): Free AI image generator with GPT Image 2.5, Nano Banana 2 and more. Create and edit images in your browser — new accounts get 3 free images, no card required.
+- [GPT Image 2.5 Generator — Free AI Image Creator Online](https://modelpixlab.com/gpt-image-2-5-generator/): Free GPT Image 2.5 generator: create and edit AI images in browser. Text-to-image, sketch-to-image, multi-round 4K editing. 3 free images, no card needed.
+- [Nano Banana 2: Free AI Photo Editor | ModelPixLab](https://modelpixlab.com/nano-banana-2-generator/): Free Nano Banana 2 generator and AI photo editor in your browser. Swap backgrounds, restyle photos, keep faces consistent — no Photoshop. 3 free images.
+- [Pricing — ModelPixLab](https://modelpixlab.com/pricing/): New accounts get 3 free images. Upgrade for HD output, no watermark and commercial use.
+- [How to Use ModelPixLab — AI Image Generator Guide](https://modelpixlab.com/how-to-use/): Step-by-step guide to generating and editing images on ModelPixLab: prompts, models, sizes, free credits and downloads.
+- [AI Image Prompt Guide: Prompts That Work | ModelPixLab](https://modelpixlab.com/ai-image-prompt-guide/): Learn how to write AI image prompts that work: the subject+setting+light+style formula, style words, 10 copy-paste prompt examples and common mistakes.
+- [How to Edit Photos with AI — Guide | ModelPixLab](https://modelpixlab.com/ai-photo-editing-guide/): Learn how to edit photos with AI: swap backgrounds, remove objects, relight scenes and restyle images with one-sentence prompts. Step-by-step tutorial.
+- [GPT Image 2.5 vs Midjourney (2026) | ModelPixLab](https://modelpixlab.com/gpt-image-2-5-vs-midjourney/): GPT Image 2.5 vs Midjourney compared: text rendering, art style, photo editing, pricing and commercial use. TL;DR verdict plus a pick-by-task guide for 2026.
+- [Nano Banana 2 vs GPT Image 2.5 (2026) | ModelPixLab](https://modelpixlab.com/nano-banana-2-vs-gpt-image-2-5/): Nano Banana 2 vs GPT Image 2.5: speed, text rendering, editing and pricing compared. TL;DR verdict + pick-by-task guide — both models on ModelPixLab.
+- [7 Best Free AI Image Generators (2026) | ModelPixLab](https://modelpixlab.com/best-free-ai-image-generator/): The 7 best free AI image generators in 2026, compared by free plan, sign-up requirements and watermarks. Start free with no credit card.
+- [GPT Image 2.5 Pricing 2026: Cost Per Image | ModelPixLab](https://modelpixlab.com/gpt-image-2-5-pricing/): GPT Image 2.5 pricing explained: official API token rates, measured cost per image, Flare vs Sunburst, and the cheapest way to generate in 2026.
+- [Midjourney Alternative: Start Free, Pay Per Use — No Subscription Needed | ModelPixLab](https://modelpixlab.com/midjourney-alternative/): Looking for a Midjourney alternative? Midjourney starts at $10/mo with no free trial. ModelPixLab gives you 3 free images, no card, pay-per-use packs from $4.9 that never expire, and GPT Image 2.5 in your browser — no Discord needed.
+- [What Is Canva Craft? Pricing & How to Use | ModelPixLab](https://modelpixlab.com/canva-craft/): Canva Craft explained: what it is, key features, pricing and how to use it. Plus how to generate images free on ModelPixLab right now.
+- [About — ModelPixLab](https://modelpixlab.com/about/): ModelPixLab is one lab for every new AI image model: GPT Image 2.5 and Nano Banana 2 in a single browser workspace.
+- [Privacy — ModelPixLab](https://modelpixlab.com/privacy/): How ModelPixLab handles prompts, images, cookies and account data.
+- [Terms — ModelPixLab](https://modelpixlab.com/terms/): Terms of use for the ModelPixLab AI image generator: free quota, credits, acceptable use and your outputs.
+
+## Optional
+
+- [Sitemap](https://modelpixlab.com/sitemap.xml)
