@@ -21,6 +21,9 @@
 - [Privacy — ModelPixLab](https://modelpixlab.com/privacy/): How ModelPixLab handles prompts, images, cookies and account data.
 - [Terms — ModelPixLab](https://modelpixlab.com/terms/): Terms of use for the ModelPixLab AI image generator: free quota, credits, acceptable use and your outputs.
 
+- [Nano Banana 2 vs Midjourney (2026) | ModelPixLab](https://modelpixlab.com/nano-banana-2-vs-midjourney/): Nano Banana 2 vs Midjourney compared: speed, photorealism, multi-image references, pricing and free options. TL;DR verdict plus a pick-by-task guide.
+- [Free vs Paid AI Image Generators (2026) | ModelPixLab](https://modelpixlab.com/free-ai-image-generator-vs-paid/): When is a free AI image generator enough? Free tiers vs paid plans, with the decision rule and ModelPixLab's 3 free images and $4.9 packs that never expire.
+
 ## Optional
 
 - [Sitemap](https://modelpixlab.com/sitemap.xml)
