@@ -6,6 +6,12 @@
 /*.html
   Cache-Control: public, max-age=300
 
+# Prevent thin legal pages from diluting search index
+/privacy/*
+  X-Robots-Tag: noindex, follow
+/terms/*
+  X-Robots-Tag: noindex, follow
+
 # Baseline security headers
 /*
   X-Content-Type-Options: nosniff
