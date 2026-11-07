@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Text Cleaner &amp; Invisible Watermark Remover Online | ModelPixLab</title>
+  <link rel="canonical" href="https://modelpixlab.com/ai-text-cleaner/" />
+  <meta name="description" content="Precision client-side AI text cleaner and Unicode forensics utility. Strip invisible zero-width watermarks (U+200B, U+FEFF), normalize non-breaking spaces (U+00A0), and remove synthetic punctuation footprints." />
+  <meta name="keywords" content="ai text cleaner, remove zero width characters, unicode watermark remover, strip chatgpt watermark, normalize non breaking space, clean ai text" />
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Verbatim — AI Text Hygiene & Unicode Forensics",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": "Client-side text sanitization and Unicode watermark inspection studio for writers, editors, and software engineers."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does invisible Unicode watermarking work in AI text?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Language model interfaces and rich-text clipboards frequently embed non-printing format characters such as U+200B (Zero-Width Space), U+200C (Zero-Width Non-Joiner), U+FEFF (Byte Order Mark), and U+00A0 (Non-Breaking Space). Verbatim scans the raw UTF-16 code units in browser memory and strips these non-standard codepoints."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Verbatim transmit text to an external server?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Never. Every inspection and normalization pass executes locally inside your browser's JavaScript runtime with zero network requests."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg-canvas: #F6F5F0;
+      --bg-surface: #FFFFFF;
+      --bg-subtle: #EFECE6;
+      --text-primary: #141413;
+      --text-secondary: #575653;
+      --text-muted: #87857E;
+      --border-hairline: #DFDDD4;
+      --border-strong: #141413;
+      --accent-signal: #D9381E;
+      --accent-signal-bg: rgba(217, 56, 30, 0.08);
+      --accent-amber: #B45309;
+      --accent-amber-bg: rgba(180, 83, 9, 0.09);
+      --accent-blue: #1D4ED8;
+      --accent-blue-bg: rgba(29, 78, 216, 0.08);
+      --accent-ok: #15803D;
+      --accent-ok-bg: rgba(21, 128, 61, 0.08);
+    }
+
+    html.dark-theme {
+      --bg-canvas: #0C0C0B;
+      --bg-surface: #141413;
+      --bg-subtle: #1C1C1A;
+      --text-primary: #F2F0E8;
+      --text-secondary: #A3A19A;
+      --text-muted: #6E6C66;
+      --border-hairline: #262624;
+      --border-strong: #F2F0E8;
+      --accent-signal: #F95738;
+      --accent-signal-bg: rgba(249, 87, 56, 0.14);
+      --accent-amber: #F59E0B;
+      --accent-amber-bg: rgba(245, 158, 11, 0.14);
+      --accent-blue: #60A5FA;
+      --accent-blue-bg: rgba(96, 165, 250, 0.14);
+      --accent-ok: #22C55E;
+      --accent-ok-bg: rgba(34, 197, 94, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-canvas);
+      color: var(--text-primary);
+      margin: 0;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.18s ease, color 0.18s ease;
+    }
+
+    .serif-display {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-weight: 400;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .hairline-border {
+      border-color: var(--border-hairline);
+    }
+
+    .surface-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+    }
+
+    .subtle-bar {
+      background-color: var(--bg-subtle);
+    }
+
+    /* Custom tactile switch */
+    .rule-pill {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 9px 12px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      border-radius: 6px;
+      cursor: pointer;
+      user-select: none;
+      transition: border-color 0.15s ease, background-color 0.15s ease;
+    }
+    .rule-pill:hover {
+      border-color: var(--text-muted);
+    }
+    .rule-pill input {
+      display: none;
+    }
+    .switch-track {
+      width: 28px;
+      height: 16px;
+      border-radius: 999px;
+      background: var(--border-hairline);
+      position: relative;
+      flex-shrink: 0;
+      transition: background-color 0.15s ease;
+    }
+    .switch-thumb {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: transform 0.15s ease;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    }
+    .rule-pill input:checked + .switch-track {
+      background: var(--text-primary);
+    }
+    html.dark-theme .rule-pill input:checked + .switch-track {
+      background: #F2F0E8;
+    }
+    html.dark-theme .rule-pill input:checked + .switch-track .switch-thumb {
+      background: #0C0C0B;
+    }
+    .rule-pill input:checked + .switch-track .switch-thumb {
+      transform: translateX(12px);
+    }
+
+    /* Forensic token tags inside X-Ray view */
+    .token-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 0 5px;
+      margin: 0 2px;
+      border-radius: 3px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      line-height: 1.5;
+      vertical-align: baseline;
+      letter-spacing: -0.02em;
+    }
+    .token-zw {
+      background: var(--accent-signal-bg);
+      color: var(--accent-signal);
+      border: 1px solid var(--accent-signal);
+    }
+    .token-nbsp {
+      background: var(--accent-amber-bg);
+      color: var(--accent-amber);
+      border: 1px solid var(--accent-amber);
+    }
+    .token-punct {
+      background: var(--accent-blue-bg);
+      color: var(--accent-blue);
+      border: 1px solid var(--accent-blue);
+    }
+
+    textarea {
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      color: var(--text-primary);
+    }
+    textarea::placeholder {
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Minimalist Status Toast -->
+  <div id="toastBox" class="fixed bottom-6 right-6 z-50 hidden px-4 py-2.5 rounded-md shadow-lg text-xs mono font-medium tracking-wide flex items-center gap-2.5" style="background: var(--text-primary); color: var(--bg-surface);">
+    <span class="w-1.5 h-1.5 rounded-full" style="background: var(--accent-ok);"></span>
+    <span id="toastText">COPIED TO CLIPBOARD</span>
+  </div>
+
+  <!-- Top Technical Specification Header -->
+  <header class="border-b hairline-border sticky top-0 z-40 backdrop-blur-md" style="background-color: color-mix(in srgb, var(--bg-canvas) 88%, transparent);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 h-14 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-6">
+        <a href="#top" class="flex items-center gap-2.5 group">
+          <span class="w-3 h-3 inline-block rounded-xs" style="background-color: var(--accent-signal);"></span>
+          <span class="font-bold tracking-tight text-base">VERBATIM</span>
+          <span class="mono text-[11px] px-1.5 py-0.5 rounded border hairline-border" style="color: var(--text-secondary);">v2.4</span>
+        </a>
+        <div class="hidden md:flex items-center gap-5 text-xs font-medium" style="color: var(--text-secondary);">
+          <a href="#workbench" class="hover:opacity-75 transition" data-i18n="nav_workbench">Workbench</a>
+          <a href="#forensics" class="hover:opacity-75 transition" data-i18n="nav_forensics">Hex Forensics</a>
+          <a href="#specification" class="hover:opacity-75 transition" data-i18n="nav_spec">Specification</a>
+          <a href="#faq" class="hover:opacity-75 transition" data-i18n="nav_faq">FAQ</a>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:flex items-center gap-2 mono text-[11px] px-2.5 py-1 rounded border hairline-border" style="color: var(--text-secondary);">
+          <span class="w-1.5 h-1.5 rounded-full" style="background-color: var(--accent-ok);"></span>
+          <span data-i18n="local_runtime">LOCAL RUNTIME · 0 KB UPLOADED</span>
+        </div>
+
+        <button type="button" id="themeToggleBtn" class="mono text-xs px-2.5 py-1.5 rounded border hairline-border hover:opacity-80 transition flex items-center gap-1.5" style="background: var(--bg-surface); color: var(--text-primary);">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          <span id="themeLabel">CARBON</span>
+        </button>
+
+        <select id="langSwitch" aria-label="Language" class="mono text-xs px-2.5 py-1.5 rounded border hairline-border focus:outline-none cursor-pointer" style="background: var(--bg-surface); color: var(--text-primary);">
+          <option value="en">EN</option>
+          <option value="zh">中文</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <main id="top" class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-8 pt-10 pb-20">
+
+    <!-- Editorial Header Section (Swiss Asymmetric Layout) -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-6 pb-8 mb-8 border-b hairline-border items-end">
+      <div class="lg:col-span-8">
+        <div class="mono text-[11px] uppercase tracking-widest mb-2.5 flex items-center gap-2" style="color: var(--text-secondary);">
+          <span>UNICODE HYGIENE &amp; WATERMARK SANITIZER</span>
+          <span>/</span>
+          <span>ISO-10646 STREAM INSPECTOR</span>
+        </div>
+        <h1 class="serif-display text-4xl sm:text-6xl leading-[1.06] tracking-tight" data-i18n="hero_h1">
+          Strip invisible watermarks and synthetic typography.
+        </h1>
+      </div>
+      <div class="lg:col-span-4 flex flex-col justify-end">
+        <p class="text-sm leading-relaxed mb-4" style="color: var(--text-secondary);" data-i18n="hero_sub">
+          Inspect raw text streams for non-printing zero-width characters (<code class="mono text-xs">U+200B</code>, <code class="mono text-xs">U+FEFF</code>), DOM non-breaking spaces (<code class="mono text-xs">U+00A0</code>), and high-frequency LLM punctuation signatures.
+        </p>
+        <div class="flex flex-wrap items-center gap-2">
+          <button type="button" id="btnSampleEssay" class="mono text-xs font-medium px-3 py-1.5 rounded border hairline-border hover:opacity-80 transition" style="background: var(--bg-surface);">
+            <span data-i18n="sample_1">Load Editorial Sample</span>
+          </button>
+          <button type="button" id="btnSampleCode" class="mono text-xs font-medium px-3 py-1.5 rounded border hairline-border hover:opacity-80 transition" style="background: var(--bg-surface);">
+            <span data-i18n="sample_2">Load Corrupted Code</span>
+          </button>
+          <button type="button" id="btnClearInput" class="mono text-xs px-3 py-1.5 rounded border hairline-border hover:opacity-80 transition" style="color: var(--text-muted);">
+            <span data-i18n="btn_clear">Clear</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Telemetry Strip + Normalization Matrix -->
+    <section id="workbench" class="mb-10">
+      <!-- Architectural Telemetry Strip -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 border hairline-border rounded-t-lg overflow-hidden" style="background: var(--bg-surface);">
+        <div class="p-4 border-b sm:border-b-0 border-r hairline-border">
+          <div class="mono text-[11px] uppercase tracking-wider mb-1" style="color: var(--text-muted);" data-i18n="stat_hidden">ZERO-WIDTH ANOMALIES</div>
+          <div class="flex items-baseline gap-2">
+            <span id="countHidden" class="mono text-2xl font-semibold" style="color: var(--accent-signal);">0</span>
+            <span class="mono text-xs" style="color: var(--text-muted);">codepoints</span>
+          </div>
+        </div>
+        <div class="p-4 border-b sm:border-b-0 sm:border-r hairline-border">
+          <div class="mono text-[11px] uppercase tracking-wider mb-1" style="color: var(--text-muted);" data-i18n="stat_nbsp">NON-BREAKING SPACES</div>
+          <div class="flex items-baseline gap-2">
+            <span id="countNbsp" class="mono text-2xl font-semibold" style="color: var(--accent-amber);">0</span>
+            <span class="mono text-xs" style="color: var(--text-muted);">U+00A0 / U+202F</span>
+          </div>
+        </div>
+        <div class="p-4 border-r hairline-border">
+          <div class="mono text-[11px] uppercase tracking-wider mb-1" style="color: var(--text-muted);" data-i18n="stat_fp">PUNCTUATION SIGNATURES</div>
+          <div class="flex items-baseline gap-2">
+            <span id="countFootprints" class="mono text-2xl font-semibold" style="color: var(--accent-blue);">0</span>
+            <span class="mono text-xs" style="color: var(--text-muted);">em-dash / quotes</span>
+          </div>
+        </div>
+        <div class="p-4">
+          <div class="mono text-[11px] uppercase tracking-wider mb-1" style="color: var(--text-muted);" data-i18n="stat_delta">STREAM SANITIZATION</div>
+          <div class="flex items-baseline gap-2">
+            <span id="removedBadge" class="mono text-2xl font-semibold" style="color: var(--accent-ok);">0</span>
+            <span id="byteDelta" class="mono text-xs" style="color: var(--text-muted);">0 B delta</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rule Toggle Bar -->
+      <div class="p-4 border-x border-b hairline-border subtle-bar">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+          <span class="mono text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-secondary);" data-i18n="rules_title">ACTIVE NORMALIZATION PIPELINE</span>
+          <div class="flex items-center gap-2 mono text-xs">
+            <span style="color: var(--text-secondary);" data-i18n="emdash_mode_label">EM-DASH (U+2014) POLICY:</span>
+            <select id="emDashMode" aria-label="Em-dash replacement policy" class="mono text-xs px-2.5 py-1 rounded border hairline-border focus:outline-none" style="background: var(--bg-surface); color: var(--text-primary);">
+              <option value=" - ">spaced hyphen ( - )</option>
+              <option value=", ">clause comma (, )</option>
+              <option value="--">double hyphen (--)</option>
+              <option value="keep">preserve (—)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 text-xs">
+          <label class="rule-pill">
+            <div>
+              <div class="font-semibold" data-i18n="rule_zw">Zero-Width Formatters</div>
+              <div class="mono text-[10px]" style="color: var(--text-muted);">U+200B · U+200C · U+FEFF</div>
+            </div>
+            <input type="checkbox" id="ruleZeroWidth" checked />
+            <span class="switch-track"><span class="switch-thumb"></span></span>
+          </label>
+
+          <label class="rule-pill">
+            <div>
+              <div class="font-semibold" data-i18n="rule_nbsp">Non-Breaking Spaces</div>
+              <div class="mono text-[10px]" style="color: var(--text-muted);">U+00A0 · U+202F → U+0020</div>
+            </div>
+            <input type="checkbox" id="ruleNbsp" checked />
+            <span class="switch-track"><span class="switch-thumb"></span></span>
+          </label>
+
+          <label class="rule-pill">
+            <div>
+              <div class="font-semibold" data-i18n="rule_quotes">Typographic Quotes</div>
+              <div class="mono text-[10px]" style="color: var(--text-muted);">U+201C–U+2019 → ASCII</div>
+            </div>
+            <input type="checkbox" id="ruleSmartQuotes" checked />
+            <span class="switch-track"><span class="switch-thumb"></span></span>
+          </label>
+
+          <label class="rule-pill">
+            <div>
+              <div class="font-semibold" data-i18n="rule_md">Markdown Syntax</div>
+              <div class="mono text-[10px]" style="color: var(--text-muted);">**bold** · ### headers</div>
+            </div>
+            <input type="checkbox" id="ruleMarkdown" checked />
+            <span class="switch-track"><span class="switch-thumb"></span></span>
+          </label>
+
+          <label class="rule-pill">
+            <div>
+              <div class="font-semibold" data-i18n="rule_cite">Citation Footnotes</div>
+              <div class="mono text-[10px]" style="color: var(--text-muted);">[1] · 【2】 · [oai_cite]</div>
+            </div>
+            <input type="checkbox" id="ruleCitations" checked />
+            <span class="switch-track"><span class="switch-thumb"></span></span>
+          </label>
+
+          <label class="rule-pill">
+            <div>
+              <div class="font-semibold" data-i18n="rule_bidi">BiDi &amp; Control Codes</div>
+              <div class="mono text-[10px]" style="color: var(--text-muted);">U+200E–U+202E</div>
+            </div>
+            <input type="checkbox" id="ruleBidi" checked />
+            <span class="switch-track"><span class="switch-thumb"></span></span>
+          </label>
+
+          <label class="rule-pill">
+            <div>
+              <div class="font-semibold" data-i18n="rule_ws">Trailing Whitespace</div>
+              <div class="mono text-[10px]" style="color: var(--text-muted);"> Collapse 3+ newlines</div>
+            </div>
+            <input type="checkbox" id="ruleWhitespace" checked />
+            <span class="switch-track"><span class="switch-thumb"></span></span>
+          </label>
+
+          <label class="rule-pill">
+            <div>
+              <div class="font-semibold" data-i18n="rule_dots">Horizontal Ellipsis</div>
+              <div class="mono text-[10px]" style="color: var(--text-muted);">U+2026 (…) → ...</div>
+            </div>
+            <input type="checkbox" id="ruleEllipsis" checked />
+            <span class="switch-track"><span class="switch-thumb"></span></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Split-Pane Workbench -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 border-x border-b hairline-border rounded-b-lg overflow-hidden" style="background: var(--bg-surface);">
+        <!-- Left Pane: Source Buffer -->
+        <div class="flex flex-col border-b lg:border-b-0 lg:border-r hairline-border">
+          <div class="px-4 py-2.5 border-b hairline-border flex items-center justify-between subtle-bar">
+            <div class="flex items-center gap-2">
+              <span class="mono text-[11px] font-semibold uppercase tracking-wider" data-i18n="pane_in_title">01 / RAW INPUT BUFFER</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span id="inputStats" class="mono text-[11px]" style="color: var(--text-muted);">0 W · 0 C</span>
+              <button type="button" id="btnPasteClipboard" class="mono text-[11px] font-semibold px-2 py-0.5 rounded border hairline-border hover:opacity-75 transition" style="background: var(--bg-surface);">
+                PASTE
+              </button>
+            </div>
+          </div>
+
+          <textarea
+            id="rawInput"
+            rows="13"
+            placeholder="Paste raw text or source code here to inspect Unicode codepoints..."
+            class="w-full flex-1 bg-transparent p-5 text-[14px] leading-[1.75] focus:outline-none resize-y"
+          ></textarea>
+        </div>
+
+        <!-- Right Pane: Sanitized Buffer -->
+        <div class="flex flex-col">
+          <div class="px-4 py-2.5 border-b hairline-border flex items-center justify-between subtle-bar">
+            <div class="flex items-center gap-2">
+              <span class="mono text-[11px] font-semibold uppercase tracking-wider" data-i18n="pane_out_title">02 / SANITIZED UTF-8 OUTPUT</span>
+            </div>
+            <span id="outputStats" class="mono text-[11px]" style="color: var(--text-muted);">0 W · 0 C</span>
+          </div>
+
+          <textarea
+            id="cleanOutput"
+            rows="13"
+            readonly
+            placeholder="Sanitized output stream..."
+            class="w-full flex-1 bg-transparent p-5 text-[14px] leading-[1.75] focus:outline-none resize-y"
+          ></textarea>
+
+          <div class="px-4 py-3 border-t hairline-border flex flex-wrap items-center justify-between gap-2 subtle-bar">
+            <span class="mono text-[11px]" style="color: var(--text-secondary);">ENCODING: UTF-8 NORMALIZED</span>
+            <div class="flex items-center gap-2">
+              <button type="button" id="btnDownloadTxt" class="mono text-xs font-medium px-3 py-1.5 rounded border hairline-border hover:opacity-80 transition" style="background: var(--bg-surface);">
+                EXPORT .TXT
+              </button>
+              <button type="button" id="btnCopyClean" class="mono text-xs font-semibold px-4 py-1.5 rounded transition hover:opacity-90" style="background: var(--text-primary); color: var(--bg-surface);">
+                <span data-i18n="btn_copy">COPY CLEAN STREAM</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Unicode Forensics & X-Ray Stream -->
+    <section id="forensics" class="mb-16">
+      <div class="surface-card rounded-lg overflow-hidden">
+        <div class="px-5 py-3.5 border-b hairline-border flex flex-wrap items-center justify-between gap-3 subtle-bar">
+          <div class="flex items-center gap-3">
+            <span class="mono text-xs font-semibold uppercase tracking-wider" data-i18n="xray_title">03 / UNICODE FORENSICS &amp; X-RAY STREAM</span>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="token-tag token-zw">U+200B..FEFF ZERO-WIDTH</span>
+            <span class="token-tag token-nbsp">U+00A0 NBSP</span>
+            <span class="token-tag token-punct">U+2014..201D PUNCTUATION</span>
+          </div>
+        </div>
+
+        <div class="p-5">
+          <div id="xrayView" class="p-4 rounded border hairline-border text-sm leading-[1.85] max-h-64 overflow-y-auto whitespace-pre-wrap break-words" style="background: var(--bg-canvas);"></div>
+
+          <div id="breakdownWrap" class="mt-5 hidden">
+            <div class="mono text-[11px] uppercase tracking-wider mb-2" style="color: var(--text-muted);">DETECTED CODEPOINT INVENTORY</div>
+            <div class="overflow-x-auto border hairline-border rounded">
+              <table class="w-full text-left text-xs border-collapse">
+                <thead>
+                  <tr class="border-b hairline-border subtle-bar mono text-[11px]" style="color: var(--text-secondary);">
+                    <th class="py-2 px-3">TOKEN</th>
+                    <th class="py-2 px-3">UNICODE NAME</th>
+                    <th class="py-2 px-3">UTF-8 HEX BYTES</th>
+                    <th class="py-2 px-3">BEHAVIORAL IMPACT</th>
+                    <th class="py-2 px-3 text-right">OCCURRENCES</th>
+                  </tr>
+                </thead>
+                <tbody id="breakdownBody" class="divide-y hairline-border"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Architectural Technical Specification Section -->
+    <section id="specification" class="mb-16 pt-8 border-t hairline-border">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div class="lg:col-span-4">
+          <div class="mono text-[11px] uppercase tracking-widest mb-2" style="color: var(--text-muted);">TECHNICAL REFERENCE</div>
+          <h2 class="serif-display text-3xl sm:text-4xl leading-tight mb-3" data-i18n="feat_h2">
+            Why raw LLM output fails strict parsers and editorial review.
+          </h2>
+          <p class="text-sm leading-relaxed" style="color: var(--text-secondary);">
+            Rich-text clipboards and language model tokenizers routinely leave non-printing formatters and typographic substitutions inside copied text.
+          </p>
+        </div>
+
+        <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="surface-card rounded-lg p-5 flex flex-col justify-between">
+            <div>
+              <div class="mono text-xs font-semibold mb-3" style="color: var(--accent-signal);">01 / FORMATTER WATERMARKS</div>
+              <h3 class="font-bold text-base mb-2">Zero-Width Codepoints</h3>
+              <p class="text-xs leading-relaxed" style="color: var(--text-secondary);">
+                Codepoints in the <code class="mono">U+200B–U+200F</code> and <code class="mono">U+FEFF</code> ranges occupy zero horizontal pixels in web browsers, yet remain persisted in database strings, Git diffs, and academic plagiarism scanners.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t hairline-border mono text-[11px]" style="color: var(--text-muted);">
+              HEX: E2 80 8B · E2 80 8C · EF BB BF
+            </div>
+          </div>
+
+          <div class="surface-card rounded-lg p-5 flex flex-col justify-between">
+            <div>
+              <div class="mono text-xs font-semibold mb-3" style="color: var(--accent-amber);">02 / LEXER CORRUPTION</div>
+              <h3 class="font-bold text-base mb-2">Non-Breaking Spaces</h3>
+              <p class="text-xs leading-relaxed" style="color: var(--text-secondary);">
+                Copying code or configuration blocks from chat interfaces often substitutes standard ASCII spaces (<code class="mono">0x20</code>) with <code class="mono">U+00A0</code>, triggering immediate <code class="mono">SyntaxError</code> exceptions in Python, Rust, and SQL compilers.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t hairline-border mono text-[11px]" style="color: var(--text-muted);">
+              HEX: C2 A0 · E2 80 AF → 0x20
+            </div>
+          </div>
+
+          <div class="surface-card rounded-lg p-5 flex flex-col justify-between">
+            <div>
+              <div class="mono text-xs font-semibold mb-3" style="color: var(--accent-blue);">03 / STYLISTIC SIGNATURES</div>
+              <h3 class="font-bold text-base mb-2">Typographic Normalization</h3>
+              <p class="text-xs leading-relaxed" style="color: var(--text-secondary);">
+                Synthetic prose exhibits extreme density of Unicode em-dashes (<code class="mono">U+2014</code>) and smart quotes (<code class="mono">U+201C/D</code>). Converting them to standard editorial punctuation restores natural rhythm.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t hairline-border mono text-[11px]" style="color: var(--text-muted);">
+              HEX: E2 80 94 · E2 80 9C → ASCII
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="pt-8 border-t hairline-border grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div class="lg:col-span-4">
+        <div class="mono text-[11px] uppercase tracking-widest mb-2" style="color: var(--text-muted);">DOCUMENTATION</div>
+        <h2 class="serif-display text-3xl sm:text-4xl leading-tight">Frequently Asked Questions</h2>
+      </div>
+      <div class="lg:col-span-8 space-y-3">
+        <div class="surface-card rounded-lg p-5">
+          <h3 class="font-semibold text-sm mb-1.5">How does Verbatim detect invisible characters in ChatGPT or Claude output?</h3>
+          <p class="text-xs leading-relaxed" style="color: var(--text-secondary);">
+            Verbatim iterates through every UTF-16 code unit in your input buffer and cross-references each character against the Unicode General Category <code class="mono">Cf</code> (Format), <code class="mono">Cc</code> (Control), and non-standard space tables, rendering inline hex badges in the X-Ray view.
+          </p>
+        </div>
+        <div class="surface-card rounded-lg p-5">
+          <h3 class="font-semibold text-sm mb-1.5">Is any pasted text or source code sent over the network?</h3>
+          <p class="text-xs leading-relaxed" style="color: var(--text-secondary);">
+            No. The entire inspection and normalization pipeline runs synchronously inside your local browser tab with zero external API requests, telemetry, or storage.
+          </p>
+        </div>
+        <div class="surface-card rounded-lg p-5">
+          <h3 class="font-semibold text-sm mb-1.5">Will stripping zero-width characters affect normal multilingual text?</h3>
+          <p class="text-xs leading-relaxed" style="color: var(--text-secondary);">
+            Standard English, Chinese, Japanese, Spanish, and European scripts do not require zero-width spaces. If you work with Indic or Arabic scripts that intentionally rely on <code class="mono">U+200C/D</code> joiners, you can toggle off the Zero-Width rule individually in the pipeline bar.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t hairline-border py-6 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 flex flex-wrap items-center justify-between gap-4 text-xs mono" style="color: var(--text-muted);">
+      <span>VERBATIM // CLIENT-SIDE UNICODE &amp; TEXT HYGIENE STUDIO</span>
+      <span>UTF-8 · ZERO SERVER TELEMETRY</span>
+    </div>
+  </footer>
+
+  <script>
+    const SAMPLE_ESSAY = "### Architectural Notes on Autonomous Systems\u200B\n\nIn 2026,\u00A0software engineering has shifted from passive prompt interfaces to **deterministic execution pipelines**\u200C — systems that verify, lint, and ship production artifacts\u200B [1]. Across editorial and engineering teams,\u00A0“stream hygiene” and ‘character-level provenance’ have become essential — particularly when entregaring client deliverables【2】.\n\nHowever\uFEFF, copied clipboard buffers routinely retain non-printing zero-width spaces\u200D, non-breaking spaces\u00A0, and synthetic punctuation… Inspect the X-Ray stream below to audit every byte.";
+
+    const SAMPLE_CODE = "export const runtimeConfig = {\u200B\n  endpoint: “https://api.verbatim.dev/v2/sanitize”,\u200C\n  maxRetries:\u00A03,\u00A0// Contains U+00A0 NBSP & curly quotes — breaks TypeScript!\n  mode: ‘strict-utf8’\uFEFF\n};";
+
+    const I18N = {
+      en: {
+        nav_workbench: "Workbench",
+        nav_forensics: "Hex Forensics",
+        nav_spec: "Specification",
+        nav_faq: "FAQ",
+        local_runtime: "LOCAL RUNTIME · 0 KB UPLOADED",
+        hero_h1: "Strip invisible watermarks and synthetic typography.",
+        hero_sub: "Inspect raw text streams for non-printing zero-width characters (U+200B, U+FEFF), DOM non-breaking spaces (U+00A0), and high-frequency LLM punctuation signatures.",
+        sample_1: "Load Editorial Sample",
+        sample_2: "Load Corrupted Code",
+        btn_clear: "Clear",
+        stat_hidden: "ZERO-WIDTH ANOMALIES",
+        stat_nbsp: "NON-BREAKING SPACES",
+        stat_fp: "PUNCTUATION SIGNATURES",
+        stat_delta: "STREAM SANITIZATION",
+        rules_title: "ACTIVE NORMALIZATION PIPELINE",
+        emdash_mode_label: "EM-DASH (U+2014) POLICY:",
+        rule_zw: "Zero-Width Formatters",
+        rule_nbsp: "Non-Breaking Spaces",
+        rule_quotes: "Typographic Quotes",
+        rule_md: "Markdown Syntax",
+        rule_cite: "Citation Footnotes",
+        rule_bidi: "BiDi & Control Codes",
+        rule_ws: "Trailing Whitespace",
+        rule_dots: "Horizontal Ellipsis",
+        pane_in_title: "01 / RAW INPUT BUFFER",
+        pane_out_title: "02 / SANITIZED UTF-8 OUTPUT",
+        btn_copy: "COPY CLEAN STREAM",
+        xray_title: "03 / UNICODE FORENSICS & X-RAY STREAM",
+        feat_h2: "Why raw LLM output fails strict parsers and editorial review."
+      },
+      zh: {
+        nav_workbench: "净化工作台",
+        nav_forensics: "十六进制审计",
+        nav_spec: "技术规范",
+        nav_faq: "常见问答",
+        local_runtime: "纯本地运行 · 零数据上传",
+        hero_h1: "剥离隐形零宽水印与合成排版痕迹。",
+        hero_sub: "深度扫描文本流中的不可见零宽字符（U+200B、U+FEFF）、DOM 不换行空格（U+00A0）与高频 AI 标点特征，输出纯净的 UTF-8 标准文本。",
+        sample_1: "载入带水印文章样本",
+        sample_2: "载入含隐形空格代码",
+        btn_clear: "清空",
+        stat_hidden: "零宽隐形字符",
+        stat_nbsp: "异常不换行空格",
+        stat_fp: "合成标点特征",
+        stat_delta: "已净化标记总数",
+        rules_title: "实时字节流净化管线",
+        emdash_mode_label: "破折号 (U+2014) 转换策略：",
+        rule_zw: "清除零宽隐形水印",
+        rule_nbsp: "标准化不换行空格",
+        rule_quotes: "弯引号转标准直引号",
+        rule_md: "剥离 Markdown 标记",
+        rule_cite: "移除引用角标",
+        rule_bidi: "清除双向与控制字符",
+        rule_ws: "清理行尾空格与空行",
+        rule_dots: "标准化省略号",
+        pane_in_title: "01 / 原始输入缓冲区",
+        pane_out_title: "02 / 标准 UTF-8 净化输出",
+        btn_copy: "复制纯净文本",
+        xray_title: "03 / UNICODE 字节流透视与十六进制审计",
+        feat_h2: "为什么未净化的 AI 文本会导致编译器报错与排版异常。"
+      }
+    };
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function countWords(str) {
+      const trimmed = str.trim();
+      if (!trimmed) return 0;
+      return trimmed.split(/\s+/).length;
+    }
+
+    function byteLen(str) {
+      return new TextEncoder().encode(str).length;
+    }
+
+    function showToast(msg) {
+      const box = document.getElementById('toastBox');
+      const txt = document.getElementById('toastText');
+      txt.textContent = msg;
+      box.classList.remove('hidden');
+      setTimeout(() => {
+        box.classList.add('hidden');
+      }, 2200);
+    }
+
+    function processText() {
+      const raw = document.getElementById('rawInput').value;
+      const zwMatches = raw.match(/[\u200B\u200C\u200D\u2060\uFEFF\u00AD\u180E]/g) || [];
+      const bidiMatches = raw.match(/[\u200E\u200F\u202A-\u202E\u2066-\u2069]/g) || [];
+      const nbspMatches = raw.match(/[\u00A0\u202F\u2007]/g) || [];
+      const dashMatches = raw.match(/[\u2014\u2013]/g) || [];
+      const quoteMatches = raw.match(/[\u201C\u201D\u2018\u2019]/g) || [];
+
+      const totalHidden = zwMatches.length + bidiMatches.length;
+      const totalNbsp = nbspMatches.length;
+      const totalFp = dashMatches.length + quoteMatches.length;
+
+      document.getElementById('countHidden').textContent = String(totalHidden);
+      document.getElementById('countNbsp').textContent = String(totalNbsp);
+      document.getElementById('countFootprints').textContent = String(totalFp);
+
+      let out = raw;
+      let removedCount = 0;
+
+      if (document.getElementById('ruleZeroWidth').checked) {
+        removedCount += zwMatches.length;
+        out = out.replace(/[\u200B\u200C\u200D\u2060\uFEFF\u00AD\u180E]/g, '');
+      }
+      if (document.getElementById('ruleBidi').checked) {
+        removedCount += bidiMatches.length;
+        out = out.replace(/[\u200E\u200F\u202A-\u202E\u2066-\u2069]/g, '');
+      }
+      if (document.getElementById('ruleNbsp').checked) {
+        removedCount += nbspMatches.length;
+        out = out.replace(/[\u00A0\u202F\u2007]/g, ' ');
+      }
+      const emMode = document.getElementById('emDashMode').value;
+      if (emMode !== 'keep') {
+        removedCount += dashMatches.length;
+        out = out.replace(/\s*[\u2014\u2013]\s*/g, emMode);
+      }
+      if (document.getElementById('ruleSmartQuotes').checked) {
+        removedCount += quoteMatches.length;
+        out = out.replace(/[\u201C\u201D]/g, '"').replace(/[\u2018\u2019]/g, "'");
+      }
+      if (document.getElementById('ruleEllipsis').checked) {
+        const ell = (out.match(/\u2026/g) || []).length;
+        removedCount += ell;
+        out = out.replace(/\u2026/g, '...');
+      }
+      if (document.getElementById('ruleCitations').checked) {
+        const citeMatches = out.match(/(\[\d+\]|【\d+】|\[oai_citation:[^\]]+\])/g) || [];
+        removedCount += citeMatches.length;
+        out = out.replace(/(\[\d+\]|【\d+】|\[oai_citation:[^\]]+\])/g, '');
+      }
+      if (document.getElementById('ruleMarkdown').checked) {
+        out = out
+          .replace(/^#{1,6}\s+/gm, '')
+          .replace(/\*\*([^*]+)\*\*/g, '$1')
+          .replace(/__([^_]+)__/g, '$1')
+          .replace(/`([^`]+)`/g, '$1');
+      }
+      if (document.getElementById('ruleWhitespace').checked) {
+        out = out
+          .replace(/[ \t]+$/gm, '')
+          .replace(/\n{3,}/g, '\n\n')
+          .trim();
+      }
+
+      const inBytes = byteLen(raw);
+      const outBytes = byteLen(out);
+      const diffBytes = outBytes - inBytes;
+
+      document.getElementById('cleanOutput').value = out;
+      document.getElementById('inputStats').textContent = `${countWords(raw)} W · ${inBytes} B`;
+      document.getElementById('outputStats').textContent = `${countWords(out)} W · ${outBytes} B`;
+      document.getElementById('removedBadge').textContent = String(removedCount);
+      document.getElementById('byteDelta').textContent = `${diffBytes <= 0 ? diffBytes : '+' + diffBytes} B delta`;
+
+      const xrayEl = document.getElementById('xrayView');
+      if (!raw) {
+        xrayEl.innerHTML = '<span class="mono text-xs" style="color: var(--text-muted);">STREAM EMPTY — Paste text above or load a forensic sample to inspect codepoints.</span>';
+        document.getElementById('breakdownWrap').classList.add('hidden');
+        return;
+      }
+
+      const codeMap = {
+        '\u200B': { label: 'U+200B:ZWSP', cls: 'token-zw', name: 'Zero-Width Space', hex: 'E2 80 8B', reason: 'Invisible watermark / token boundary' },
+        '\u200C': { label: 'U+200C:ZWNJ', cls: 'token-zw', name: 'Zero-Width Non-Joiner', hex: 'E2 80 8C', reason: 'Hidden non-joiner format character' },
+        '\u200D': { label: 'U+200D:ZWJ', cls: 'token-zw', name: 'Zero-Width Joiner', hex: 'E2 80 8D', reason: 'Invisible glyph joiner' },
+        '\uFEFF': { label: 'U+FEFF:BOM', cls: 'token-zw', name: 'Zero-Width No-Break Space (BOM)', hex: 'EF BB BF', reason: 'Stream byte-order marker artifact' },
+        '\u2060': { label: 'U+2060:WJ', cls: 'token-zw', name: 'Word Joiner', hex: 'E2 81 A0', reason: 'Invisible line-break lock' },
+        '\u00AD': { label: 'U+00AD:SHY', cls: 'token-zw', name: 'Soft Hyphen', hex: 'C2 AD', reason: 'Hidden conditional hyphen' },
+        '\u00A0': { label: 'U+00A0:NBSP', cls: 'token-nbsp', name: 'No-Break Space', hex: 'C2 A0', reason: 'Rich-text space; breaks code lexers' },
+        '\u202F': { label: 'U+202F:NNBSP', cls: 'token-nbsp', name: 'Narrow No-Break Space', hex: 'E2 80 AF', reason: 'Non-standard narrow whitespace' },
+        '\u2014': { label: 'U+2014:EM', cls: 'token-punct', name: 'Em-Dash (—)', hex: 'E2 80 94', reason: 'High-density synthetic punctuation' },
+        '\u2013': { label: 'U+2013:EN', cls: 'token-punct', name: 'En-Dash (–)', hex: 'E2 80 93', reason: 'Typographic range dash' },
+        '\u201C': { label: 'U+201C:“', cls: 'token-punct', name: 'Left Double Quotation Mark', hex: 'E2 80 9C', reason: 'Curly quote; invalid in code strings' },
+        '\u201D': { label: 'U+201D:”', cls: 'token-punct', name: 'Right Double Quotation Mark', hex: 'E2 80 9D', reason: 'Curly quote; invalid in code strings' },
+        '\u2018': { label: 'U+2018:‘', cls: 'token-punct', name: 'Left Single Quotation Mark', hex: 'E2 80 98', reason: 'Curly apostrophe' },
+        '\u2019': { label: 'U+2019:’', cls: 'token-punct', name: 'Right Single Quotation Mark', hex: 'E2 80 99', reason: 'Curly apostrophe' }
+      };
+
+      const counts = {};
+      const parts = [];
+      for (let i = 0; i < raw.length; i++) {
+        const ch = raw[i];
+        if (codeMap[ch]) {
+          const info = codeMap[ch];
+          parts.push(`<span class="token-tag ${info.cls}" title="${info.name} (${info.hex})">${info.label}</span>`);
+          counts[ch] = (counts[ch] || 0) + 1;
+        } else {
+          parts.push(escapeHtml(ch));
+        }
+      }
+      xrayEl.innerHTML = parts.join('');
+
+      const bWrap = document.getElementById('breakdownWrap');
+      const bBody = document.getElementById('breakdownBody');
+      const keys = Object.keys(counts);
+      if (keys.length > 0) {
+        bWrap.classList.remove('hidden');
+        bBody.innerHTML = keys.map(k => {
+          const info = codeMap[k];
+          return `<tr>
+            <td class="py-2 px-3"><span class="token-tag ${info.cls}">${info.label}</span></td>
+            <td class="py-2 px-3 font-medium">${info.name}</td>
+            <td class="py-2 px-3 mono text-[11px]" style="color: var(--text-secondary);">${info.hex}</td>
+            <td class="py-2 px-3" style="color: var(--text-secondary);">${info.reason}</td>
+            <td class="py-2 px-3 text-right font-semibold mono">${counts[k]}</td>
+          </tr>`;
+        }).join('');
+      } else {
+        bWrap.classList.add('hidden');
+      }
+    }
+
+    function copyCleanOutput() {
+      const outEl = document.getElementById('cleanOutput');
+      if (!outEl.value) {
+        showToast('BUFFER EMPTY');
+        return;
+      }
+      outEl.select();
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(outEl.value).then(() => {
+            showToast('SANITIZED STREAM COPIED');
+          }).catch(() => {
+            document.execCommand('copy');
+            showToast('SANITIZED STREAM COPIED');
+          });
+        } else {
+          document.execCommand('copy');
+          showToast('SANITIZED STREAM COPIED');
+        }
+      } catch (e) {
+        document.execCommand('copy');
+        showToast('SANITIZED STREAM COPIED');
+      }
+    }
+
+    function downloadCleanTxt() {
+      const val = document.getElementById('cleanOutput').value;
+      if (!val) {
+        showToast('BUFFER EMPTY');
+        return;
+      }
+      const blob = new Blob([val], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'verbatim-sanitized.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 3000);
+      showToast('EXPORTED VERBATIM-SANITIZED.TXT');
+    }
+
+    function applyLang(lang) {
+      const dict = I18N[lang] || I18N.en;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const k = el.getAttribute('data-i18n');
+        if (dict[k]) el.textContent = dict[k];
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const rawInput = document.getElementById('rawInput');
+      rawInput.value = SAMPLE_ESSAY;
+      processText();
+
+      rawInput.addEventListener('input', processText);
+      document.getElementById('emDashMode').addEventListener('change', processText);
+
+      [
+        'ruleZeroWidth', 'ruleNbsp', 'ruleSmartQuotes', 'ruleMarkdown',
+        'ruleCitations', 'ruleBidi', 'ruleWhitespace', 'ruleEllipsis'
+      ].forEach(id => {
+        document.getElementById(id).addEventListener('change', processText);
+      });
+
+      document.getElementById('btnSampleEssay').addEventListener('click', () => {
+        rawInput.value = SAMPLE_ESSAY;
+        processText();
+        showToast('EDITORIAL SAMPLE LOADED');
+      });
+
+      document.getElementById('btnSampleCode').addEventListener('click', () => {
+        rawInput.value = SAMPLE_CODE;
+        processText();
+        showToast('CORRUPTED CODE SAMPLE LOADED');
+      });
+
+      document.getElementById('btnClearInput').addEventListener('click', () => {
+        rawInput.value = '';
+        processText();
+      });
+
+      document.getElementById('btnCopyClean').addEventListener('click', copyCleanOutput);
+      document.getElementById('btnDownloadTxt').addEventListener('click', downloadCleanTxt);
+
+      document.getElementById('btnPasteClipboard').addEventListener('click', async () => {
+        try {
+          if (navigator.clipboard && navigator.clipboard.readText) {
+            const t = await navigator.clipboard.readText();
+            if (t) {
+              rawInput.value = t;
+              processText();
+              showToast('CLIPBOARD STREAM IMPORTED');
+              return;
+            }
+          }
+        } catch (e) {}
+        rawInput.focus();
+        showToast('PRESS CTRL+V TO PASTE');
+      });
+
+      document.getElementById('langSwitch').addEventListener('change', (e) => {
+        applyLang(e.target.value);
+      });
+
+      document.getElementById('themeToggleBtn').addEventListener('click', () => {
+        const root = document.documentElement;
+        const isDark = root.classList.toggle('dark-theme');
+        document.getElementById('themeLabel').textContent = isDark ? 'PAPER' : 'CARBON';
+      });
+    });
+  </script>
+</body>
+</html>

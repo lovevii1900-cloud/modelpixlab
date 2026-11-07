@@ -14,6 +14,9 @@ ModelPixLab is an independent browser-based AI image generation and photo editin
 
 ## Guides & Model Comparisons
 
+- [GPT Image 2.5 vs FLUX.2 & FLUX 3 (2026) | ModelPixLab](https://modelpixlab.com/gpt-image-2-5-vs-flux/): Comparison of photorealism, multi-round editing, and 4K workflow.
+- [GPT Image 2.5 vs Ideogram 4.0 & Recraft V4 (2026) | ModelPixLab](https://modelpixlab.com/gpt-image-2-5-vs-ideogram-4/): Typography, poster design, and photo retouching benchmark.
+- [Nano Banana 2 & 2.1 AI Photo Editor Guide | ModelPixLab](https://modelpixlab.com/nano-banana-2-1-guide/): Prompts, character consistency, and instant photo editing guide.
 - [AI Image Prompt Guide: Prompts That Work | ModelPixLab](https://modelpixlab.com/ai-image-prompt-guide/): Practical prompt templates for product photography, 3D character portraits, and realistic scenes.
 - [How to Edit Photos with AI - Guide | ModelPixLab](https://modelpixlab.com/ai-photo-editing-guide/): Guide to multi-round editing, inpainting, style transfer, and background replacement.
 - [GPT Image 2.5 vs Midjourney (2026) | ModelPixLab](https://modelpixlab.com/gpt-image-2-5-vs-midjourney/): Side-by-side comparison of prompt coherence, text rendering, pricing, and browser workflow.
@@ -28,6 +31,4 @@ ModelPixLab is an independent browser-based AI image generation and photo editin
 ## Company & Policies
 
 - [About - ModelPixLab](https://modelpixlab.com/about/): About ModelPixLab and contact details (support@modelpixlab.com).
-- [Privacy - ModelPixLab](https://modelpixlab.com/privacy/): Privacy policy covering prompts, generated images, and account data.
-- [Terms - ModelPixLab](https://modelpixlab.com/terms/): Terms of service, commercial usage rights, and refund policy.
 - [Sitemap](https://modelpixlab.com/sitemap.xml)
